@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fire Incident Report</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 16px;
+            color: #bbb;
+        }
+
+        input, button, select, textarea, input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            background-color: #222;
+            border: 1px solid #444;
+            color: #fff;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: 0.3s;
+            appearance: none;
+        }
+
+        input:focus, button:focus, select:focus, textarea:focus, input:focus {
+            outline: none;
+            border-color: #00c8ff;
+        }
+
+        button {
+            background-color: #00c8ff;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #0099cc;
+        }
+
+        h2 {
+            color: #00c8ff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #barangay {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        box-sizing: border-box;
+        border: 1px solid #555;
+        background-color: #1c1c1c;
+        color: #fff;
+        border-radius: 5px;
+        outline: none;
+    }
+
+    #suggestions {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        position: absolute;
+        width: calc(100% - 20px);
+        background-color: #1c1c1c;
+        border: 1px solid #555;
+        border-top: none;
+        z-index: 1000;
+        max-height: 200px;
+        overflow-y: auto;
+        border-radius: 0 0 5px 5px;
+    }
+
+    #suggestions li {
+        padding: 10px;
+        cursor: pointer;
+        color: #fff;
+        transition: background 0.2s ease;
+    }
+
+    #suggestions li:hover, #suggestions li.active {
+        background-color: #333;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    body {
+        background-color: #121212; /* Match dark background */
+        color: #ffffff; /* Match text color */
+        font-family: Arial, sans-serif; /* Match general font */
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 16px;
+        color: #ffffff;
+    }
+
+    </style>
+</head>
+<body>
+
+<h1>Zamboanga City Fire District
+    Real Time Monitoring System (RTMS)
+</h1>
+<h2>INITIAL INFO</h2>
+<form id="incidentForm">
+    <!-- Area of Responsibility Dropdown -->
+    <label for="aor">Area of Responsibility:</label>
+    <select id="aor" required>
+                <option value=""></option>
+                <option value="Intelligence and Investigation Section">Intelligence and Investigation Section</option>
+                <option value="Zamboanga City Fire District">Zamboanga City Fire District</option>
+                <option value="Zamboanga City Central Fire Station">Zamboanga City Central Fire Station</option>
+                <option value="Ayala Fire Sub-Station">Ayala Fire Sub-Station</option>
+                <option value="Boalan Fire Sub-Station">Boalan Fire Sub-Station</option>
+                <option value="Cabaluay Fire Sub-Station">Cabaluay Fire Sub-Station</option>
+                <option value="Calarian Fire Sub-Station">Calarian Fire Sub-Station</option>
+                <option value="Culianan Fire Sub-Station">Culianan Fire Sub-Station</option>
+                <option value="Guiwan Fire Sub-Station">Guiwan Fire Sub-Station</option>
+                <option value="Labuan Fire Sub-Station">Labuan Fire Sub-Station</option>
+                <option value="Lunzuran Fire Sub-Station">Lunzuran Fire Sub-Station</option>
+                <option value="Mampang Fire Sub-Station">Mampang Fire Sub-Station</option>
+                <option value="Manicahan Fire Sub-Station">Manicahan Fire Sub-Station</option>
+                <option value="Mercedes Fire Sub-Station">Mercedes Fire Sub-Station</option>
+                <option value="Putik Fire Sub-Station">Putik Fire Sub-Station</option>
+                <option value="Quiniput Fire Sub-Station">Quiniput Fire Sub-Station</option>
+                <option value="Recodo Fire Sub-Station">Recodo Fire Sub-Station</option>
+                <option value="Sangali Fire Sub-Station">Sangali Fire Sub-Station</option>
+                <option value="Sta Catalina Fire Sub-Station">Sta Catalina Fire Sub-Station</option>
+                <option value="San Jose Gusu Fire Sub-Station">San Jose Gusu Fire Sub-Station</option>
+                <option value="San Roque Fire Sub-Station">San Roque Fire Sub-Station</option>
+                <option value="Sta Maria Fire Sub-Station">Sta Maria Fire Sub-Station</option>
+                <option value="Talisayan Fire Sub-Station">Talisayan Fire Sub-Station</option>
+                <option value="Talon-Talon Fire Sub-Station">Talon-Talon Fire Sub-Station</option>
+                <option value="Tetuan Fire Sub-Station">Tetuan Fire Sub-Station</option>
+                <option value="Tumaga Fire Sub-Station">Tumaga Fire Sub-Station</option>
+                <option value="Vitali Fire Sub-Station">Vitali Fire Sub-Station</option>
+    </select>
+
+     <!-- Occupancy (Auto-filled but editable) -->
+    <label for="occupancy">Occupancy:</label>
+    <select id="occupancy" required onchange="updateInvolvedOptions()">
+        <option value=""></option>
+        <option value="structural">Structural</option>
+        <option value="non Structural">Non Structural</option>
+    </select>
+
+    <!-- Involved -->
+    <label for="involved">Involved:</label>
+    <select id="involved" required>
+        <option value=""></option>
+    </select>
+
+    <!-- Location -->
+    <label for="location">Location:</label>
+    <input type="text" id="location" required />
+
+    <label for="barangay">Barangay:</label>
+    <input type="text" id="barangay" oninput="filterBarangays()" onkeydown="handleKeydown(event)" autocomplete="off" required />
+    <ul id="suggestions" class="hidden"></ul>
+
+    <label for="city">City:</label>
+    <input type="text" id="city" value="Zamboanga City" required />
+
+    <label for="region">Region:</label>
+    <input type="text" id="region" value="Region IX" required />
+
+    <!-- Responding Team Dropdown -->
+    <label for="respondingTeam">Responding Team:</label>
+    <textarea id="respondingTeam" required wrap="soft" rows="1" 
+        style="
+            width: 100%;
+            font-family: Arial, sans-serif; 
+            min-height: 40px; /* Match the height of other fields */
+            resize: none; 
+            overflow-y: hidden; 
+            box-sizing: border-box;
+            padding: 8px;
+            border: 1px solid #444;
+            background-color: #1a1a1a;
+            color: #fff;
+            font-size: 16px;
+            border-radius: 4px;
+        "></textarea>
+
+    <!-- Date and Time -->
+    <label for="dateTimeReported">Time/Date Reported:</label>
+    <input type="datetime-local" id="dateTimeReported" required />
+
+    <label for="timeArrival">Time of Arrival:</label>
+    <input type="datetime-local" id="timeArrival" required />
+
+    <label for="timeFireOut">Fire Out:</label>
+    <input type="datetime-local" id="timeFireOut" required />
+
+    <!-- Alarm Status Dropdown -->
+    <label for="alarm">Alarm Status:</label>
+    <select id="alarm" required>
+        <option value="1st Alarm">1st Alarm</option>
+        <option value="2nd Alarm">2nd Alarm</option>
+        <option value="3rd Alarm">3rd Alarm</option>
+        <option value="4th Alarm">4th Alarm</option>
+        <option value="5th Alarm">5th Alarm</option>
+        <option value="Task Force Alpha">Task Force Alpha</option>
+        <option value="Task Force Bravo">Task Force Bravo</option>
+        <option value="Task Force Charlie">Task Force Charlie</option>
+        <option value="Task Force Delta">Task Force Delta</option>
+        <option value="Task Force Echo">Task Force Echo</option>
+        <option value="General Alarm">General Alarm</option>
+        <option value="Fire Out Upon Arrival">Fire Out Upon Arrival</option>
+        <option value="Unresponded">Unresponded</option>
+    </select>
+
+    <!-- Ground Commander -->
+    <label for="commander">Ground Commander:</label>
+    <input type="text" id="commander" required />
+
+    <label for="commanderContact">Ground Commander Contact:</label>
+    <input type="tel" id="commanderContact" maxlength="16" oninput="formatPhoneInput(this)" required />
+
+    <!-- Sender -->
+    <label for="sender">Sender:</label>
+    <input type="text" id="sender" required />
+
+    <label for="senderContact">Sender Contact:</label>
+    <input type="tel" id="senderContact" maxlength="16" oninput="formatPhoneInput(this)" required />
+
+    <!-- Submit INITIAL Button -->
+    <button type="button" onclick="submitInitial()">Submit Initial</button>
+
+    <label for="owner">Name of Owner:</label>
+    <input type="text" id="owner" value="" required />
+
+    <label for="damage">Estimated Damage:</label>
+    <input type="text" id="damage" value="" required oninput="formatDamageInput(this)" />
+
+    <label for="fatality">Fatality:</label>
+    <input type="text" id="fatality" value="None" required />
+    
+    <label for="injured">Injured:</label>
+    <input type="text" id="injured" value="None" required />
+
+    <label for="noofestablishment">Number of Establishment:</label>
+    <input type="text" id="noofestablishment" value="0" required />
+
+    <label for="nooffamilies">Number of Famillies:</label>
+    <input type="text" id="nooffamilies" value="0" required />
+
+    <label for="responders">Number of Responders:</label>
+    <input type="text" id="responders" value="0" required />  
+    
+    <!-- Submit PROGRESS Button -->
+    <button type="button" onclick="submitProgress()">Submit Progress</button>
+
+    <label for="nameofestablishment">Name of Establishment:</label>
+    <input type="text" id="nameofestablishment" value="" required />
+
+    <label for="sqm">Lot Area Affected:</label>
+    <input type="number" id="sqm" value="" required />  
+    
+    <!-- Submit COMPLETE Button -->
+    <button type="button" onclick="submitComplete()">Submit Complete</button>
+
+</form>
+
+<script>
+    // Textarea auto-resize
+    const textarea = document.getElementById('respondingTeam');
+
+    textarea.addEventListener('input', () => {
+        // Reset height to recalculate based on new content
+        textarea.style.height = 'auto';
+        // Set height based on the scroll height of the content
+        textarea.style.height = textarea.scrollHeight + 'px';
+    });
+
+    // Trigger input event to adjust height on load (if there's already content)
+    textarea.dispatchEvent(new Event('input'));
+
+    //BARANGAY AUTOCOMPLETE
+    const barangays = [
+    "Arena Blanco", "Ayala", "Baliwasan", "Baluno", "Barangay Zone I", "Barangay Zone II",
+    "Barangay Zone III", "Barangay Zone IV", "Boalan", "Bolong", "Buenavista", "Bunguiao",
+    "Busay", "Cabaluay", "Cabatangan", "Cacao", "Calabasa", "Calarian", "Camino Nuevo",
+    "Campo Islam", "Canelar", "Capisan", "Cawit", "Culianan", "Curuan", "Dita", "Divisoria",
+    "Dulian (Upper Bunguiao)", "Dulian (Upper Pasonanca)", "Guisao", "Guiwan", "Kasanyangan",
+    "La Paz", "Labuan", "Lamisahan", "Landang Gua", "Landang Laum", "Lanzones", "Lapakan",
+    "Latuan", "Licomo", "Limaong", "Limpapa", "Lubigan", "Lumayang", "Lumbangan", "Lunzuran",
+    "Maasin", "Malagutay", "Mampang", "Manalipa", "Mangusu", "Manicahan", "Mariki", "Mercedes",
+    "Muti", "Pamucutan", "Pangapuyan", "Panubigan", "Pasilmanta", "Pasobolong", "Pasonanca",
+    "Patalon", "Putik", "Quiniput", "Recodo", "Rio Hondo", "Salaan", "San Jose Cawa-cawa",
+    "San Jose Gusu", "San Roque", "Sangali", "Santa Barbara", "Santa Catalina", "Santa Maria",
+    "Santo Niño", "Sibulao", "Sinubung", "Sinunoc", "Tagasilay", "Taguiti", "Talabaan",
+    "Talisayan", "Talon-talon", "Taluksangay", "Tetuan", "Tictapul", "Tigbalabag", "Tigtabon",
+    "Tolosa", "Tugbungan", "Tulungatung", "Tumaga", "Tumalutab", "Tumitus", "Victoria",
+    "Vitali", "Zambowood"
+    ];
+
+    const barangayInput = document.getElementById('barangay');
+    const suggestionsList = document.getElementById('suggestions');
+    let selectedIndex = -1;
+
+    function filterBarangays() {
+        const input = barangayInput.value.toLowerCase();
+        suggestionsList.innerHTML = '';
+
+        if (!input) {
+        suggestionsList.classList.add('hidden');
+        return;
+        }
+
+        const filtered = barangays.filter(barangay => 
+        barangay.toLowerCase().includes(input)
+        );
+
+        filtered.forEach((barangay, index) => {
+        const li = document.createElement('li');
+        li.textContent = barangay;
+        li.addEventListener('click', () => selectBarangay(barangay));
+        suggestionsList.appendChild(li);
+        });
+
+        if (filtered.length > 0) {
+        suggestionsList.classList.remove('hidden');
+        positionSuggestions();
+
+        // Pre-select the first item by default
+        selectedIndex = 0;
+        updateActiveItem(suggestionsList.getElementsByTagName('li'));
+        } else {
+        suggestionsList.classList.add('hidden');
+        }
+    }
+
+    function selectBarangay(barangay) {
+        barangayInput.value = barangay;
+        suggestionsList.classList.add('hidden');
+    }
+
+    function handleKeydown(event) {
+        const items = suggestionsList.getElementsByTagName('li');
+
+        if (event.key === 'ArrowDown') {
+        event.preventDefault();
+        selectedIndex = (selectedIndex + 1) % items.length;
+        updateActiveItem(items);
+        } else if (event.key === 'ArrowUp') {
+        event.preventDefault();
+        selectedIndex = (selectedIndex - 1 + items.length) % items.length;
+        updateActiveItem(items);
+        } else if (event.key === 'Enter') {
+        if (selectedIndex > -1) {
+            event.preventDefault();
+            selectBarangay(items[selectedIndex].textContent);
+        }
+        } else if (event.key === 'Tab') {
+        if (selectedIndex > -1) {
+            // Autocomplete first result on Tab
+            selectBarangay(items[selectedIndex].textContent);
+            event.preventDefault(); // Prevent tabbing to next element
+        }
+        }
+    }
+
+    function updateActiveItem(items) {
+        for (let i = 0; i < items.length; i++) {
+        items[i].classList.remove('active');
+        }
+
+        if (selectedIndex > -1) {
+        items[selectedIndex].classList.add('active');
+        items[selectedIndex].scrollIntoView({ block: 'nearest' });
+        }
+    }
+
+    function positionSuggestions() {
+        const rect = barangayInput.getBoundingClientRect();
+        suggestionsList.style.top = `${rect.bottom + window.scrollY}px`;
+        suggestionsList.style.left = `${rect.left + window.scrollX}px`;
+        suggestionsList.style.width = `${rect.width}px`;
+    }
+
+    document.addEventListener('click', (event) => {
+        if (event.target !== barangayInput) {
+        suggestionsList.classList.add('hidden');
+        }
+    });
+
+    //INVOLVED
+    const structuralOptions = [
+        'Apartment Building', 'Condominiums', 'Dormitory', 'Hotel', 'Lodging and Rooming Houses', 
+        'Single and Two Family Dwelling', 'Assembly', 'Business', 'Detention and Correctional', 
+        'Educational', 'Health Care', 'Industrial', 'Mercantile', 'Miscellaneous', 
+        'Mixed Occupancies', 'Storage'
+    ];
+
+    const nonStructuralOptions = [
+        'Agricultural Land', 'Ambulant Vendor', 'Electrical Pole', 'Forest', 'Grass Rubbish', 
+        'Aircraft', 'Automobile', 'Bus', 'Heavy Equipment', 'Jeepney', 'Locomotive', 
+        'Motorcycle', 'Ship/Watervessel', 'Tricycle', 'Truck'
+    ];
+
+    function updateInvolvedOptions() {
+        const occupancy = document.getElementById('occupancy').value;
+        const involved = document.getElementById('involved');
+        
+        // Clear previous options
+        involved.innerHTML = '<option value=""></option>';
+
+        let options = [];
+        if (occupancy === 'structural') {
+            options = structuralOptions;
+        } else if (occupancy === 'non Structural') {
+            options = nonStructuralOptions;
+        }
+
+        options.forEach(option => {
+            const opt = document.createElement('option');
+            opt.value = option;
+            opt.textContent = option;
+            involved.appendChild(opt);
+        });
+    }
+
+    // Format phone numbers to (0975) 993 2701 format
+    function formatPhoneInput(input) {
+        // Remove all non-numeric characters
+        let cleaned = input.value.replace(/\D+/g, '');
+
+        // Limit to 11 digits
+        if (cleaned.length > 11) {
+            cleaned = cleaned.slice(0, 11);
+        }
+
+        // Format as (0975) 993 2701
+        let formatted = '';
+        if (cleaned.length >= 4) {
+            formatted += `(${cleaned.slice(0, 4)}) `;
+            if (cleaned.length >= 7) {
+                formatted += `${cleaned.slice(4, 7)} ${cleaned.slice(7)}`;
+            } else {
+                formatted += `${cleaned.slice(4)}`;
+            }
+        } else {
+            formatted = cleaned;
+        }
+
+        input.value = formatted;
+    }
+
+    // Format phone number to (0975) 993 2701 format
+    function formatPhoneNumber(phoneNumber) {
+        // Remove all non-numeric characters
+        let cleaned = phoneNumber.replace(/\D+/g, '');
+
+        // Limit to 11 digits
+        if (cleaned.length > 11) {
+            cleaned = cleaned.slice(0, 11);
+        }
+
+        // Format as (0975) 993 2701
+        let formatted = '';
+        if (cleaned.length >= 4) {
+            formatted += `(${cleaned.slice(0, 4)}) `;
+            if (cleaned.length >= 7) {
+                formatted += `${cleaned.slice(4, 7)} ${cleaned.slice(7)}`;
+            } else {
+                formatted += `${cleaned.slice(4)}`;
+            }
+        } else {
+            formatted = cleaned;
+        }
+
+        return formatted;
+    }
+
+    // Format date and time to "HHMMH of DD Mmmm YYYY"
+    function formatDateTime(date) {
+        return `${date.getHours().toString().padStart(2, '0')}${date.getMinutes().toString().padStart(2, '0')}H of ${date.toLocaleDateString('en-US', { day: '2-digit', month: 'long', year: 'numeric' })}`;
+    }
+
+    // Function to format damage input to "P1,000,000.00" format
+    function formatDamageInput(input) {
+        // Get the cursor position
+        const cursorPosition = input.selectionStart;
+
+        // Remove all non-numeric characters except for the decimal point
+        let cleaned = input.value.replace(/[^0-9.]/g, '');
+
+        // Split the cleaned value into integer and decimal parts
+        let parts = cleaned.split('.');
+        let integerPart = parts[0];
+        let decimalPart = parts[1] ? parts[1].slice(0, 2) : '';
+
+        // Format the integer part with commas
+        integerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+        // Ensure there are always two decimal places
+        if (decimalPart.length < 2) {
+            decimalPart = decimalPart.padEnd(2, '0');
+        }
+
+        // Combine the integer and decimal parts
+        let formatted = `P${integerPart}.${decimalPart}`;
+
+        // Add "more or less" if the amount is greater than 0
+        if (parseFloat(cleaned) > 0) {
+            formatted += " more or less";
+        }
+
+        // Update the input value
+        input.value = formatted;
+
+        // Restore the cursor position
+        input.setSelectionRange(cursorPosition, cursorPosition);
+    }
+
+    // Function to submit and copy to clipboard
+    function submitInitial() {
+        console.log('submitInitial function called'); // Debugging line
+        const data = {
+            aor: document.getElementById('aor').value,
+            involved: document.getElementById('involved').value,
+            occupancy: document.getElementById('occupancy').value,
+            location: document.getElementById('location').value,
+            barangay: document.getElementById('barangay').value,
+            city: document.getElementById('city').value,
+            region: document.getElementById('region').value,
+            timeAndDateReported: formatDateTime(new Date(document.getElementById('dateTimeReported').value)),
+            timeAndDateOfArrival: formatDateTime(new Date(document.getElementById('timeArrival').value)),
+            timeAndDateOfFireOut: formatDateTime(new Date(document.getElementById('timeFireOut').value)),
+            alarm: document.getElementById('alarm').value,
+            commander: document.getElementById('commander').value,
+            commanderContact: formatPhoneNumber(document.getElementById('commanderContact').value),
+            sender: document.getElementById('sender').value,
+            senderContact: formatPhoneNumber(document.getElementById('senderContact').value),
+            respondingTeam: document.getElementById('respondingTeam').value
+        };
+
+        const report = `Initial Report
+
+${data.aor}, ZCFD, reporting a ${data.occupancy} fire incident at ${data.location}, Barangay ${data.barangay}, ${data.city}, ${data.region}
+
+Responding Team:
+${data.respondingTeam}
+
+Time/Date Reported: ${data.timeAndDateReported}
+Involved: ${data.involved}
+Alarm Status: ${data.alarm}
+Time of Arrival: ${data.timeAndDateOfArrival}
+Fire Out: ${data.timeAndDateOfFireOut}
+
+Ground Commander: ${data.commander} ${data.commanderContact}
+Sender: ${data.sender} ${data.senderContact}`;
+
+        // Copy to clipboard
+        navigator.clipboard.writeText(report).then(() => {
+            alert('Initial report copied to clipboard!');
+        });
+    }
+
+    // Function to submit progress and copy to clipboard
+    function submitProgress() {
+        console.log('submitProgress function called'); // Debugging line
+        const data = {
+            aor: document.getElementById('aor').value,
+            involved: document.getElementById('involved').value,
+            occupancy: document.getElementById('occupancy').value,
+            location: document.getElementById('location').value,
+            barangay: document.getElementById('barangay').value,
+            city: document.getElementById('city').value,
+            region: document.getElementById('region').value,
+            timeAndDateReported: formatDateTime(new Date(document.getElementById('dateTimeReported').value)),
+            timeAndDateOfArrival: formatDateTime(new Date(document.getElementById('timeArrival').value)),
+            timeAndDateOfFireOut: formatDateTime(new Date(document.getElementById('timeFireOut').value)),
+            alarm: document.getElementById('alarm').value,
+            commander: document.getElementById('commander').value,
+            commanderContact: formatPhoneNumber(document.getElementById('commanderContact').value),
+            sender: document.getElementById('sender').value,
+            senderContact: formatPhoneNumber(document.getElementById('senderContact').value),
+            respondingTeam: document.getElementById('respondingTeam').value,
+            noofestablishment: document.getElementById('noofestablishment').value,
+            nooffamilies: document.getElementById('nooffamilies').value,
+            responders: document.getElementById('responders').value,
+            nameofestablishment: document.getElementById('nameofestablishment').value,
+            sqm: document.getElementById('sqm').value,
+            owner: document.getElementById('owner').value,
+            damage: document.getElementById('damage').value,
+            fatality: document.getElementById('fatality').value,
+            injured: document.getElementById('injured').value
+        };
+
+        const report = `Progress Report
+        
+Time/Date Reported: ${formatDateTime(new Date(document.getElementById('dateTimeReported').value))}
+Location: ${data.location}, Barangay ${data.barangay}, ${data.city}, ${data.region}
+Name of Owner: ${data.owner}
+Alarm Status: ${data.alarm}
+Time of Arrival: ${formatDateTime(new Date(document.getElementById('timeArrival').value))}
+Fire Out: ${formatDateTime(new Date(document.getElementById('timeFireOut').value))}
+
+Estimated Damage: ${data.damage}
+Fatality: ${data.fatality}
+Injured: ${data.injured}
+Number of House/Establishment: ${data.noofestablishment}
+Number of Families: ${data.nooffamilies}
+Number of Responders: ${data.responders}
+
+Ground Commander: ${data.commander} ${data.commanderContact}
+Sender: ${data.sender} ${data.senderContact}`;
+
+        // Copy to clipboard
+        navigator.clipboard.writeText(report).then(() => {
+            alert('Progress report copied to clipboard!');
+        });
+    }
+
+    // Function to submit complete and copy to clipboard
+    function submitComplete() {
+        console.log('submitComplete function called'); // Debugging line
+        const data = {
+            aor: document.getElementById('aor').value,
+            involved: document.getElementById('involved').value,
+            occupancy: document.getElementById('occupancy').value,
+            location: document.getElementById('location').value,
+            barangay: document.getElementById('barangay').value,
+            city: document.getElementById('city').value,
+            region: document.getElementById('region').value,
+            timeAndDateReported: formatDateTime(new Date(document.getElementById('dateTimeReported').value)),
+            timeAndDateOfArrival: formatDateTime(new Date(document.getElementById('timeArrival').value)),
+            timeAndDateOfFireOut: formatDateTime(new Date(document.getElementById('timeFireOut').value)),
+            alarm: document.getElementById('alarm').value,
+            commander: document.getElementById('commander').value,
+            commanderContact: formatPhoneNumber(document.getElementById('commanderContact').value),
+            sender: document.getElementById('sender').value,
+            senderContact: formatPhoneNumber(document.getElementById('senderContact').value),
+            respondingTeam: document.getElementById('respondingTeam').value,
+            noofestablishment: document.getElementById('noofestablishment').value,
+            nooffamilies: document.getElementById('nooffamilies').value,
+            responders: document.getElementById('responders').value,
+            nameofestablishment: document.getElementById('nameofestablishment').value,
+            sqm: document.getElementById('sqm').value,
+            owner: document.getElementById('owner').value,
+            damage: document.getElementById('damage').value,
+            fatality: document.getElementById('fatality').value,
+            injured: document.getElementById('injured').value
+        };
+
+        const report = `Complete Report
+
+${data.aor}, ZCFD, reporting a ${data.occupancy} fire incident at ${data.location}, Barangay ${data.barangay}, ${data.city}, ${data.region}
+
+Responding Team:
+${data.respondingTeam}
+
+Time/Date Reported: ${data.timeAndDateReported}
+Time of Arrival: ${data.timeAndDateOfArrival}
+Involved: ${data.involved} (${sqm})
+Name of Owner: ${data.owner}
+Name of Establishment: ${data.nameofestablishment}
+Alarm Status: ${data.alarm}
+Time of Fire Out: ${data.timeAndDateOfFireOut}
+Estimated Damage: ${data.damage}
+Fatality: ${data.fatality}
+Injured: ${data.injured}
+Number of Establishment: ${data.noofestablishment}
+Number of Families: ${data.nooffamilies}
+Number of Responders: ${data.responders}
+
+Ground Commander: ${data.commander} ${data.commanderContact}
+Sender: ${data.sender} ${data.senderContact}
+`;
+
+        // Copy to clipboard
+        navigator.clipboard.writeText(report).then(() => {
+            alert('Complete report copied to clipboard!');
+        });
+    }
+</script>
+
+</body>
+</html>
