@@ -1,0 +1,320 @@
+body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 16px;
+            color: #bbb;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            background-color: #222;
+            border: 1px solid #444;
+            color: #fff;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: 0.3s;
+            appearance: none;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        #barangay {
+            color: #F28500 !important;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            background-color: #222;
+            border: 1px solid #444;
+            color: #F28500;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: 0.3s;
+            appearance: none;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        input:focus, button:focus, select:focus, textarea:focus, input:focus {
+            outline: none;
+            border-color: #00c8ff;
+        }
+
+        button {
+            background-color: #00c8ff;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #0099cc;
+        }
+
+        h2 {
+            color: #00c8ff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #barangay {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        box-sizing: border-box;
+        border: 1px solid #555;
+        background-color: #1c1c1c;
+        color: #fff;
+        border-radius: 5px;
+        outline: none;
+    }
+
+    #suggestions {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        position: absolute;
+        width: calc(100% - 20px);
+        background-color: #1c1c1c;
+        border: 1px solid #555;
+        border-top: none;
+        z-index: 1000;
+        max-height: 200px;
+        overflow-y: auto;
+        border-radius: 0 0 5px 5px;
+    }
+
+    #suggestions li {
+        padding: 10px;
+        cursor: pointer;
+        color: #fff;
+        transition: background 0.2s ease;
+    }
+
+    #suggestions li:hover, #suggestions li.active {
+        background-color: #333;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    body {
+        background-color: #121212; /* Match dark background */
+        color: #ffffff; /* Match text color */
+        font-family: Arial, Helvetica, sans-serif; /* Match general font */
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 16px;
+        color: #ffffff;
+    }
+
+
+    .modal {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  width: 60%;
+  max-height: 70vh;
+  overflow-y: auto;
+  border-radius: 8px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #000;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Modal Background */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 50;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Dark overlay */
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px); /* Blurred background */
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 24px;
+    background: rgba(20, 20, 20, 0.8); /* Semi-transparent background */
+    border-radius: 12px;
+    color: #fff;
+    width: 95%; /* Increased width */
+    max-width: 900px; /* Wider modal */
+    max-height: 80vh; /* Taller modal */
+    overflow: hidden;
+    backdrop-filter: blur(20px); /* Glass effect */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3); /* Soft shadow */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+}
+
+/* Apparatus List */
+#apparatusList {
+    overflow-y: auto;
+    flex-grow: 1;
+    max-height: 60vh;
+    padding-right: 5px;
+}
+
+/* Confirm Button (Sticky) */
+#confirmApparatus {
+    position: sticky;
+    bottom: 0;
+    background-color: #F28500;
+    color: white;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 10;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+#confirmApparatus:hover {
+    background-color: #ff5e00;
+}
+
+/* Close Button */
+.close {
+    color: #bbb;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close:hover {
+    color: #fff;
+}
+
+/* Apparatus Item */
+.apparatus-item {
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 6px;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.apparatus-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.apparatus-item.selected {
+    background-color: #F28500;
+    color: white;
+}
+
+/* General Styles */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #121212;
+    color: #fff;
+    padding: 20px;
+}
+
+/* Textarea */
+#respondingTeam {
+    width: 100%;
+    min-height: 40px;
+    resize: none;
+    overflow-y: hidden;
+    padding: 10px;
+    border: 1px solid #444;
+    background-color: #1a1a1a;
+    color: #F28500;
+    font-size: 16px;
+    border-radius: 6px;
+    box-sizing: border-box;
+    cursor: pointer; /* Make it look like a button */
+}
+
+#respondingTeam:focus {
+    outline: none;
+    border-color: #00c8ff;
+}
+
+/* Button */
+button {
+    background-color: #F28500;
+    color: white;
+    border: none;
+    padding: 12px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #ff5e00;
+}
