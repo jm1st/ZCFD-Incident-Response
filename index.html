@@ -23,9 +23,7 @@
     <div class="form-container">
         
         <form id="incidentForm">
-
         <h2></h2>
-
         <!-- Area of Responsibility Dropdown -->
         <label for="aor">Area of Responsibility:</label>
         <select id="aor" >
@@ -71,7 +69,7 @@
 
         <!-- Involved -->
         <label for="involved">Involved:</label>
-        <select id="involved" >
+        <select id="involved">
             <option value="">Choose Occupancy</option>
         </select>
 
@@ -144,7 +142,7 @@
         <input type="text" id="sender"  />
 
         <label for="senderContact">Sender Contact:</label>
-        <input type="tel" id="senderContact" maxlength="16" oninput="formatPhoneInput(this)"  />
+        <input type="tel" id="senderContact" maxlength="16" oninput="formatPhoneInput(this)" value="(0975) 993 2701"  />
 
         <!-- Submit INITIAL Button -->
         <button type="button" onclick="submitInitial()">Submit Initial</button>
