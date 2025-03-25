@@ -144,7 +144,7 @@
         let options = [];
         if (occupancy === 'structural') {
             options = structuralOptions;
-        } else if (occupancy === 'non Structural') {
+        } else if (occupancy === 'non structural') {
             options = nonStructuralOptions;
         }
 
@@ -439,24 +439,27 @@ const apparatusList = [
     'Quiniput FSS, Isuzu Anos Pumper FT FE18 (FIRST-DUE)',
     'Recodo FSS, ZCFD, Hino Pumper FT FE14 (FIRST-DUE)',
     'Sangali FSS, ZCFD, Isuzu 6-wheeler FT FE34 (FIRST-DUE)',
-    'Sangali FSS, ZCFD, Isuzu Morita FT FE16 (FIRST-DUE)',
+    'Sangali FSS, ZCFD, Isuzu Morita FT FE16 (SECOND-DUE)',
     'San Jose Gusu FSS, ZCFD, Kia Anos Penetrator FT FE19 (FIRST-DUE)',
     'San Roque FSS, ZCFD, Rosenbauer FT FE10 (FIRST-DUE)',
     'Sta. Catalina FSS, ZCFD, Isuzu 6-wheeler FT FE35 (FIRST-DUE)',
-    'Sta. Maria FSS, ZCFD, Isuzu Morita Super Tanker FE02 (SECOND-DUE)',
     'Sta. Maria FSS, ZCFD, Isuzu 6-wheeler FT FE26 (FIRST-DUE)',
+    'Sta. Maria FSS, ZCFD, Isuzu Morita Super Tanker FE02 (SECOND-DUE)',
     'Sta. Maria FSS, ZCFD, Isuzu Morita Aerial Platform FE04 (SECOND-DUE)',
     'Talisayan FSS, ZCFD, Isuzu Morita Pumper FT FE15 (FIRST-DUE)',
     'Talisayan FSS, ZCFD, Lighting Tower FE22 (SECOND-DUE)',
     'Talon-Talon FSS, ZCFD, Foton Pumper FT FE12 (FIRST-DUE)',
     'Tetuan FSS, ZCFD, Hino Pumper FT FE05 (FIRST-DUE)',
     'Tumaga FSS, ZCFD, Isuzu Pumper FT FE03 (FIRST-DUE)',
-    'Vitali FSS, ZCFD, Hino Nikki Pumper FT FE07 (SECOND-DUE)',
+    'Tigbalabag FSS, ZCFD, Hino Nikki Pumper FT FE07 (FIRST-DUE)',
     'Vitali FSS, ZCFD, Isuzu 6-wheeler FT FE31 (FIRST-DUE)',
     'Special Rescue Force, ZCFD, Isuzu Morita Rescue Truck',
     'Emergency Medical Services, ZCFD, Ambulance',
     'Zamboanga City Fire District, Toyota Rush',
     'Zamboanga City Fire District, Toyota Hilux',
+    'Zamboanga City Disaster Risk Reduction Management Office (ZCDRRMO), Water Tanker',
+    'Zamboanga City Disaster Risk Reduction Management Office (ZCDRRMO), EMS',
+    'Philippine National Police (PNP)',
 ];
 
 let selectedApparatus = [];
