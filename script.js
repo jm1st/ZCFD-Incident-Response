@@ -23,7 +23,7 @@
     "Maasin", "Malagutay", "Mampang", "Manalipa", "Mangusu", "Manicahan", "Mariki", "Mercedes",
     "Muti", "Pamucutan", "Pangapuyan", "Panubigan", "Pasilmanta", "Pasobolong", "Pasonanca",
     "Patalon", "Putik", "Quiniput", "Recodo", "Rio Hondo", "Salaan", "San Jose Cawa-cawa",
-    "San Jose Gusu", "San Roque", "Sangali", "Santa Barbara", "Santa Catalina", "Santa Maria",
+    "San Jose Gusu", "San Roque", "Sangali", "St. Barbara", "St. Catalina", "St. Maria",
     "Santo Niño", "Sibulao", "Sinubung", "Sinunoc", "Tagasilay", "Taguiti", "Talabaan",
     "Talisayan", "Talon-talon", "Taluksangay", "Tetuan", "Tictapul", "Tigbalabag", "Tigtabon",
     "Tolosa", "Tugbungan", "Tulungatung", "Tumaga", "Tumalutab", "Tumitus", "Victoria",
@@ -129,7 +129,7 @@
     ];
 
     const nonStructuralOptions = [
-        'Agricultural Land', 'Ambulant Vendor', 'Electrical Pole', 'Forest', 'Grass Rubbish', 
+        'Agricultural Land', 'Ambulant Vendor', 'Electrical Pole', 'Forest', 'Grass', 'Rubbish', 
         'Aircraft', 'Automobile', 'Bus', 'Heavy Equipment', 'Jeepney', 'Locomotive', 
         'Motorcycle', 'Ship/Watervessel', 'Tricycle', 'Truck'
     ];
@@ -210,7 +210,7 @@
 
     // Format date and time to "HHMMH of DD Mmmm YYYY"
     function formatDateTime(date) {
-        return `${date.getHours().toString().padStart(2, '0')}${date.getMinutes().toString().padStart(2, '0')}H of ${date.toLocaleDateString('en-US', { day: '2-digit', month: 'long', year: 'numeric' })}`;
+        return `${date.getHours().toString().padStart(2, '0')}${date.getMinutes().toString().padStart(2, '0')}H of ${date.toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' })}`;
     }
 
     // Function to format damage input to "P1,000,000.00" format
@@ -389,7 +389,7 @@ ${data.respondingTeam}
 
 Time/Date Reported: ${data.timeAndDateReported}
 Time of Arrival: ${data.timeAndDateOfArrival}
-Involved: ${data.involved} (${data.sqm}sqm)
+Involved: ${data.involved} (${data.sqm} sqm)
 Name of Owner: ${data.owner}
 Name of Establishment: ${data.nameofestablishment}
 Alarm Status: ${data.alarm}
@@ -397,7 +397,7 @@ Time of Fire Out: ${data.timeAndDateOfFireOut}
 Estimated Damage: ${data.damage}
 Fatality: ${data.fatality}
 Injured: ${data.injured}
-Number of Establishment: ${data.noofestablishment}
+Number of House/Establishment: ${data.noofestablishment}
 Number of Families: ${data.nooffamilies}
 Number of Responders: ${data.responders}
 
@@ -425,6 +425,7 @@ const apparatusList = [
     'Ayala FSS, ZCFD, Isuzu 6-wheeler FE33 (FIRST-DUE)',
     'Ayala FSS, ZCFD, Isuzu Brake Squirt FE13 (SECOND-DUE)',
     'Boalan FSS, ZCFD, Isuzu Anos Pumper FT FE11 (FIRST-DUE)',
+    'Buenavista FSS, ZCFD, Isuzu Morita FT FE16 (SECOND-DUE)',
     'Cabaluay FSS, ZCFD, ZCDRRMO FT (FIRST-DUE)',
     'Calarian FSS, ZCFD, Isuzu 6-wheeler FT FE30 (FIRST-DUE)',
     'Culianan FSS, ZCFD, Isuzu 6-wheeler FT FE32 (FIRST-DUE)',
@@ -439,7 +440,6 @@ const apparatusList = [
     'Quiniput FSS, Isuzu Anos Pumper FT FE18 (FIRST-DUE)',
     'Recodo FSS, ZCFD, Hino Pumper FT FE14 (FIRST-DUE)',
     'Sangali FSS, ZCFD, Isuzu 6-wheeler FT FE34 (FIRST-DUE)',
-    'Sangali FSS, ZCFD, Isuzu Morita FT FE16 (SECOND-DUE)',
     'San Jose Gusu FSS, ZCFD, Kia Anos Penetrator FT FE19 (FIRST-DUE)',
     'San Roque FSS, ZCFD, Rosenbauer FT FE10 (FIRST-DUE)',
     'Sta. Catalina FSS, ZCFD, Isuzu 6-wheeler FT FE35 (FIRST-DUE)',

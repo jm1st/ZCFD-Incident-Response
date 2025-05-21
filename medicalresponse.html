@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ZCFD (RTMF)</title>
+    <link rel="stylesheet" href="medicalresponse.css" />
+</head>
+<body>
+
+<h1>ZAMBOANGA CITY FIRE DISTRICT
+</h1>
+<h2>Medical/Trauma Incident Response</h2>
+
+<div class="container">
+    <!--
+    <div class="dashboard">
+        <h2>DASHBOARD</h2>
+        <p>History</p>
+
+    </div>
+    -->
+    <div class="form-container">
+        
+        <form id="incidentForm">
+        <h2></h2>
+        <!-- Area of Responsibility Dropdown -->
+        <label for="aor">Area of Responsibility:</label>
+        <select id="aor" >
+                    <option value=""></option>
+                    <option value="ZAMBOAGA CITY CENTRAL FIRE STATION, EMS">Emergency Medical Services, ZCFS</option>
+                    <option value="Zamboanga City Central Fire Station, ZCFD">Zamboanga City Central Fire Station</option>
+                    <option value="Ayala Fire Sub-Station, ZCFD">Ayala Fire Sub-Station</option>
+                    <option value="Boalan Fire Sub-Station, ZCFD">Boalan Fire Sub-Station</option>
+                    <option value="Buenavista Fire Sub-Station, ZCFD">Buenavista Fire Sub-Station</option>
+                    <option value="Cabaluay Fire Sub-Station, ZCFD">Cabaluay Fire Sub-Station</option>
+                    <option value="Calarian Fire Sub-Station, ZCFD">Calarian Fire Sub-Station</option>
+                    <option value="Culianan Fire Sub-Station, ZCFD">Culianan Fire Sub-Station</option>
+                    <option value="Guiwan Fire Sub-Station, ZCFD">Guiwan Fire Sub-Station</option>
+                    <option value="Labuan Fire Sub-Station, ZCFD">Labuan Fire Sub-Station</option>
+                    <option value="Lunzuran Fire Sub-Station, ZCFD">Lunzuran Fire Sub-Station</option>
+                    <option value="Mampang Fire Sub-Station, ZCFD">Mampang Fire Sub-Station</option>
+                    <option value="Manicahan Fire Sub-Station, ZCFD">Manicahan Fire Sub-Station</option>
+                    <option value="Mercedes Fire Sub-Station, ZCFD">Mercedes Fire Sub-Station</option>
+                    <option value="Putik Fire Sub-Station, ZCFD">Putik Fire Sub-Station</option>
+                    <option value="Quiniput Fire Sub-Station, ZCFD">Quiniput Fire Sub-Station</option>
+                    <option value="Recodo Fire Sub-Station, ZCFD">Recodo Fire Sub-Station</option>
+                    <option value="Sangali Fire Sub-Station, ZCFD">Sangali Fire Sub-Station</option>
+                    <option value="Sta Catalina Fire Sub-Station, ZCFD">Sta Catalina Fire Sub-Station</option>
+                    <option value="San Jose Gusu Fire Sub-Station, ZCFD">San Jose Gusu Fire Sub-Station</option>
+                    <option value="San Roque Fire Sub-Station, ZCFD">San Roque Fire Sub-Station</option>
+                    <option value="Sta Maria Fire Sub-Station, ZCFD">Sta Maria Fire Sub-Station</option>
+                    <option value="Talisayan Fire Sub-Station, ZCFD">Talisayan Fire Sub-Station</option>
+                    <option value="Talon-Talon Fire Sub-Station, ZCFD">Talon-Talon Fire Sub-Station</option>
+                    <option value="Tetuan Fire Sub-Station, ZCFD">Tetuan Fire Sub-Station</option>
+                    <option value="Tigbalabag Fire Sub-Station, ZCFD">Tigbalabag Fire Sub-Station</option>
+                    <option value="Tumaga Fire Sub-Station, ZCFD">Tumaga Fire Sub-Station</option>
+                    <option value="Vitali Fire Sub-Station, ZCFD">Vitali Fire Sub-Station</option>
+        </select>
+        
+        <!-- TYPE OF CALL -->
+        <label for="typeofcall">Type of Call:</label>
+        <select id="typeofcall">
+            <option value=""></option>
+            <option value="medical call">Medical</option>
+            <option value="trauma call">Trauma</option>
+            <option value="patient transport">Transport</option>
+        </select>
+
+        <div class="callfromadress" style="border: 1px solid white; border-radius: 10px; padding: 10px; margin-bottom: 10px;background: #121212;">
+            <h3>FROM</h3>
+            <!-- Location -->
+            <label for="fromlocation">Location:</label>
+            <input type="text" id="fromlocation"  />
+
+            <label for="frombarangay">Barangay:</label>
+            <input type="text" id="frombarangay" oninput="filterBarangaysFrom()" onkeydown="handleKeydownFrom(event)" autocomplete="off"  />
+            <ul id="suggestionsFrom" class="hidden"></ul>
+
+            <label for="fromcity">City:</label>
+            <input type="text" id="fromcity" value="Zamboanga City"  />
+
+        </div>
+
+        <label text aliign="center" for="whereto">Is Mr. ShotsFired driving me to the hospital?</label>
+        <div class="button-container">
+            
+            <button type="button" onclick="toggleHospitalOption('yes')">Yes</button>
+            <button type="button" onclick="toggleHospitalOption('no')">No</button>
+        </div>
+
+        <div id="medicalFacilitySection" class="hidden" style="margin-bottom: 20px;">
+            <label for="medicalFacility">Select Medical Facility:</label>
+            <select id="medicalFacility">
+                <option value="">Select a facility</option>
+                <option value="Zamboanga City Medical Center">Zamboanga City Medical Center</option>
+                <option value="Ciudad Medical Zamboanga">Ciudad Medical Zamboanga</option>
+                <option value="Brent Hospital and Colleges Inc.">Brent Hospital and Colleges Inc.</option>
+                <option value="Zamboanga Peninsula Medical Center">Zamboanga Peninsula Medical Center</option>
+                <option value="Western Mindanao Medical Center">Western Mindanao Medical Center</option>
+                <option value="Mindanao Central Sanitarium">Mindanao Central Sanitarium</option>
+                <option value="Zamboanga Doctors Hospital">Zamboanga Doctors Hospital</option>
+            </select>
+        </div>
+
+        <div id="calltoaddress" class="calltoaddress hidden" style="border: 1px solid white; border-radius: 10px; padding: 10px; margin-bottom: 10px; background:#121212;">
+            <h3>TO</h3>
+            <label for="tolocation">Location:</label>
+            <input type="text" id="tolocation"  />
+
+            <label for="tobarangay">Barangay:</label>
+            <input type="text" id="tobarangay" oninput="filterBarangaysTo()" onkeydown="handleKeydownTo(event)" autocomplete="off"  />
+            <ul id="suggestionsTo" class="hidden"></ul>
+
+            <label for="tocity">City:</label>
+            <input type="text" id="tocity" value="Zamboanga City"  />
+
+            <label for="toregion">Region:</label>
+            <input type="text" id="toregion" value="Region IX"  />
+
+        </div>
+        
+        <!-- RESPONDING TEAM -->
+        <label for="respondingTeam">Responding Team:</label>
+        <textarea id="respondingTeam" wrap="soft" rows="1" readonly onclick="showModal()"></textarea>
+
+        <!-- Modal -->
+        <div id="apparatusModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="apparatusList"></div>
+                <button id="confirmApparatus">Confirm</button>
+            </div>
+        </div>
+
+        <!-- Date and Time -->
+        <label for="dateTimeReported">Time/Date Reported:</label>
+        <input type="datetime-local" id="dateTimeReported" />
+
+        <!-- RESPONDERS -->
+        <label for="responders">Number of Responders:</label>
+        <textarea id="responders" rows="1" readonly></textarea>
+
+        <!-- Ground Commander -->
+        <label for="commander">Ground Commander:</label>
+        <input type="text" id="commander"  />
+
+        <label for="commanderContact">Ground Commander Contact:</label>
+        <input type="tel" id="commanderContact" maxlength="16" oninput="formatPhoneInput(this)"  />
+
+        <!-- Sender -->
+        <label for="sender">Sender:</label>
+        <input type="text" id="sender"  />
+
+        <label for="senderContact">Sender Contact:</label>
+        <input type="tel" id="senderContact" maxlength="16" oninput="formatPhoneInput(this)" value="(0953) 310 4889"  />
+
+        <!-- Submit INITIAL Button -->
+        <button type="button" onclick="emssubmitInitial()">Submit Initial</button>
+
+
+
+
+        <!-- FINAL REPORT -->
+        
+        <h2>FINAL REPORT</h2>
+
+        <label for="timeArrivalofResidence">Time of Arrival at Scene:</label>
+        <input type="datetime-local" id="timeArrivalofResidence" />
+        <div style="margin-top: 10px;">
+            <button type="button" onclick="setCurrentDateTime('timeArrivalofResidence')">Arrived On Scene</button>
+        </div>
+
+        <label for="timeArrivalofHospital">Time of Arrival at Medical Facility:</label>
+        <input type="datetime-local" id="timeArrivalofHospital" />
+        <div style="margin-top: 10px;">
+            <button type="button" onclick="setCurrentDateTime('timeArrivalofHospital')">Arrived On Medical Facility</button>
+        </div>
+
+        <label for="involved">Involved:</label>
+        <input type="text" id="involved" value="0"/>
+
+        <label for="actiontaken">Action Taken:</label>
+        <textarea id="actiontaken" rows="1" oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px';"></textarea>
+
+        <label for="fatality">Casualty/Fatality:</label>
+        <input type="text" id="fatality" value="0" oninput="handlePxDetails('fatality', 'fatalityDetails')" onkeypress="return isNumberKey(event)" />
+
+        <label for="injured">Injured:</label>
+        <input type="text" id="injured" value="0" oninput="handlePxDetails('injured', 'injuredDetails')" onkeypress="return isNumberKey(event)" />
+
+        <div id="fatalityDetails" class="pxdetail" style="display: none; border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+            <!-- Fatality details will be dynamically added here -->
+        </div>
+
+        <div id="injuredDetails" class="pxdetail" style="display: none; border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+            <!-- Injured details will be dynamically added here -->
+        </div>
+     
+        <!-- Submit COMPLETE Button -->
+        <button type="button" onclick="submitComplete()">Submit Complete</button>
+
+        </form>
+    </div>
+
+    <script src="medicalresponse.js"></script>
+</body>
+</html>

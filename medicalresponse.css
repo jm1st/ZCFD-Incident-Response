@@ -318,6 +318,77 @@ button:hover {
     cursor: pointer;
 }
 
+/* Suggestions for FROM and TO Barangay */
+#suggestionsFrom, #suggestionsTo {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    width: calc(100% - 20px);
+    background-color: #1c1c1c;
+    border: 1px solid #555;
+    border-top: none;
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for better visibility */
+}
+
+#suggestionsFrom li, #suggestionsTo li {
+    padding: 10px;
+    cursor: pointer;
+    color: #fff;
+    transition: background 0.2s ease;
+    font-family: Arial, Helvetica, sans-serif; /* Ensure consistent font */
+}
+
+#suggestionsFrom li:hover, #suggestionsFrom li.active,
+#suggestionsTo li:hover, #suggestionsTo li.active {
+    background-color: #444; /* Highlight active or hovered items */
+    color: #F28500; /* Add a distinct color for better focus */
+}
+
+/* Input Fields for FROM and TO Barangay */
+#frombarangay, #tobarangay {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    box-sizing: border-box;
+    border: 1px solid #555;
+    background-color: #1c1c1c;
+    color: #F28500;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+#frombarangay:focus, #tobarangay:focus {
+    border-color: #F28500;
+    background-color: #222; /* Slightly darker background on focus */
+}
+
+/* Ensure consistent spacing for the form */
+.callfromadress, .calltoaddress {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #1a1a1a; /* Slightly lighter background for better contrast */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for better separation */
+}
+
+/* Responsive Design Adjustments */
+@media (max-width: 768px) {
+    #frombarangay, #tobarangay {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    #suggestionsFrom, #suggestionsTo {
+        width: calc(100% - 10px); /* Adjust width for smaller screens */
+    }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .container {
@@ -338,4 +409,31 @@ button:hover {
         padding: 10px;
         font-size: 14px;
     }
+}
+
+/* Optional: Add spacing and styling for the transport section */
+.transport-section, #medicalFacilitySection {
+    margin-bottom: 20px;
+}
+
+/* Horizontal Button Container */
+.button-container {
+    display: flex;
+    justify-content: space-between; /* Space buttons evenly */
+    gap: 10px; /* Add spacing between buttons */
+    margin-top: 20px; /* Add spacing above the container */
+}
+
+.button-container button {
+    flex: 1; /* Make buttons equal width */
+}
+
+/* Expandable Textarea */
+textarea.expandable {
+    resize: none; /* Disable manual resizing */
+    overflow-y: hidden; /* Hide vertical scrollbar */
+    height: auto; /* Allow dynamic height adjustment */
+    min-height: 40px; /* Match the initial height of other input fields */
+    max-height: 300px; /* Optional: Set a maximum height */
+    line-height: 1.5; /* Improve readability for multiline text */
 }
