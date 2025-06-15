@@ -692,4 +692,78 @@ label {
     display: block;
 }
 
+/* New styles for dynamic person details rows and containers */
+.person-detail-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 18px;
+    margin-bottom: 10px;
+    background: #181818;
+    border-radius: 6px;
+    padding: 10px 8px 8px 8px;
+}
+
+.person-detail-row label {
+    flex: 1 1 100%;
+    margin-bottom: 2px;
+    color: #F28500;
+    font-size: 0.98em;
+    font-weight: bold;
+}
+
+.person-detail-row input,
+.person-detail-row select {
+    flex: 1 1 45%;
+    margin-bottom: 8px;
+    background: #222;
+    color: #F28500;
+    border: 1px solid #444;
+    border-radius: 6px;
+    font-size: 15px;
+    min-width: 120px;
+}
+
+/* Added styles for textarea in person-detail-row */
+.person-detail-row textarea {
+    flex: 1 1 100%;
+    min-height: 38px;
+    max-height: 120px;
+    resize: vertical;
+    margin-bottom: 8px;
+    background: #222;
+    color: #F28500;
+    border: 1px solid #444;
+    border-radius: 6px;
+    font-size: 15px;
+    min-width: 120px;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    padding: 12px;
+    transition: border-color 0.2s;
+    height: 38px; /* Match default input height */
+}
+
+#injured-details-container {
+    margin: 10px 0 0 0;
+    padding: 10px 12px 8px 12px;
+    background: #1a2d1a; /* greenish background */
+    border: 2px solid #00d26a; /* green border */
+    border-radius: 8px;
+}
+
+#fatality-details-container {
+    margin: 10px 0 0 0;
+    padding: 10px 12px 8px 12px;
+    background: #2d1a1a; /* reddish background */
+    border: 2px solid #ff3300; /* red border */
+    border-radius: 8px;
+}
+
+@media (max-width: 700px) {
+    .person-detail-row {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
 

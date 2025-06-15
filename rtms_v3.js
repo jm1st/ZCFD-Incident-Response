@@ -823,6 +823,119 @@ document.addEventListener('DOMContentLoaded', function() {
         shiftSelect.addEventListener('change', updateInvestigatorAndFCOS);
     }
 
+    // --- Dynamic Injured and Fatality Details ---
+    function createPersonDetailRow(type, index) {
+        // type: 'injured' or 'fatality'
+        const wrapper = document.createElement('div');
+        wrapper.className = 'person-detail-row';
+        wrapper.style.marginBottom = '10px';
+
+        // Name
+        const nameLabel = document.createElement('label');
+        nameLabel.textContent = `${type === 'injured' ? 'Injured' : 'Fatality'} #${index + 1} Name:`;
+        nameLabel.setAttribute('for', `${type}-name-${index}`);
+        wrapper.appendChild(nameLabel);
+        const nameInput = document.createElement('input');
+        nameInput.type = 'text';
+        nameInput.id = `${type}-name-${index}`;
+        nameInput.name = `${type}-name-${index}`;
+        nameInput.required = true;
+        wrapper.appendChild(nameInput);
+
+        // Age
+        const ageLabel = document.createElement('label');
+        ageLabel.textContent = 'Age:';
+        ageLabel.setAttribute('for', `${type}-age-${index}`);
+        wrapper.appendChild(ageLabel);
+        const ageInput = document.createElement('input');
+        ageInput.type = 'number';
+        ageInput.id = `${type}-age-${index}`;
+        ageInput.name = `${type}-age-${index}`;
+        ageInput.min = 0;
+        ageInput.required = true;
+        wrapper.appendChild(ageInput);
+
+        // Chief Complaint
+        const ccLabel = document.createElement('label');
+        ccLabel.textContent = 'Chief Complaint:';
+        ccLabel.setAttribute('for', `${type}-cc-${index}`);
+        wrapper.appendChild(ccLabel);
+        // Use textarea instead of input
+        const ccInput = document.createElement('textarea');
+        ccInput.id = `${type}-cc-${index}`;
+        ccInput.name = `${type}-cc-${index}`;
+        ccInput.required = true;
+        ccInput.rows = 1;
+        ccInput.style.overflowY = 'auto';
+        ccInput.style.height = '22px';
+        // Auto-expand textarea as user types
+        ccInput.addEventListener('input', function() {
+            ccInput.style.height = '22px';
+            ccInput.style.height = Math.min(ccInput.scrollHeight, 120) + 'px';
+        });
+        wrapper.appendChild(ccInput);
+
+        // Connection
+        const connLabel = document.createElement('label');
+        connLabel.textContent = 'Connection:';
+        connLabel.setAttribute('for', `${type}-conn-${index}`);
+        wrapper.appendChild(connLabel);
+        const connSelect = document.createElement('select');
+        connSelect.id = `${type}-conn-${index}`;
+        connSelect.name = `${type}-conn-${index}`;
+        connSelect.required = true;
+        connSelect.innerHTML = `
+            <option value="" disabled selected hidden>Select Connection</option>
+            <option value="BFP">BFP</option>
+            <option value="Civilian">Civilian</option>
+        `;
+        wrapper.appendChild(connSelect);
+
+        return wrapper;
+    }
+
+    function updatePersonDetails(type, count) {
+        const containerId = type === 'injured' ? 'injured-details-container' : 'fatality-details-container';
+        let container = document.getElementById(containerId);
+        if (!container) return;
+        container.innerHTML = '';
+        if (count > 0) {
+            for (let i = 0; i < count; i++) {
+                container.appendChild(createPersonDetailRow(type, i));
+            }
+            container.style.display = '';
+        } else {
+            container.style.display = 'none';
+        }
+    }
+
+    // Setup listeners for casualties and fatalities
+    const injuredInput = document.getElementById('casualties-injured');
+    const fatalityInput = document.getElementById('casualties-fatality');
+
+    if (injuredInput) {
+        injuredInput.addEventListener('input', function() {
+            const val = parseInt(injuredInput.value, 10);
+            updatePersonDetails('injured', isNaN(val) ? 0 : val);
+        });
+        // On load, trigger if value exists
+        if (injuredInput.value) {
+            const val = parseInt(injuredInput.value, 10);
+            updatePersonDetails('injured', isNaN(val) ? 0 : val);
+        }
+    }
+    if (fatalityInput) {
+        fatalityInput.addEventListener('input', function() {
+            const val = parseInt(fatalityInput.value, 10);
+            updatePersonDetails('fatality', isNaN(val) ? 0 : val);
+        });
+        // On load, trigger if value exists
+        if (fatalityInput.value) {
+            const val = parseInt(fatalityInput.value, 10);
+            updatePersonDetails('fatality', isNaN(val) ? 0 : val);
+        }
+    }
+
     // ...existing code...
 });
 
