@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ZCFD (RTMF)</title>
+    <link rel="stylesheet" href="rtms_v3.css" />
+</head>
+<body>
+
+    <h1>
+        BUREAU OF FIRE PROTECTION<br>
+        ZAMBOANGA CITY FIRE DISTRICT<br>
+        Intelligence and Investigation Section
+    </h1>
+
+    <div class="container">
+        <div class="form-container">
+            <form id="rtmsForm">
+
+                <div class="form-header aor-section">
+                    <label for="aor">Area of Responsibility:</label>
+                    <select id="aor" name="aor" >
+                        <option value="" disabled selected hidden>Choose Station</option>
+                        <option value="Intelligence and Investigation Section, ZCFD">Intelligence and Investigation Section</option>
+                        <option value="Zamboanga City Fire District">Zamboanga City Fire District</option>
+                        <option value="Zamboanga City Central Fire Station, ZCFD">Zamboanga City Central Fire Station</option>
+                        <option value="Ayala Fire Sub-Station, ZCFD">Ayala Fire Sub-Station</option>
+                        <option value="Boalan Fire Sub-Station, ZCFD">Boalan Fire Sub-Station</option>
+                        <option value="Buenavista Fire Sub-Station, ZCFD">Buenavista Fire Sub-Station</option>
+                        <option value="Cabaluay Fire Sub-Station, ZCFD">Cabaluay Fire Sub-Station</option>
+                        <option value="Calarian Fire Sub-Station, ZCFD">Calarian Fire Sub-Station</option>
+                        <option value="Culianan Fire Sub-Station, ZCFD">Culianan Fire Sub-Station</option>
+                        <option value="Guiwan Fire Sub-Station, ZCFD">Guiwan Fire Sub-Station</option>
+                        <option value="Labuan Fire Sub-Station, ZCFD">Labuan Fire Sub-Station</option>
+                        <option value="Lunzuran Fire Sub-Station, ZCFD">Lunzuran Fire Sub-Station</option>
+                        <option value="Mampang Fire Sub-Station, ZCFD">Mampang Fire Sub-Station</option>
+                        <option value="Manicahan Fire Sub-Station, ZCFD">Manicahan Fire Sub-Station</option>
+                        <option value="Mercedes Fire Sub-Station, ZCFD">Mercedes Fire Sub-Station</option>
+                        <option value="Pasonanca Fire Sub-Station, ZCFD">Pasonanca Fire Sub-Station</option>
+                        <option value="Putik Fire Sub-Station, ZCFD">Putik Fire Sub-Station</option>
+                        <option value="Quiniput Fire Sub-Station, ZCFD">Quiniput Fire Sub-Station</option>
+                        <option value="Recodo Fire Sub-Station, ZCFD">Recodo Fire Sub-Station</option>
+                        <option value="Sangali Fire Sub-Station, ZCFD">Sangali Fire Sub-Station</option>
+                        <option value="Sta Catalina Fire Sub-Station, ZCFD">Sta Catalina Fire Sub-Station</option>
+                        <option value="San Jose Gusu Fire Sub-Station, ZCFD">San Jose Gusu Fire Sub-Station</option>
+                        <option value="San Roque Fire Sub-Station, ZCFD">San Roque Fire Sub-Station</option>
+                        <option value="Sta Maria Fire Sub-Station, ZCFD">Sta Maria Fire Sub-Station</option>
+                        <option value="Talisayan Fire Sub-Station, ZCFD">Talisayan Fire Sub-Station</option>
+                        <option value="Talon-Talon Fire Sub-Station, ZCFD">Talon-Talon Fire Sub-Station</option>
+                        <option value="Tetuan Fire Sub-Station, ZCFD">Tetuan Fire Sub-Station</option>
+                        <option value="Tigbalabag Fire Sub-Station, ZCFD">Tigbalabag Fire Sub-Station</option>
+                        <option value="Tugbungan Fire Sub-Station, ZCFD">Tugbungan Fire Sub-Station</option>
+                        <option value="Tumaga Fire Sub-Station, ZCFD">Tumaga Fire Sub-Station</option>
+                        <option value="Vitali Fire Sub-Station, ZCFD">Vitali Fire Sub-Station</option>
+                    </select>
+
+                    <div class="station-info-row">
+                        <div>
+                            <label for="station">Shift:</label>
+                            <select id="station" name="station" >
+                                <option value="" disabled selected hidden>Select Shift</option>
+                                <option value="Shift A">A Shift</option>
+                                <option value="Shift B">B Shift</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="apparatus">Apparatus:</label>
+                            <select id="apparatus" name="apparatus" >
+                                <option value="" disabled selected hidden>Choose Fire Station</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <label for="stationAddress">Station Address:</label>
+                    <input type="text" id="stationAddress" name="stationAddress" />
+                </div>
+
+                <div class="form-header location-section">
+                    <label for="exactaddress">Exact Address:</label>
+                    <input type="text" id="exactaddress" name="exactaddress"  />
+
+                    <div class="location-row">
+                        <div>
+                            <label for="barangay">Barangay:</label>
+                            <input type="text" id="barangay" oninput="filterBarangays()" onkeydown="handleKeydown(event)" autocomplete="off" />
+                            <ul id="suggestions" class="hidden"></ul>
+                        </div>
+                        <div>
+                            <label for="city">City:</label>
+                            <input type="text" id="city" name="city" value="Zamboanga City"  />
+                        </div>
+                        <div>
+                            <label for="region">Region:</label>
+                            <input type="text" id="region" name="region" value="Region IX"  />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-header timeanddate-section">
+                    <label for="datetime-report">Date and Time of Reported:</label>
+                    <input type="datetime-local" id="datetime-report" name="datetime-report"  />
+                    <div style="margin-top: 10px;">
+                        <button type="button" onclick="setCurrentDateTime('datetime-report')">Reported</button>
+                    </div>
+
+                    <label for="datetime-dispatched">Date and Time Apparatus Dispatched:</label>
+                    <input type="datetime-local" id="datetime-dispatched" name="datetime-dispatched"  />
+                    <div style="margin-top: 10px;">
+                        <button type="button" onclick="setCurrentDateTime('datetime-dispatched')">Dispatched</button>
+                    </div>
+
+                    <label for="datetime-arrivedonscene">Date and Time Arrived on Scene:</label>
+                    <input type="datetime-local" id="datetime-arrivedonscene" name="datetime-arrivedonscene"   />
+                    <div style="margin-top: 10px;">
+                        <button type="button" onclick="setCurrentDateTime('datetime-arrivedonscene')">Arrived On Scene</button>
+                    </div>
+                    
+                    <div class="responsetimeanddistance-row">
+                        <div>
+                            <label for="responsetime">Response Time:</label>
+                            <input type="text" id="responsetime" name="responsetime" placeholder=""   />
+                        </div>
+                        <div>
+                            <label for="distancetravelled">Distance Travelled:</label>
+                            <input type="text" id="distancetravelled" name="distancetravelled" placeholder=""   />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-header other-section">
+                    <div class="occupancy-involved-row">
+                        <div>
+                            <label for="occupancy">Occupancy:</label>
+                            <select id="occupancy" onchange="updateInvolvedOptions()">
+                                <option value="" disabled selected hidden></option>
+                                <option value="structural">Structural</option>
+                                <option value="non structural">Non Structural</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="involved">Involved:</label>
+                            <select id="involved" disabled>
+                                <option value="" disabled selected hidden>Choose Occupancy</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <label for="owner">Owner:</label>
+                    <input type="text" id="owner" name="owner" placeholder=""   />
+
+                    <div class="familliesaffected-row">
+                        <div>
+                            <label for="familiesaffected">Number of Families Affected:</label>
+                            <input type="number" id="familiesaffected" name="familiesaffected" value="0"   />
+                        </div>
+                        <div>
+                            <label for="individualsaffected">Number of Individual Affected:</label>
+                            <input type="number" id="individualsaffected" name="individualsaffected" value="0"   />
+                        </div>
+                    </div>
+                    <div class="housesaffected-row">
+                        <div>
+                            <label for="housesaffected">Number of Houses Affected:</label>
+                            <input type="number" id="housesaffected" name="housesaffected" value="0"   />
+                        </div>
+                        <div>
+                            <label for="floorarea">Floor Area Affected:</label>
+                            <input type="number" id="floorarea" name="floorarea" value="0"   />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="responders-section">
+                    <div class="responders-container">
+                        <h4>BFP RESPONDERS</h4>
+                        <div class="bfp-responders-row">
+                            <div>
+                                <label for="bfp-fireengine">Fire Engine:</label>
+                                <input type="number" id="bfp-fireengine" name="bfp-fireengine" value="0"   />
+                            </div>
+                            <div>
+                                <label for="bfp-rescue">Rescue Truck:</label>
+                                <input type="number" id="bfp-rescue" name="bfp-rescue" value="0"   />
+                            </div>
+                            <div>
+                                <label for="bfp-ambulance">Ambulance:</label>
+                                <input type="number" id="bfp-ambulance" name="bfp-ambulance" value="0"   />
+                            </div>
+                        </div>
+                        <h4>AUXILIARY</h4>
+                        <div class="otherresponders-row">
+                            <div>
+                                <label for="otherfiretrucks">Fire Engine/Tanker:</label>
+                                <input type="number" id="otherfiretrucks" name="otherfiretrucks" value="0"   />
+                            </div>
+                            <div>
+                                <label for="otherrescue">Rescue Vehicles:</label>
+                                <input type="number" id="otherrescue" name="otherrescue" value="0"   />
+                            </div>
+                            <div>
+                                <label for="otherambulance">Ambulance:</label>
+                                <input type="number" id="otherambulance" name="otherambulance" value="0"   />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="operational-status">
+                    <label for="alarm">Alarm Status:</label>
+                    
+                    <input type="hidden" id="alarm" name="alarm" value="" />
+                    <div class="alarm-status-row">
+                        <span id="alarm-status-label">Verification</span>
+                        <div class="alarm-buttons-row">
+                            <button type="button" class="minus-alarm" id="alarm-minus">-</button>
+                            <button type="button" class="fire-under-control" id="alarm-under-control">Fire Under Control</button>
+                            <button type="button" class="plus-alarm" id="alarm-plus">+</button>
+                        </div>
+                    </div>
+                    <div id="alarm-log-container"></div>
+                </div>
+
+                <div class="Casualties-container">
+                    <div class="casualties-row">
+                        <div>
+                            <label for="casualties-injured">Injured:</label>
+                            <input type="number" id="casualties-injured" name="casualties-injured" value="0"   />
+                        </div>
+                        <div>
+                            <label for="casualties-fatality">Fatality:</label>
+                            <input type="number" id="casualties-fatality" name="casualties-fatality" value="0"   />
+                        </div>
+                    </div>
+                </div>
+                
+                </br></br>
+                <label for="icplocation">Incident Command Post Location:</label>
+                    <input type="text" id="icplocation" name="icplocation"/>
+                
+                <div class="reeviewsinfo-section">
+
+                    <div class="senders-section">
+                        <label for="senders">Sender:</label>
+                        <input type="text" id="senders" name="senders" placeholder=""   />
+
+                        <label for="contactnumber">Sender Contact Number:</label>
+                        <input type="text" id="contactnumber" name="contactnumber" placeholder=""   />
+                    </div>
+
+                    <div class="fai-fcos-note">
+                        Note: The details for Fire Arson Investigator (FAI) and Fire Control Operation Section (FCOS) will be inputted by the on-duty FAI and FCOS after sending to the proper channel.
+                    </div>
+
+                    <div class="fai-detailscontainer">
+                        <label for="fai">Fire Investigator:</label>
+                        <input type="text" id="fai" name="fai" placeholder=""   />
+
+                        <label for="fai-contact">Contact Number:</label>
+                        <input type="text" id="fai-contact" name="fai-contact" value="(0975) 993 2701"   />
+                    </div>
+
+                    <div class="fcos-section">
+                        <label for="fcos-name">Fire Control Operation Section:</label>
+                        <input type="text" id="fcos-name" name="fcos-name" placeholder=""   />
+
+                        <label for="fcos-contact">Contact Number:</label>
+                        <input type="text" id="fcos-contact" name="fcos-contact" value="(0955) 781 6063"   />
+                    </div>
+                </div>
+                
+                <label for="optionInput">Choose Option:</label>
+                <input type="text" id="optionInput" readonly placeholder="Click to select..." />
+
+                <button type="submit">SUBMIT</button>
+            </form>
+        </div>
+
+        <!-- Modal for options -->
+        <div id="optionModal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal" style="cursor:pointer;float:right;font-size:1.5em;">&times;</span>
+                <h3>Select an Option</h3>
+                <ul id="optionList" style="list-style:none;padding:0;margin:0;">
+                    <li class="option-item" style="padding:8px;cursor:pointer;">Option 1</li>
+                    <li class="option-item" style="padding:8px;cursor:pointer;">Option 2</li>
+                    <li class="option-item" style="padding:8px;cursor:pointer;">Option 3</li>
+                </ul>
+            </div>
+        </div>
+
+        <script src="rtms_v3.js"></script>
+    </div>
+</body>
+</html>

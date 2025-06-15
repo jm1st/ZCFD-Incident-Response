@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ZCFD (RTMF)</title>
+    <link rel="stylesheet" href="fireresponse.css" />
+</head>
+<body>
+
+<h1>ZAMBOANGA CITY FIRE DISTRICT
+</h1>
+<h2>Fire Incident Response</h2>
+
+<div class="container">
+    <!--
+    <div class="dashboard">
+        <h2>DASHBOARD</h2>
+        <p>History</p>
+
+    </div>
+    -->
+    <div class="form-container">
+        
+        <form id="incidentForm">
+        <h2></h2>
+        <!-- Area of Responsibility Dropdown -->
+        
+        <label for="aor">Area of Responsibility:</label>
+        <select id="aor" >
+                    <option value=""></option>
+                    <option value="Intelligence and Investigation Section (IIS), Shift A, Mayor Cesar C Climaco Avenue, Barangay Zone II, Zamboanga City, ZCFD, R9">IIS, Shift A</option>
+                    <option value="Intelligence and Investigation Section (IIS), Shift B, Mayor Cesar C Climaco Avenue, Barangay Zone II, Zamboanga City, ZCFD, R9">IIS, Shift B</option>
+
+                    <!--Central Fire Station-->
+                    <option value="Engine 23, Shift A, Central FS, Mayor Cesar C Climaco Avenue, Barangay Zone II, Zamboanga City, ZCFD, R9">CFS, E23, Shift A</option>
+                    <option value="Engine 23, Shift B, Central FS, Mayor Cesar C Climaco Avenue, Barangay Zone II, Zamboanga City, ZCFD, R9">CFS, E23, Shift B</option>
+                    <option value="Engine 36, Shift A, Central FS, Mayor Cesar C Climaco Avenue, Barangay Zone II, Zamboanga City, ZCFD, R9">CFS, E36, Shift A</option>
+                    <option value="Engine 36, Shift B, Central FS, Mayor Cesar C Climaco Avenue, Barangay Zone II, Zamboanga City, ZCFD, R9">CFS, E36, Shift B</option>
+                    <option value="Engine 01, Shift A, Central FS, Mayor Cesar C Climaco Avenue, Barangay Zone II, Zamboanga City, ZCFD, R9">CFS, E01, Shift A</option>
+                    <option value="Engine 01, Shift B, Central FS, Mayor Cesar C Climaco Avenue, Barangay Zone II, Zamboanga City, ZCFD, R9">CFS, E01, Shift B</option>
+                    <!--Ayala FSS-->
+                    <option value="Engine 33, Shift A, Ayala FSS, Zamboanga City, ZCFD, R9">Ayala FSS, ZCFD</option>
+                    <option value="Engine 33, Shift B, Ayala FSS, Zamboanga City, ZCFD, R9">Ayala FSS, ZCFD</option>
+                    <!--Boalan FSS-->
+                    <option value="Engine 11, Shift A, Boalan FSS, Zamboanga City, ZCFD, R9">Boalan FSS, Shift A</option>
+                    <option value="Engine 11, Shift B, Boalan FSS, Zamboanga City, ZCFD, R9">Boalan FSS, Shift B</option>
+                    <!--Buenavista FSS-->
+                    <option value="Engine 16, Shift A, Buenavista FSS, Zamboanga City, ZCFD, R9">Buenavista FSS Shift A</option>
+                    <option value="Engine 16, Shift B, Buenavista FSS, Zamboanga City, ZCFD, R9">Buenavista FSS Shift B</option>
+                    <!--Cabaluay FSS-->
+                    <option value="ZCDRRMO FT, Shift A, Cabaluay FSS, Zamboanga City, ZCFD, R9">Cabaluay FSS, Shift A</option>
+                    <option value="ZCDRRMO FT, Shift B, Cabaluay FSS, Zamboanga City, ZCFD, R9">Cabaluay FSS, Shift B</option>
+                    <!--Calarian FSS-->
+                    <option value="Engine 30, Shift A, Calarian FSS, Zamboanga City, ZCFD, R9">Calarian FSS, Shift A</option>
+                    <option value="Engine 30, Shift B, Calarian FSS, Zamboanga City, ZCFD, R9">Calarian FSS, Shift B</option>
+                    <!--Culianan FSS-->
+                    <option value="Engine 32, Shift A, Culianan FSS, Rural Service Center, Zone 2, Barnagay Culianan, Zamboanga City, ZCFD, R9">Culianan FSS, Shift A</option>
+                    <option value="Engine 32, Shift B, Culianan FSS, Rural Service Center, Zone 2, Barnagay Culianan, Zamboanga City, ZCFD, R9">Culianan FSS, Shift B</option>
+                    <!--Guiwan FSS-->
+                    <option value="Engine 09, Shift A, Guiwan FSS, Zamboanga City, ZCFD, R9">Guiwan FSS, Shift A</option>
+                    <option value="Engine 09, Shift B, Guiwan FSS, Zamboanga City, ZCFD, R9">Guiwan FSS, Shift B</option>
+                    <!--Labuan FSS-->
+                    <option value="Engine 24, Shift A, Labuan FSS, Zamboanga City, ZCFD, R9">Labuan FSS, Shift A</option>
+                    <option value="Engine 24, Shift B, Labuan FSS, Zamboanga City, ZCFD, R9">Labuan FSS, Shift B</option>
+                    <!--Lunzuran FSS-->
+                    <option value="Engine 27, Shift A, Lunzuran FSS, Zamboanga City, ZCFD, R9">Lunzuran FSS, Shift A</option>
+                    <option value="Engine 27, Shift B, Lunzuran FSS, Zamboanga City, ZCFD, R9">Lunzuran FSS, Shift B</option>
+                    <!--Mampang FSS-->
+                    <option value="Engine 25, Shift A, Mampang FSS, Zamboanga City, ZCFD, R9">Mampang FSS, Shift A</option>
+                    <option value="Engine 25, Shift B, Mampang FSS, Zamboanga City, ZCFD, R9">Mampang FSS, Shift B</option>
+                    <!--Manicahan FSS-->
+                    <option value="Engine 29, Shift A, Manicahan FSS, Zamboanga City, ZCFD, R9">Manicahan FSS, Shift A</option>
+                    <option value="Engine 29, Shift B, Manicahan FSS, Zamboanga City, ZCFD, R9">Manicahan FSS, Shift B</option>
+                    <!--Mercedes FSS-->
+                    <option value="Engine 28, Shift A, Mercedes FSS, Zamboanga City, ZCFD, R9">Mercedes FSS, Shift A</option>
+                    <option value="Engine 28, Shift B, MMercedes FSS, Zamboanga City, ZCFD, R9">Mercedes FSS, Shift B</option>
+                    <!--Pasonanca FSS-->
+                    <option value="Engine 13, Shift A, Pasonanca FSS, Zamboanga City, ZCFD, R9">Pasonanca FSS, Shift A</option>
+                    <option value="Engine 13, Shift B, Pasonanca FSS, Zamboanga City, ZCFD, R9">Pasonanca FSS, Shift B</option>
+                    <!--Putik FSS-->
+                    <option value="Engine 20, Shift A, Putik FSS, Zamboanga City, ZCFD, R9">Putik FSS, Shift A</option>
+                    <option value="Engine 20, Shift B, Putik FSS, Zamboanga City, ZCFD, R9">Putik FSS, Shift B</option>
+                    <!--Quiniput FSS-->
+                    <option value="Engine 18, Shift A, Quiniput FSS, Zamboanga City, ZCFD, R9">Quiniput FSS, Shift A</option>
+                    <option value="Engine 18, Shift B, Quiniput FSS, Zamboanga City, ZCFD, R9">Quiniput FSS, Shift B</option>
+                    <!--Recodo FSS-->
+                    <option value="Engine 14, Shift A, Recodo FSS, Zamboanga City, ZCFD, R9">Recodo FSS, Shift A</option>
+                    <option value="Engine 14, Shift B, Recodo FSS, Zamboanga City, ZCFD, R9">Recodo FSS, Shift B</option>
+                    <!--Sangali FSS-->
+                    <option value="Engine 34, Shift A, Sangali FSS, Malasugat, Barangay Sangali, Zamboanga City, ZCFD, R9">Sangali FSS, Shift A</option>
+                    <option value="Engine 34, Shift B, Sangali FSS, Malasugat, Barangay Sangali, Zamboanga City, ZCFD, R9">Sangali FSS, Shift B</option>
+                    <!--San Jose Gusu FSS-->
+                    <option value="Engine 19, Shift A, San Jose Gusu FSS, Zamboanga City, ZCFD, R9">San Jose Gusu FSS, Shift A</option>
+                    <option value="Engine 19, Shift B, San Jose Gusu FSS, Zamboanga City, ZCFD, R9">San Jose Gusu FSS, Shift B</option>
+                    <!--San Roque FSS-->
+                    <option value="Engine 10, Shift A, San Roque FSS, Zamboanga City, ZCFD, R9">San Roque FSS, Shift A</option>
+                    <option value="Engine 10, Shift B, San Roque FSS, Zamboanga City, ZCFD, R9">San Roque FSS, Shift B</option>
+                    <!--Sta Catalina FSS-->
+                    <option value="Engine 35, Shift A, Sta Catalina FSS, Zamboanga City, ZCFD, R9">Sta Catalina FSS, Shift A</option>
+                    <option value="Engine 35, Shift B, Sta Catalina FSS, Zamboanga City, ZCFD, R9">Sta Catalina FSS, Shift B</option>
+                    <!--Sta Maria FSS-->
+                    <option value="Engine 26, Shift A, Sta Maria FSS, Zamboanga City, ZCFD, R9">Sta Maria FSS, Shift A</option>
+                    <option value="Engine 26, Shift B, Sta Maria FSS, Zamboanga City, ZCFD, R9">Sta Maria FSS, Shift B</option>
+                    <!--Talisayan FSS-->
+                    <option value="Engine 15, Shift A, Talisayan FSS, Zamboanga City, ZCFD, R9">Talisayan FSS, Shift A</option>
+                    <option value="Engine 15, Shift B, Talisayan FSS, Zamboanga City, ZCFD, R9">Talisayan FSS, Shift B</option>
+                    <!--Talon-Talon FSS-->
+                    <option value="Engine 12, Shift A, Talon-Talon FSS, Zamboanga City, ZCFD, R9">Talon-Talon FSS, Shift A</option>
+                    <option value="Engine 12, Shift B, Talon-Talon FSS, Zamboanga City, ZCFD, R9">Talon-Talon FSS, Shift B</option>
+                    <!--Tetuan FSS-->
+                    <option value="Engine 05, Shift A, Tetuan FSS, Zamboanga City, ZCFD, R9">Tetuan FSS, Shift A</option>
+                    <option value="Engine 05, Shift B, Tetuan FSS, Zamboanga City, ZCFD, R9">Tetuan FSS, Shift B</option>
+                    <!--Tigbalabag FSS-->
+                    <option value="Engine 07, Shift A, Tigbalabag FSS, Zamboanga City, ZCFD, R9">Tigbalabag FSS, Shift A</option>
+                    <option value="Engine 07, Shift B, Tigbalabag FSS, Zamboanga City, ZCFD, R9">Tigbalabag FSS, Shift B</option>
+                    <!--Tugbungan FSS-->
+                    <option value="Engine 08, Shift A, Tugbungan FSS, Zamboanga City, ZCFD, R9">Tugbungan FSS, Shift A</option>
+                    <option value="Engine 08, Shift B, Tugbungan FSS, Zamboanga City, ZCFD, R9">Tugbungan FSS, Shift B</option>
+                    <!--Tumaga FSS-->
+                    <option value="Engine 03, Shift A, Tumaga FSS, Zamboanga City, ZCFD, R9">Tumaga FSS, Shift A</option>
+                    <option value="Engine 03, Shift B, Tumaga FSS, Zamboanga City, ZCFD, R9">Tumaga FSS, Shift B</option>
+                    <!--Vitali FSS-->
+                    <option value="Engine 31, Shift A, Vitali FSS, Zamboanga City, ZCFD, R9">Vitali FSS, Shift A</option>
+                    <option value="Engine 31, Shift B, Vitali FSS, Zamboanga City, ZCFD, R9">Vitali FSS, Shift B</option>
+
+        </select>
+
+        <!-- Occupancy (Auto-filled but editable) -->
+        <label for="occupancy">Occupancy:</label>
+        <select id="occupancy"  onchange="updateInvolvedOptions()">
+            <option value=""></option>
+            <option value="structural">Structural</option>
+            <option value="non structural">Non Structural</option>
+        </select>
+
+        <!-- Involved -->
+        <label for="involved">Involved:</label>
+        <select id="involved">
+            <option value="">Choose Occupancy</option>
+        </select>
+
+        <div class="fai" style="border: 1px solid white; border-radius: 10px; padding: 10px; margin-bottom: 10px;background: #121212;">
+
+            <label for="location">Location:</label>
+            <input type="text" id="location"  />
+
+            <label for="barangay">Barangay:</label>
+            <input type="text" id="barangay" oninput="filterBarangays()" onkeydown="handleKeydown(event)" autocomplete="off"  />
+            <ul id="suggestions" class="hidden"></ul>
+
+            <label for="city">City:</label>
+            <input type="text" id="city" value="Zamboanga City"  />
+
+            <label for="region">Region:</label>
+            <input type="text" id="region" value="Region IX"  />
+        
+        </div>
+        <!-- Location -->
+        
+        
+        <!-- RESPONDING TEAM -->
+        <label for="respondingTeam">Responding Team:</label>
+        <textarea id="respondingTeam" wrap="soft" rows="1" readonly onclick="showModal()"></textarea>
+
+        <!-- Modal -->
+        <div id="apparatusModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="apparatusList"></div>
+                <button id="confirmApparatus">Confirm</button>
+            </div>
+        </div>
+        
+        <!-- DATE AND TIME NEW -->
+
+        <!-- Date and Time Reported -->
+        <div class="fai" style="border: 1px solid white; border-radius: 10px; padding: 10px; margin-bottom: 10px;background: #121212;">
+            <label for="timedateReported">Date and Time Reported (DTR):</label>
+            <input type="datetime-local" id="timedateReported" />
+            
+            <div style="margin-top: 10px;">
+                <button type="button" onclick="setCurrentDateTime('timedateReported')">REPORTED</button>
+            </div>
+        </div>
+
+
+        <!-- Date and Time Dispatched -->
+            <div class="fai" style="border: 1px solid white; border-radius: 10px; padding: 10px; margin-bottom: 10px;background: #121212;">
+            <label for="timedateDispatched">Time and Date Dispatched (TED)</label>
+            <input type="datetime-local" id="timedateDispatched" />
+            <div style="margin-top: 10px;">
+                <button type="button" onclick="setCurrentDateTime('timedateDispatched')">DISPATCHED</button>
+            </div>
+        </div>
+
+        
+        <!-- Date and Time Arrived On Scene -->
+            <div class="fai" style="border: 1px solid white; border-radius: 10px; padding: 10px; margin-bottom: 10px;background: #121212;">
+            <label for="timedateArrival">Time and Date of Arrival (TAS)</label>
+            <input type="datetime-local" id="timedateArrival" />
+            <div style="margin-top: 10px;">
+                <button type="button" onclick="setCurrentDateTime('timedateArrival')">ARRIVAL ON SCENE</button>
+            </div>
+        </div>
+
+        <!-- Response Time -->
+        <label for="responsetime">Resposne Time (RT):</label>
+        <input type="number" id="responsetime" value="0"  />
+        <!-- Distance to Incident Location -->
+        <label for="distance">Distance to Incident Location (DIST):</label>
+        <input type="number" id="distance" value="0"  />
+
+        <!-- Date and Time Reported OOOLLDD
+
+        <label for="dateTimeReported">Time and Date Reported (DTR):</label>
+        <input type="datetime-local" id="dateTimeReported" onclick="this.showPicker()" />
+
+        <label for="dateTimeDispatched">Time and Date Dispatched (TED):</label>
+        <input type="datetime-local" id="dateTimeDispatched" onclick="this.showPicker()" />
+
+        <label for="timeArrival">Time and Date of Arrival (TAS):</label>
+        <input type="datetime-local" id="timeArrival" onclick="this.showPicker()" />
+
+        <label for="responsetime">Resposne Time (RT):</label>
+        <input type="number" id="responsetime" value="0"  />
+
+        <label for="distance">Distance to Incident Location (DIST):</label>
+        <input type="number" id="distance" value="None"  />
+
+        <label for="timeFireOut">Fire Out:</label>
+        <input type="datetime-local" id="timeFireOut" onclick="this.showPicker()" />
+
+        -->
+
+        <!-- Alarm Status Dropdown -->
+        <label for="alarm">Alarm Status:</label>
+        <select id="alarm" >
+            <option value=""></option>
+            <option value="1st Alarm">1st Alarm</option>
+            <option value="2nd Alarm">2nd Alarm</option>
+            <option value="3rd Alarm">3rd Alarm</option>
+            <option value="4th Alarm">4th Alarm</option>
+            <option value="5th Alarm">5th Alarm</option>
+            <option value="Task Force Alpha">Task Force Alpha</option>
+            <option value="Task Force Bravo">Task Force Bravo</option>
+            <option value="Task Force Charlie">Task Force Charlie</option>
+            <option value="Task Force Delta">Task Force Delta</option>
+            <option value="Task Force Echo">Task Force Echo</option>
+            <option value="General Alarm">General Alarm</option>
+            <option value="Fire Out Upon Arrival">Fire Out Upon Arrival</option>
+            <option value="Unresponded">Unresponded</option>
+        </select>
+        
+        <div class="fai" style="border: 1px solid white; border-radius: 10px; padding: 10px; margin-bottom: 10px;background: #121212;">
+
+        <!-- Sender -->
+        <p2>Fire Arson Investigator (FAI):</p2></br></br>
+        <label for="sender">Name:</label>
+        <input type="text" id="sender"  />
+
+        <label for="senderContact">Contact No:</label>
+        <input type="tel" id="senderContact" maxlength="16" oninput="formatPhoneInput(this)" value="(0975) 993 2701"  />
+
+        </div>
+
+        <div class="fcos" style="border: 1px solid white; border-radius: 10px; padding: 10px; margin-bottom: 10px;background: #121212;">
+
+            <!-- Ground Commander -->
+            <p2 style="text-align: center;">Fire Control Operation Section (FCOS):</p2></br></br>
+            <label for="commander">Name:</label>
+            <input type="text" id="commander"  />
+
+            <label for="commanderContact">Contact No:</label>
+            <input type="tel" id="commanderContact" maxlength="16" oninput="formatPhoneInput(this)"  />
+
+        </div>
+
+        <!-- Submit INITIAL Button -->
+        <button type="button" onclick="submitInitial()">Submit Initial</button>
+
+        <label for="owner">Name of Owner:</label>
+        <input type="text" id="owner" value=""  />
+
+        <label for="damage">Estimated Damage:</label>
+        <input type="text" id="damage" value=""  oninput="formatDamageInput(this)" />
+
+        <label for="fatality">Fatality:</label>
+        <input type="text" id="fatality" value="None"  />
+        
+        <label for="injured">Injured:</label>
+        <input type="text" id="injured" value="None"  />
+
+        <label for="noofestablishment">Number of Establishment:</label>
+        <input type="text" id="noofestablishment" value="0"  />
+
+        <label for="nooffamilies">Number of Famillies:</label>
+        <input type="text" id="nooffamilies" value="0"  />
+
+        <label for="responders">Number of Responders:</label>
+        <textarea id="responders" rows="1" readonly></textarea>
+
+        <!-- Submit PROGRESS Button -->
+        <button type="button" onclick="submitProgress()">Submit Progress</button>
+
+        <label for="nameofestablishment">Name of Establishment:</label>
+        <input type="text" id="nameofestablishment" value="N/A"  />
+
+        <label for="sqm">Lot Area Affected:</label>
+        <input type="number" id="sqm" value="0"  />  
+        
+        <!-- Submit COMPLETE Button -->
+        <button type="button" onclick="submitComplete()">Submit Complete</button>
+
+        </form>
+    </div>
+
+    <script src="fireresponse.js"></script>
+</body>
+</html>
