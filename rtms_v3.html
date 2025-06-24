@@ -225,11 +225,11 @@
                     <div class="casualties-row">
                         <div>
                             <label for="casualties-injured">Injured:</label>
-                            <input type="number" id="casualties-injured" name="casualties-injured" value="0"   />
+                            <input type="number" id="casualties-injured" name="casualties-injured" value="0" min="0"   />
                         </div>
                         <div>
                             <label for="casualties-fatality">Fatality:</label>
-                            <input type="number" id="casualties-fatality" name="casualties-fatality" value="0"   />
+                            <input type="number" id="casualties-fatality" name="casualties-fatality" value="0" min="0"   />
                         </div>
                     </div>
                     <!-- Move detail containers outside of .casualties-row -->
@@ -271,11 +271,13 @@
                         <input type="text" id="fcos-contact" name="fcos-contact" value="(0955) 781 6063"   />
                     </div>
                 </div>
-                
+                <!--
                 <label for="optionInput">Choose Option:</label>
                 <input type="text" id="optionInput" readonly placeholder="Click to select..." />
-
+                -->
+                <br>
                 <button type="submit">SUBMIT</button>
+                <button type="clear">CLEAR</button>
             </form>
         </div>
 

@@ -915,24 +915,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (injuredInput) {
         injuredInput.addEventListener('input', function() {
-            const val = parseInt(injuredInput.value, 10);
-            updatePersonDetails('injured', isNaN(val) ? 0 : val);
+            let val = parseInt(injuredInput.value, 10);
+            if (isNaN(val) || val < 0) val = 0;
+            injuredInput.value = val;
+            updatePersonDetails('injured', val);
         });
         // On load, trigger if value exists
         if (injuredInput.value) {
-            const val = parseInt(injuredInput.value, 10);
-            updatePersonDetails('injured', isNaN(val) ? 0 : val);
+            let val = parseInt(injuredInput.value, 10);
+            if (isNaN(val) || val < 0) val = 0;
+            injuredInput.value = val;
+            updatePersonDetails('injured', val);
         }
     }
     if (fatalityInput) {
         fatalityInput.addEventListener('input', function() {
-            const val = parseInt(fatalityInput.value, 10);
-            updatePersonDetails('fatality', isNaN(val) ? 0 : val);
+            let val = parseInt(fatalityInput.value, 10);
+            if (isNaN(val) || val < 0) val = 0;
+            fatalityInput.value = val;
+            updatePersonDetails('fatality', val);
         });
         // On load, trigger if value exists
         if (fatalityInput.value) {
-            const val = parseInt(fatalityInput.value, 10);
-            updatePersonDetails('fatality', isNaN(val) ? 0 : val);
+            let val = parseInt(fatalityInput.value, 10);
+            if (isNaN(val) || val < 0) val = 0;
+            fatalityInput.value = val;
+            updatePersonDetails('fatality', val);
         }
     }
 
@@ -978,6 +986,55 @@ document.addEventListener('DOMContentLoaded', function() {
     setupContactNumberAutoFormat('contactnumber');
     setupContactNumberAutoFormat('fai-contact');
     setupContactNumberAutoFormat('fcos-contact');
+
+    // --- Injured/Fatality + and - buttons ---
+    const injuredInput = document.getElementById('casualties-injured');
+    const fatalityInput = document.getElementById('casualties-fatality');
+    const injuredPlus = document.getElementById('injured-plus');
+    const injuredMinus = document.getElementById('injured-minus');
+    const fatalityPlus = document.getElementById('fatality-plus');
+    const fatalityMinus = document.getElementById('fatality-minus');
+
+    if (injuredPlus && injuredInput) {
+        injuredPlus.addEventListener('click', function() {
+            let val = parseInt(injuredInput.value, 10) || 0;
+            val++;
+            injuredInput.value = val;
+            injuredInput.dispatchEvent(new Event('input', { bubbles: true }));
+        });
+    }
+    if (injuredMinus && injuredInput) {
+        injuredMinus.addEventListener('click', function() {
+            let val = parseInt(injuredInput.value, 10) || 0;
+            if (val > 0) {
+                if (confirm('Are you sure you want to decrease the number of injured? This may remove entered details.')) {
+                    val--;
+                    injuredInput.value = val;
+                    injuredInput.dispatchEvent(new Event('input', { bubbles: true }));
+                }
+            }
+        });
+    }
+    if (fatalityPlus && fatalityInput) {
+        fatalityPlus.addEventListener('click', function() {
+            let val = parseInt(fatalityInput.value, 10) || 0;
+            val++;
+            fatalityInput.value = val;
+            fatalityInput.dispatchEvent(new Event('input', { bubbles: true }));
+        });
+    }
+    if (fatalityMinus && fatalityInput) {
+        fatalityMinus.addEventListener('click', function() {
+            let val = parseInt(fatalityInput.value, 10) || 0;
+            if (val > 0) {
+                if (confirm('Are you sure you want to decrease the number of fatalities? This may remove entered details.')) {
+                    val--;
+                    fatalityInput.value = val;
+                    fatalityInput.dispatchEvent(new Event('input', { bubbles: true }));
+                }
+            }
+        });
+    }
 
     // ...existing code...
 });
