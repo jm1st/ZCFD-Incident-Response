@@ -225,16 +225,21 @@
                     <div class="casualties-row">
                         <div>
                             <label for="casualties-injured">Injured:</label>
-                            <input type="number" id="casualties-injured" name="casualties-injured" value="0" min="0"   />
+                            <input type="number" id="casualties-injured" name="casualties-injured" value="0" min="0" />
                         </div>
                         <div>
                             <label for="casualties-fatality">Fatality:</label>
-                            <input type="number" id="casualties-fatality" name="casualties-fatality" value="0" min="0"   />
+                            <input type="number" id="casualties-fatality" name="casualties-fatality" value="0" min="0" />
+                        </div>
+                        <div>
+                            <label for="casualties-missing">Missing:</label>
+                            <input type="number" id="casualties-missing" name="casualties-missing" value="0" min="0" />
                         </div>
                     </div>
                     <!-- Move detail containers outside of .casualties-row -->
-                    <div id="injured-details-container"></div>
-                    <div id="fatality-details-container"></div>
+                    <div id="injured-details-container" class="person-details-card"></div>
+                    <div id="fatality-details-container" class="person-details-card"></div>
+                    <div id="missing-details-container" class="person-details-card"></div>
                 </div>
                 
                 </br></br>
@@ -277,7 +282,7 @@
                 -->
                 <br>
                 <button type="submit">SUBMIT</button>
-                <button type="clear">CLEAR</button>
+                <button type="reset">CLEAR</button>
             </form>
         </div>
 

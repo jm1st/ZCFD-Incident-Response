@@ -759,6 +759,22 @@ label {
     border-radius: 8px;
 }
 
+#missing-details-container {
+    margin: 10px 0 0 0;
+    padding: 10px 12px 8px 12px;
+    background: #2d2c1a; /* bluish background */
+    border: 2px solid #ffe066; /* blue border */
+    border-radius: 8px;
+}
+
+.person-details-card {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    padding: 10px 8px;
+    margin-top: 10px;
+}
+
 @media (max-width: 700px) {
     .person-detail-row {
         flex-direction: column;
