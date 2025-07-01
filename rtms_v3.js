@@ -1151,6 +1151,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setupContactNumberAutoFormat('contactnumber');
     setupContactNumberAutoFormat('fai-contact');
     setupContactNumberAutoFormat('fcos-contact');
+    setupContactNumberAutoFormat('firegroundcommander-contactnumber'); // <-- Add this line
 
     // --- Injured/Fatality + and - buttons ---
     const injuredInput = document.getElementById('casualties-injured');
@@ -1320,8 +1321,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         dtStr = `${hour}${min}H`;
                     }
                 }
-                const icInput = entry.querySelector('input[type="text"]:nth-of-type(1)');
-                const desigInput = entry.querySelector('input[type="text"]:nth-of-type(2)');
+                // Use id selectors to reliably get the correct inputs
+                const icInput = entry.querySelector('input[id^="ic-"]');
+                const desigInput = entry.querySelector('input[id^="desig-"]');
                 let icVal = icInput && icInput.value ? icInput.value.trim() : '';
                 let desigVal = desigInput && desigInput.value ? desigInput.value.trim() : '';
                 let line = '';
@@ -1357,8 +1359,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
 
                     // Compose line
-                    // Always include ground commander (icVal) if available
-                    line = `${dtStr} - ${alarmNum} by SC${icVal ? ' ' + icVal : ''}`;
+                    // Use designation and name: by [designation][name], only if present
+                    line = `${dtStr} - ${alarmNum} by${desigVal ? ' ' + desigVal : ''}${icVal ? ' ' + icVal : ''}`;
                     lastIC = icVal;
                     lastDesig = desigVal;
                     operationalStatus += line + '\n';
@@ -1373,13 +1375,9 @@ document.addEventListener('DOMContentLoaded', function() {
             // ICP
             const icp = val('icplocation');
 
-            // Fire Ground Commander (from last alarm log entry)
-            let fgCommander = '';
-            if (alarmLog.length > 0) {
-                const lastEntry = alarmLog[alarmLog.length - 1];
-                const icInput = lastEntry.querySelector('input[type="text"]:nth-of-type(1)');
-                if (icInput && icInput.value) fgCommander = icInput.value;
-            }
+            // Fire Ground Commander (use new input fields)
+            const fgCommander = val('firegroundcommander');
+            const fgCommanderContact = val('firegroundcommander-contactnumber');
 
             // FAI (dropdown or input)
             let fai = '';
@@ -1464,7 +1462,7 @@ C. Missing: ${missing}${missingDetails ? '\n\t' + missingDetails.replace(/\n/g, 
 
 ICP: ${icp}
 
-Fire Ground Commander: ${fgCommander}
+Fire Ground Commander: ${fgCommander}${fgCommanderContact ? '/' + fgCommanderContact : ''}
 FAI: ${fai || ''}${faiContact ? '/' + faiContact : ''}
 FCOS:
 `;
