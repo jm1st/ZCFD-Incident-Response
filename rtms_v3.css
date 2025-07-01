@@ -407,6 +407,39 @@ label {
     color: #fff;
 }
 
+#station-suggestions {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+    background: #222;
+    border: 1px solid #444;
+    border-radius: 6px;
+    max-height: 180px;
+    overflow-y: auto;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: absolute;
+    z-index: 10000;
+    width: auto;
+    min-width: 0;
+    max-width: none;
+}
+
+#station-suggestions .suggestion-item {
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    color: #F28500;
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+#station-suggestions .suggestion-item.active,
+#station-suggestions .suggestion-item:hover {
+    background: #333;
+    color: #fff;
+}
+
 .station-info-row {
     display: flex;
     gap: 16px;

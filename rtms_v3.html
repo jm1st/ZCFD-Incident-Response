@@ -18,7 +18,7 @@
         <div class="form-container">
             <form id="rtmsForm">
 
-                <div class="form-header aor-section">
+                <div class="form-header station-section">
                     <label for="aor">Area of Responsibility:</label>
                     <select id="aor" name="aor" >
                         <option value="" disabled selected hidden>Choose Station</option>
@@ -71,9 +71,21 @@
                             </select>
                         </div>
                     </div>
+                </div>
 
+                <div class="form-header station-location-section">
                     <label for="stationAddress">Station Address:</label>
                     <input type="text" id="stationAddress" name="stationAddress" />
+                    <div class="location-row">
+                        <div>
+                            <label for="barangay">Barangay:</label>
+                            <input type="text" id="stationBarangay" oninput="filterStationBarangays()" onkeydown="handleStationKeydown(event)" autocomplete="off" placeholder="" title="Enter Barangay" />
+                            <ul id="station-suggestions" class="hidden"></ul>
+                        </div>
+                        <div>
+                            <label for="city">City:</label>
+                            <input type="text" id="stationCity" name="city" value="Zamboanga City" placeholder=                        </div>
+                    </div>
                 </div>
 
                 <div class="form-header location-section">
