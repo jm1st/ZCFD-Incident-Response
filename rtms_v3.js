@@ -1,4 +1,4 @@
-// --- CHOOSE OPTION MODAL ---
+//CHOOSE OOPTION MODAL
 document.addEventListener('DOMContentLoaded', function() {
     const optionInput = document.getElementById('optionInput');
     const optionModal = document.getElementById('optionModal');
@@ -29,9 +29,12 @@ document.addEventListener('DOMContentLoaded', function() {
             optionModal.classList.remove('show');
         }
     });
+    
 });
 
-// --- BARANGAY AUTOCOMPLETE ---
+//CHOOSE OOPTION MODAL END
+
+//BARANGAY AUTOCOMPLETE
 const barangays = [
 "Arena Blanco", "Ayala", "Baliwasan", "Baluno", "Zone I", "Zone II",
 "Zone III", "Zone IV", "Boalan", "Bolong", "Buenavista", "Bunguiao",
@@ -49,9 +52,12 @@ const barangays = [
 "Tolosa", "Tugbungan", "Tulungatung", "Tumaga", "Tumalutab", "Tumitus", "Victoria",
 "Vitali", "Zambowood"
 ];
+
 const barangayInput = document.getElementById('barangay');
 const suggestionsList = document.getElementById('suggestions');
-let selectedIndex = -1, filteredBarangays = [];
+let selectedIndex = -1;
+let filteredBarangays = [];
+
 function filterBarangays() {
     const input = barangayInput.value.trim().toLowerCase();
     suggestionsList.innerHTML = '';
@@ -93,12 +99,14 @@ function filterBarangays() {
         resetSuggestionsStyle();
     }
 }
+
 function selectBarangay(barangay) {
     barangayInput.value = barangay;
     suggestionsList.classList.add('hidden');
     // Instead of resetting all styles, only hide and clear content
     suggestionsList.innerHTML = '';
 }
+
 function handleKeydown(event) {
     const items = suggestionsList.getElementsByTagName('li');
     if (!items.length || suggestionsList.classList.contains('hidden')) return;
@@ -124,6 +132,7 @@ function handleKeydown(event) {
         }
     }
 }
+
 function updateActiveItem() {
     const items = suggestionsList.getElementsByTagName('li');
     for (let i = 0; i < items.length; i++) {
@@ -134,6 +143,7 @@ function updateActiveItem() {
         items[selectedIndex].scrollIntoView({ block: 'nearest' });
     }
 }
+
 function positionSuggestions() {
     const rect = barangayInput.getBoundingClientRect();
     suggestionsList.style.position = 'absolute';
@@ -151,6 +161,7 @@ function positionSuggestions() {
     suggestionsList.style.listStyle = 'none';
     suggestionsList.style.boxShadow = '0 4px 16px rgba(0,0,0,0.35)';
 }
+
 function resetSuggestionsStyle() {
     suggestionsList.style.position = '';
     suggestionsList.style.left = '';
@@ -167,6 +178,7 @@ function resetSuggestionsStyle() {
     suggestionsList.style.listStyle = '';
     suggestionsList.style.boxShadow = '';
 }
+
 document.addEventListener('mousedown', (event) => {
     if (event.target !== barangayInput && !suggestionsList.contains(event.target)) {
         suggestionsList.classList.add('hidden');
@@ -174,10 +186,14 @@ document.addEventListener('mousedown', (event) => {
     }
 });
 
-// --- STATION BARANGAY AUTOCOMPLETE ---
+//BARANGAY AUTOCOMPLETE  END
+
+// --- Station Barangay Autocomplete (separate instance) ---
 const stationBarangayInput = document.getElementById('stationBarangay');
 const stationSuggestionsList = document.getElementById('station-suggestions');
-let stationSelectedIndex = -1, stationFilteredBarangays = [];
+let stationSelectedIndex = -1;
+let stationFilteredBarangays = [];
+
 function filterStationBarangays() {
     if (!stationBarangayInput || !stationSuggestionsList) return;
     const input = stationBarangayInput.value.trim().toLowerCase();
@@ -220,11 +236,13 @@ function filterStationBarangays() {
         resetStationSuggestionsStyle();
     }
 }
+
 function selectStationBarangay(barangay) {
     stationBarangayInput.value = barangay;
     stationSuggestionsList.classList.add('hidden');
     stationSuggestionsList.innerHTML = '';
 }
+
 function handleStationKeydown(event) {
     const items = stationSuggestionsList.getElementsByTagName('li');
     if (!items.length || stationSuggestionsList.classList.contains('hidden')) return;
@@ -249,6 +267,7 @@ function handleStationKeydown(event) {
         }
     }
 }
+
 function updateStationActiveItem() {
     const items = stationSuggestionsList.getElementsByTagName('li');
     for (let i = 0; i < items.length; i++) {
@@ -259,6 +278,7 @@ function updateStationActiveItem() {
         items[stationSelectedIndex].scrollIntoView({ block: 'nearest' });
     }
 }
+
 function positionStationSuggestions() {
     const rect = stationBarangayInput.getBoundingClientRect();
     stationSuggestionsList.style.position = 'absolute';
@@ -276,6 +296,7 @@ function positionStationSuggestions() {
     stationSuggestionsList.style.listStyle = 'none';
     stationSuggestionsList.style.boxShadow = '0 4px 16px rgba(0,0,0,0.35)';
 }
+
 function resetStationSuggestionsStyle() {
     stationSuggestionsList.style.position = '';
     stationSuggestionsList.style.left = '';
@@ -292,6 +313,7 @@ function resetStationSuggestionsStyle() {
     stationSuggestionsList.style.listStyle = '';
     stationSuggestionsList.style.boxShadow = '';
 }
+
 document.addEventListener('mousedown', (event) => {
     if (
         stationBarangayInput &&
@@ -520,6 +542,7 @@ function updateResponseTime() {
     }
     responseInput.setAttribute('readonly', 'readonly');
 }
+
 document.addEventListener('DOMContentLoaded', function() {
     const dispatchedInput = document.getElementById('datetime-dispatched');
     const arrivedInput = document.getElementById('datetime-arrivedonscene');
@@ -529,18 +552,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// --- INVOLVED OPTIONS ---
+
+//INVOLVED
 const structuralOptions = [
     'Residential','Apartment Building', 'Condominiums', 'Dormitory', 'Hotel', 'Lodging and Rooming Houses', 
     'Assembly', 'Business', 'Detention and Correctional', 
     'Educational', 'Health Care', 'Industrial', 'Mercantile', 'Miscellaneous', 
     'Mixed Occupancies', 'Storage'
 ];
+
 const nonStructuralOptions = [
     'Agricultural Land', 'Ambulant Vendor', 'Electrical Pole', 'Forest', 'Grass', 'Rubbish', 
     'Aircraft', 'Automobile', 'Bus', 'Heavy Equipment', 'Jeepney', 'Locomotive', 
     'Motorcycle', 'Ship/Watervessel', 'Tricycle', 'Truck'
 ];
+
 function updateInvolvedOptions() {
     const occupancy = document.getElementById('occupancy').value;
     const involved = document.getElementById('involved');
@@ -588,7 +614,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // ...existing code...
 });
 
-// --- ALARM STATUS LOGIC ---
 const alarmLevels = [
     "VERIFICATION",
     "FIRST ALARM",
@@ -603,7 +628,12 @@ const alarmLevels = [
     "TASK FORCE ECHO",
     "GENERAL ALARM"
 ];
-let alarmIndex = 0, isUnderControl = false, isFireOut = false, isFireOutUponArrival = false;
+
+let alarmIndex = 0; // Start at Verification
+let isUnderControl = false;
+let isFireOut = false;
+let isFireOutUponArrival = false;
+
 function updateAlarmStatusDisplay() {
     const label = document.getElementById('alarm-status-label');
     const alarmInput = document.getElementById('alarm');
@@ -1079,317 +1109,287 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // --- CONTACT NUMBER AUTO-FORMAT ---
-    function formatContactNumber(value) {
-        // Remove all non-digits
-        let digits = value.replace(/\D/g, '');
-        if (digits.length === 0) return '';
-        // Limit to 11 digits (for PH mobile numbers)
-        digits = digits.substring(0, 11);
-        // Format: (####) ### ####
-        let formatted = '';
-        if (digits.length <= 4) {
-            formatted = '(' + digits;
-        } else if (digits.length <= 7) {
-            formatted = '(' + digits.substring(0, 4) + ') ' + digits.substring(4);
-        } else {
-            formatted = '(' + digits.substring(0, 4) + ') ' + digits.substring(4, 7) + ' ' + digits.substring(7);
-        }
-        return formatted;
+    // ...existing code...
+});
+
+// Auto-format contact numbers to (####) ### ####
+function formatContactNumber(value) {
+    // Remove all non-digits
+    let digits = value.replace(/\D/g, '');
+    if (digits.length === 0) return '';
+    // Limit to 11 digits (for PH mobile numbers)
+    digits = digits.substring(0, 11);
+    // Format: (####) ### ####
+    let formatted = '';
+    if (digits.length <= 4) {
+        formatted = '(' + digits;
+    } else if (digits.length <= 7) {
+        formatted = '(' + digits.substring(0, 4) + ') ' + digits.substring(4);
+    } else {
+        formatted = '(' + digits.substring(0, 4) + ') ' + digits.substring(4, 7) + ' ' + digits.substring(7);
     }
-    function setupContactNumberAutoFormat(inputId) {
-        const input = document.getElementById(inputId);
-        if (!input) return;
-        input.addEventListener('input', function (e) {
-            const caret = input.selectionStart;
-            const oldValue = input.value;
-            const formatted = formatContactNumber(oldValue);
-            input.value = formatted;
-            // Try to keep caret at the end
-            input.setSelectionRange(input.value.length, input.value.length);
+    return formatted;
+}
+
+function setupContactNumberAutoFormat(inputId) {
+    const input = document.getElementById(inputId);
+    if (!input) return;
+    input.addEventListener('input', function (e) {
+        const caret = input.selectionStart;
+        const oldValue = input.value;
+        const formatted = formatContactNumber(oldValue);
+        input.value = formatted;
+        // Try to keep caret at the end
+        input.setSelectionRange(input.value.length, input.value.length);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    // ...existing code...
+
+    // Setup auto-format for all contact number fields
+    setupContactNumberAutoFormat('contactnumber');
+    setupContactNumberAutoFormat('fai-contact');
+    setupContactNumberAutoFormat('fcos-contact');
+
+    // --- Injured/Fatality + and - buttons ---
+    const injuredInput = document.getElementById('casualties-injured');
+    const fatalityInput = document.getElementById('casualties-fatality');
+    const injuredPlus = document.getElementById('injured-plus');
+    const injuredMinus = document.getElementById('injured-minus');
+    const fatalityPlus = document.getElementById('fatality-plus');
+    const fatalityMinus = document.getElementById('fatality-minus');
+
+    if (injuredPlus && injuredInput) {
+        injuredPlus.addEventListener('click', function() {
+            let val = parseInt(injuredInput.value, 10) || 0;
+            val++;
+            injuredInput.value = val;
+            injuredInput.dispatchEvent(new Event('input', { bubbles: true }));
         });
     }
-    document.addEventListener('DOMContentLoaded', function() {
-        // ...existing code...
-
-        // Setup auto-format for all contact number fields
-        setupContactNumberAutoFormat('contactnumber');
-        setupContactNumberAutoFormat('fai-contact');
-        setupContactNumberAutoFormat('fcos-contact');
-
-        // --- INJURED/FATALITY +/- BUTTONS ---
-        document.addEventListener('DOMContentLoaded', function() {
-            // ...existing code for injured/fatality plus/minus...
-        });
-
-        // --- CLIPBOARD COPY ON SUBMIT ---
-        const form = document.getElementById('rtmsForm');
-        if (form) {
-            form.addEventListener('submit', async function(e) {
-                e.preventDefault();
-                // --- VALUE HELPERS ---
-                const val = id => {
-                    const el = document.getElementById(id);
-                    return el ? el.value.trim() : '';
-                };
-
-                // --- GATHER FORM DATA ---
-                let apparatusLabel = '', shiftLabel = '', aorLabel = '';
-                const apparatusSel = document.getElementById('apparatus');
-                if (apparatusSel && !apparatusSel.disabled && apparatusSel.selectedIndex > 0) {
-                    apparatusLabel = apparatusSel.options[apparatusSel.selectedIndex].text;
+    if (injuredMinus && injuredInput) {
+        injuredMinus.addEventListener('click', function() {
+            let val = parseInt(injuredInput.value, 10) || 0;
+            if (val > 0) {
+                if (confirm('Are you sure you want to decrease the number of injured? This may remove entered details.')) {
+                    val--;
+                    injuredInput.value = val;
+                    injuredInput.dispatchEvent(new Event('input', { bubbles: true }));
                 }
-                const shiftSel = document.getElementById('station');
-                if (shiftSel && !shiftSel.disabled && shiftSel.selectedIndex > 0) {
-                    shiftLabel = shiftSel.options[shiftSel.selectedIndex].text;
-                }
-                const aorSel = document.getElementById('aor');
-                if (aorSel && aorSel.selectedIndex > 0) {
-                    aorLabel = aorSel.options[aorSel.selectedIndex].text;
-                }
-                const barangay = val('barangay');
-                const city = val('city');
-                const region = val('region');
-                const stationAddress = val('stationAddress');
-                const stationBarangay = val('stationBarangay');
-                const stationCity = val('stationCity');
-                const exactLocation = val('exactaddress');
-                const dtReport = val('datetime-report');
-                const dtDispatched = val('datetime-dispatched');
-                const dtArrived = val('datetime-arrivedonscene');
-                const formatDT = dt => {
-                    if (!dt) return '';
-                    const d = new Date(dt);
-                    if (isNaN(d)) return '';
-                    const day = d.getDate();
-                    const month = d.toLocaleString('default', { month: 'long' });
-                    const year = d.getFullYear();
-                    const hour = d.getHours().toString().padStart(2, '0');
-                    const min = d.getMinutes().toString().padStart(2, '0');
-                    return `${day} ${hour}${min}H ${month} ${year}`;
-                };
-                const responsetime = val('responsetime');
-                const distancetravelled = val('distancetravelled');
-                let involved = '';
-                const involvedSel = document.getElementById('involved');
-                if (involvedSel && !involvedSel.disabled && involvedSel.selectedIndex > 0) {
-                    involved = involvedSel.options[involvedSel.selectedIndex].text;
-                }
-                const owner = val('owner');
-                const families = val('familiesaffected');
-                const individuals = val('individualsaffected');
-                const houses = val('housesaffected');
-                const floorarea = val('floorarea');
-
-                // --- RESPONDERS ---
-                const respondersList = [];
-                const responderFields = [
-                    { id: 'bfp-fireengine', label: 'BFP Firetruck' },
-                    { id: 'bfp-rescue', label: 'BFP Rescue Truck' },
-                    { id: 'bfp-ambulance', label: 'BFP Ambulance' },
-                    { id: 'otherfiretrucks', label: 'Aux Firetruck' },
-                    { id: 'otherrescue', label: 'Aux Rescue' },
-                    { id: 'otherambulance', label: 'Aux Ambulance' }
-                ];
-                responderFields.forEach(r => {
-                    const v = parseInt(val(r.id), 10) || 0;
-                    if (v > 0) respondersList.push(`${r.label} – ${v}`);
-                });
-
-                // --- ALARM LOG ---
-                let operationalStatus = '';
-                const alarmLog = document.querySelectorAll('#alarm-log-container .alarm-log-entry');
-                let lastIC = '';
-                let lastDesig = '';
-                function ordinal(n) {
-                    if (n === 1) return '1st';
-                    if (n === 2) return '2nd';
-                    if (n === 3) return '3rd';
-                    if (n > 3) return n + 'th';
-                    return '';
-                }
-                alarmLog.forEach((entry, idx) => {
-                    const alarmTitle = entry.querySelector('h2') ? entry.querySelector('h2').textContent : '';
-                    const dtInput = entry.querySelector('input[type="datetime-local"]');
-                    let dtStr = '';
-                    if (dtInput && dtInput.value) {
-                        const d = new Date(dtInput.value);
-                        if (!isNaN(d)) {
-                            const hour = d.getHours().toString().padStart(2, '0');
-                            const min = d.getMinutes().toString().padStart(2, '0');
-                            dtStr = `${hour}${min}H`;
-                        }
-                    }
-                    const icInput = entry.querySelector('input[type="text"]:nth-of-type(1)');
-                    const desigInput = entry.querySelector('input[type="text"]:nth-of-type(2)');
-                    let icVal = icInput && icInput.value ? icInput.value.trim() : '';
-                    let desigVal = desigInput && desigInput.value ? desigInput.value.trim() : '';
-                    let line = '';
-                    if (alarmTitle && dtStr) {
-                        let alarmNum = '';
-                        let alarmMatch = alarmTitle.match(/^([A-Z ]*?)ALARM/i);
-                        if (alarmMatch) {
-                            // e.g. "FIRST ALARM", "SECOND ALARM"
-                            let numWord = alarmTitle.split(' ')[0].toUpperCase();
-                            let num = 0;
-                            if (numWord === 'FIRST') num = 1;
-                            else if (numWord === 'SECOND') num = 2;
-                            else if (numWord === 'THIRD') num = 3;
-                            else if (numWord === 'FOURTH') num = 4;
-                            else if (numWord === 'FIFTH') num = 5;
-                            else if (numWord === 'GENERAL') num = 0;
-                            if (num > 0) alarmNum = `${ordinal(num)} Alarm`;
-                            else if (numWord === 'GENERAL') alarmNum = 'General Alarm';
-                            else alarmNum = alarmTitle.charAt(0).toUpperCase() + alarmTitle.slice(1).toLowerCase();
-                        } else if (alarmTitle.toUpperCase().includes('TASK FORCE')) {
-                            // Capitalize first letter of each word
-                            alarmNum = alarmTitle.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
-                        } else if (alarmTitle.toUpperCase().includes('FIRE OUT UPON ARRIVAL')) {
-                            alarmNum = 'FOUA';
-                        } else if (alarmTitle.toUpperCase().includes('FIRE UNDER CONTROL')) {
-                            alarmNum = 'FUC';
-                        } else if (alarmTitle.toUpperCase().includes('FIRE OUT')) {
-                            alarmNum = 'FO';
-                        } else if (alarmTitle.toUpperCase().includes('VERIFICATION')) {
-                            alarmNum = 'Verification';
-                        } else {
-                            alarmNum = alarmTitle.charAt(0).toUpperCase() + alarmTitle.slice(1).toLowerCase();
-                        }
-
-                        // Compose line
-                        // Always include ground commander (icVal) if available
-                        line = `${dtStr} - ${alarmNum} by SC${icVal ? ' ' + icVal : ''}`;
-                        lastIC = icVal;
-                        lastDesig = desigVal;
-                        operationalStatus += line + '\n';
-                    }
-                });
-
-                // --- CASUALTIES ---
-                const injured = parseInt(val('casualties-injured')) || 0;
-                const fatality = parseInt(val('casualties-fatality')) || 0;
-                const missing = parseInt(val('casualties-missing')) || 0;
-
-                // --- ICP, FAI, FCOS ---
-                const icp = val('icplocation');
-                let fgCommander = '';
-                if (alarmLog.length > 0) {
-                    const lastEntry = alarmLog[alarmLog.length - 1];
-                    const icInput = lastEntry.querySelector('input[type="text"]:nth-of-type(1)');
-                    if (icInput && icInput.value) fgCommander = icInput.value;
-                }
-                let fai = '';
-                const faiDropdown = document.getElementById('fai-dropdown');
-                if (faiDropdown && faiDropdown.value) {
-                    fai = faiDropdown.value;
-                } else {
-                    fai = val('fai');
-                }
-                const faiContact = val('fai-contact');
-                const fcosName = val('fcos-name');
-                const fcosContact = val('fcos-contact');
-
-                // --- CASUALTY DETAILS ---
-                function getPersonDetails(type, count) {
-                    let details = [];
-                    for (let i = 0; i < count; i++) {
-                        const name = val(`${type}-name-${i}`);
-                        const age = val(`${type}-age-${i}`);
-                        const cc = val(`${type}-cc-${i}`);
-                        const connSel = document.getElementById(`${type}-conn-${i}`);
-                        const conn = connSel && connSel.selectedIndex > 0 ? connSel.options[connSel.selectedIndex].text : '';
-                        let gender = '';
-                        // For missing, only include name, age, conn (no cc)
-                        if (type === 'missing') {
-                            let line = [name, gender, age, conn].filter(Boolean).join(', ');
-                            if (line) details.push(`- ${line}`);
-                        } else {
-                            let line = [name, gender, age, cc, conn].filter(Boolean).join(', ');
-                            if (line) details.push(`- ${line}`);
-                        }
-                    }
-                    return details;
-                }
-                let injuredDetails = '';
-                if (injured > 0) {
-                    const arr = getPersonDetails('injured', injured).map(s => s.trim()).filter(Boolean);
-                    if (arr.length > 0) injuredDetails = arr.join('\n');
-                }
-                let fatalityDetails = '';
-                if (fatality > 0) {
-                    const arr = getPersonDetails('fatality', fatality).map(s => s.trim()).filter(Boolean);
-                    if (arr.length > 0) fatalityDetails = arr.join('\n');
-                }
-                let missingDetails = '';
-                if (missing > 0) {
-                    const arr = getPersonDetails('missing', missing).map(s => s.trim()).filter(Boolean);
-                    if (arr.length > 0) missingDetails = arr.join('\n');
-                }
-
-                // --- OUTPUT ---
-                output =
-`FS: ${apparatusLabel}${apparatusLabel ? ',' : ''} ${shiftLabel}${shiftLabel ? ',' : ''} ${aorLabel}${aorLabel ? ',' : ' '} ${stationAddress}${stationAddress ? ", " : ""}Barangay ${stationBarangay}${stationCity ? ', ' + stationCity : ''}
-
-IPO: Fire Incident at ${exactLocation}${exactLocation ? ', ' : ''}Barangay ${barangay}, ${city}
-
-DTR: ${formatDT(dtReport)}
-TED: ${formatDT(dtDispatched)}
-TAS: ${formatDT(dtArrived)}
-RT: ${responsetime}
-DIST: ${distancetravelled}${distancetravelled ? ' km' : ''}
-Involved: ${involved}
-Owners: ${owner}
-Family: ${families}
-Individuals: ${individuals}
-Structure Burned: ${houses}
-FA: ${floorarea}${floorarea ? ' sqm' : ''}
-
-Responders:
-${respondersList.length > 0 ? respondersList.map(r => '\t' + r).join('\n') : ''}
-
-Operational Status:
-${operationalStatus.trim().split('\n').map(line => '\t' + line).join('\n')}
-
-Casualties: ${injured + fatality}
-A. Injured: ${injured}${injuredDetails ? '\n\t' + injuredDetails.replace(/\n/g, '\n\t') : ''}
-B. Fatality: ${fatality}${fatalityDetails ? '\n\t' + fatalityDetails.replace(/\n/g, '\n\t') : ''}
-C. Missing: ${missing}${missingDetails ? '\n\t' + missingDetails.replace(/\n/g, '\n\t') : ''}
-
-ICP: ${icp}
-
-Fire Ground Commander: ${fgCommander}
-FAI: ${fai || ''}${faiContact ? '/' + faiContact : ''}
-FCOS:
-`;
-
-                // --- COPY TO CLIPBOARD ---
-                try {
-                    await navigator.clipboard.writeText(output);
-                    alert('Form data copied to clipboard!');
-                } catch (err) {
-                    alert('Failed to copy to clipboard. Please copy manually.\n\n' + output);
-                }
-            });
-        }
-
-        // Prevent negative values for BFP Responders, Auxiliary, families, individuals, houses, floor area
-        const zeroMinIds = [
-            'bfp-fireengine', 'bfp-rescue', 'bfp-ambulance',
-            'otherfiretrucks', 'otherrescue', 'otherambulance',
-            'familiesaffected', 'individualsaffected', 'housesaffected', 'floorarea'
-        ];
-        zeroMinIds.forEach(id => {
-            const el = document.getElementById(id);
-            if (el) {
-                el.setAttribute('min', '0');
-                el.addEventListener('input', function() {
-                    let val = parseInt(el.value, 10);
-                    if (isNaN(val) || val < 0) el.value = 0;
-                });
             }
         });
-    });
-});
+    }
+    if (fatalityPlus && fatalityInput) {
+        fatalityPlus.addEventListener('click', function() {
+            let val = parseInt(fatalityInput.value, 10) || 0;
+            val++;
+            fatalityInput.value = val;
+            fatalityInput.dispatchEvent(new Event('input', { bubbles: true }));
+        });
+    }
+    if (fatalityMinus && fatalityInput) {
+        fatalityMinus.addEventListener('click', function() {
+            let val = parseInt(fatalityInput.value, 10) || 0;
+            if (val > 0) {
+                if (confirm('Are you sure you want to decrease the number of fatalities? This may remove entered details.')) {
+                    val--;
+                    fatalityInput.value = val;
+                    fatalityInput.dispatchEvent(new Event('input', { bubbles: true }));
+                }
+            }
+        });
+    }
+
+    // --- Clipboard Copy on Submit ---
+    const form = document.getElementById('rtmsForm');
+    if (form) {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Helper to get value by id or fallback
+            const val = id => {
+                const el = document.getElementById(id);
+                return el ? el.value.trim() : '';
+            };
+
+            // Apparatus label
+            let apparatusLabel = '';
+            const apparatusSel = document.getElementById('apparatus');
+            if (apparatusSel && !apparatusSel.disabled && apparatusSel.selectedIndex > 0) {
+                apparatusLabel = apparatusSel.options[apparatusSel.selectedIndex].text;
+            }
+
+            // Shift
+            let shiftLabel = '';
+            const shiftSel = document.getElementById('station');
+            if (shiftSel && !shiftSel.disabled && shiftSel.selectedIndex > 0) {
+                shiftLabel = shiftSel.options[shiftSel.selectedIndex].text;
+            }
+
+            // AOR
+            let aorLabel = '';
+            const aorSel = document.getElementById('aor');
+            if (aorSel && aorSel.selectedIndex > 0) {
+                aorLabel = aorSel.options[aorSel.selectedIndex].text;
+            }
+
+            // Barangay
+            const barangay = val('barangay');
+            const city = val('city');
+            const region = val('region');
+
+            // Station Address fields
+            const stationAddress = val('stationAddress');
+            const stationBarangay = val('stationBarangay');
+            const stationCity = val('stationCity');
+
+            //Exact Location
+            const exactLocation = val('exactaddress');
+
+            // Date/time fields
+            const dtReport = val('datetime-report');
+            const dtDispatched = val('datetime-dispatched');
+            const dtArrived = val('datetime-arrivedonscene');
+            const formatDT = dt => {
+                if (!dt) return '';
+                const d = new Date(dt);
+                if (isNaN(d)) return '';
+                const day = d.getDate();
+                const month = d.toLocaleString('default', { month: 'long' });
+                const year = d.getFullYear();
+                const hour = d.getHours().toString().padStart(2, '0');
+                const min = d.getMinutes().toString().padStart(2, '0');
+                return `${day} ${hour}${min}H ${month} ${year}`;
+            };
+
+            // Response time and distance
+            const responsetime = val('responsetime');
+            const distancetravelled = val('distancetravelled');
+
+            // Involved/Occupancy
+            let involved = '';
+            const involvedSel = document.getElementById('involved');
+            if (involvedSel && !involvedSel.disabled && involvedSel.selectedIndex > 0) {
+                involved = involvedSel.options[involvedSel.selectedIndex].text;
+            }
+
+            // Owner
+            const owner = val('owner');
+            const families = val('familiesaffected');
+            const individuals = val('individualsaffected');
+            const houses = val('housesaffected');
+            const floorarea = val('floorarea');
+
+            // Responders (only include if value > 0, no tab/indent)
+            const respondersList = [];
+            const responderFields = [
+                { id: 'bfp-fireengine', label: 'BFP Firetruck' },
+                { id: 'bfp-rescue', label: 'BFP Rescue Truck' },
+                { id: 'bfp-ambulance', label: 'BFP Ambulance' },
+                { id: 'otherfiretrucks', label: 'Aux Firetruck' },
+                { id: 'otherrescue', label: 'Aux Rescue' },
+                { id: 'otherambulance', label: 'Aux Ambulance' }
+            ];
+            responderFields.forEach(r => {
+                const v = parseInt(val(r.id), 10) || 0;
+                if (v > 0) respondersList.push(`${r.label} – ${v}`);
+            });
+
+            // Alarm log (no tab, hyphen formatting, compact, and deduplicate name if same as previous)
+            let operationalStatus = '';
+            const alarmLog = document.querySelectorAll('#alarm-log-container .alarm-log-entry');
+            let lastIC = '';
+            let lastDesig = '';
+            function ordinal(n) {
+                if (n === 1) return '1st';
+                if (n === 2) return '2nd';
+                if (n === 3) return '3rd';
+                if (n > 3) return n + 'th';
+                return '';
+            }
+            alarmLog.forEach((entry, idx) => {
+                const alarmTitle = entry.querySelector('h2') ? entry.querySelector('h2').textContent : '';
+                const dtInput = entry.querySelector('input[type="datetime-local"]');
+                let dtStr = '';
+                if (dtInput && dtInput.value) {
+                    const d = new Date(dtInput.value);
+                    if (!isNaN(d)) {
+                        const hour = d.getHours().toString().padStart(2, '0');
+                        const min = d.getMinutes().toString().padStart(2, '0');
+                        dtStr = `${hour}${min}H`;
+                    }
+                }
+                const icInput = entry.querySelector('input[type="text"]:nth-of-type(1)');
+                const desigInput = entry.querySelector('input[type="text"]:nth-of-type(2)');
+                let icVal = icInput && icInput.value ? icInput.value.trim() : '';
+                let desigVal = desigInput && desigInput.value ? desigInput.value.trim() : '';
+                let line = '';
+                if (alarmTitle && dtStr) {
+                    let alarmNum = '';
+                    let alarmMatch = alarmTitle.match(/^([A-Z ]*?)ALARM/i);
+                    if (alarmMatch) {
+                        // e.g. "FIRST ALARM", "SECOND ALARM"
+                        let numWord = alarmTitle.split(' ')[0].toUpperCase();
+                        let num = 0;
+                        if (numWord === 'FIRST') num = 1;
+                        else if (numWord === 'SECOND') num = 2;
+                        else if (numWord === 'THIRD') num = 3;
+                        else if (numWord === 'FOURTH') num = 4;
+                        else if (numWord === 'FIFTH') num = 5;
+                        else if (numWord === 'GENERAL') num = 0;
+                        if (num > 0) alarmNum = `${ordinal(num)} Alarm`;
+                        else if (numWord === 'GENERAL') alarmNum = 'General Alarm';
+                        else alarmNum = alarmTitle.charAt(0).toUpperCase() + alarmTitle.slice(1).toLowerCase();
+                    } else if (alarmTitle.toUpperCase().includes('TASK FORCE')) {
+                        // Capitalize first letter of each word
+                        alarmNum = alarmTitle.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+                    } else if (alarmTitle.toUpperCase().includes('FIRE OUT UPON ARRIVAL')) {
+                        alarmNum = 'FOUA';
+                    } else if (alarmTitle.toUpperCase().includes('FIRE UNDER CONTROL')) {
+                        alarmNum = 'FUC';
+                    } else if (alarmTitle.toUpperCase().includes('FIRE OUT')) {
+                        alarmNum = 'FO';
+                    } else if (alarmTitle.toUpperCase().includes('VERIFICATION')) {
+                        alarmNum = 'Verification';
+                    } else {
+                        alarmNum = alarmTitle.charAt(0).toUpperCase() + alarmTitle.slice(1).toLowerCase();
+                    }
+
+                    // Compose line
+                    // Always include ground commander (icVal) if available
+                    line = `${dtStr} - ${alarmNum} by SC${icVal ? ' ' + icVal : ''}`;
+                    lastIC = icVal;
+                    lastDesig = desigVal;
+                    operationalStatus += line + '\n';
+                }
+            });
+
+            // Casualties
+            const injured = parseInt(val('casualties-injured')) || 0;
+            const fatality = parseInt(val('casualties-fatality')) || 0;
+            const missing = parseInt(val('casualties-missing')) || 0;
+
+            // ICP
+            const icp = val('icplocation');
+
+            // Fire Ground Commander (from last alarm log entry)
+            let fgCommander = '';
+            if (alarmLog.length > 0) {
+                const lastEntry = alarmLog[alarmLog.length - 1];
+                const icInput = lastEntry.querySelector('input[type="text"]:nth-of-type(1)');
+                if (icInput && icInput.value) fgCommander = icInput.value;
+            }
+
+            // FAI (dropdown or input)
+            let fai = '';
+            const faiDropdown = document.getElementById('fai-dropdown');
+            if (faiDropdown && faiDropdown.value) {
+                fai = faiDropdown.value;
+            } else {
+                fai = val('fai');
+            }
+            const faiContact = val('fai-contact');
 
             // FCOS
             const fcosName = val('fcos-name');
