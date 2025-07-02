@@ -13,6 +13,23 @@ body {
     align-items: center;
 }
 
+.logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+.logos img {
+  height: 180px;
+  width: auto;
+  filter: grayscale(0.2) brightness(0.95);
+  border-radius: 8px;
+  background: transparent;
+  padding: 0;
+  box-shadow: none;
+}
+
 h1 {
     color: #F28500;
     text-align: center;
