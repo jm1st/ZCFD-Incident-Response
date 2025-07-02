@@ -1,188 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ZCFD (RTMF)</title>
-    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incident Response</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212; /* Dark background */
+            color: #ffffff; /* Light text color */
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: #1e1e1e; /* Darker container background */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Adjusted shadow for dark mode */
+        }
+        h1 {
+            text-align: center;
+            color: #f28500; /* Highlighted title color */
+        }
+        .button-group {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        .button-group button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #333; /* Neutral button background */
+            color: #fff; /* Light text color */
+            transition: background-color 0.3s ease;
+            width: 150px; /* Set a fixed width for uniform button size */
+        }
+        .button-group button:hover {
+            background-color: #444; /* Slightly lighter on hover */
+        }
+        .button-group .fire {
+            background-color: #ff4d4d;
+        }
+        .button-group .medical {
+            background-color: #4caf50;
+        }
+        .button-group .rescue {
+            background-color: #2196f3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #1e1e1e; /* Table background */
+            color: #fff; /* Table text color */
+        }
+        table th, table td {
+            border: 1px solid #444; /* Darker border for table */
+            padding: 8px;
+            text-align: center;
+        }
+        table th {
+            background-color: #333; /* Header background */
+        }
+        .action-buttons button {
+            margin: 0 5px;
+            padding: 5px 10px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .action-buttons .edit {
+            background-color: #ffc107;
+            color: #000;
+        }
+        .action-buttons .delete {
+            background-color: #f44336;
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
-
-<h1>ZAMBOANGA CITY FIRE DISTRICT
-</h1>
-<h2>Real Time Monitoring Form (RTMF)</h2>
-
-<div class="container">
-    <!--
-    <div class="dashboard">
-        <h2>DASHBOARD</h2>
-        <p>History</p>
-
-    </div>
-    -->
-    <div class="form-container">
-        
-        <form id="incidentForm">
-        <h2></h2>
-        <!-- Area of Responsibility Dropdown -->
-        <label for="aor">Area of Responsibility:</label>
-        <select id="aor" >
-                    <option value=""></option>
-                    <option value="Intelligence and Investigation Section, ZCFD">Intelligence and Investigation Section</option>
-                    <option value="Zamboanga City Fire District">Zamboanga City Fire District</option>
-                    <option value="Zamboanga City Central Fire Station, ZCFD">Zamboanga City Central Fire Station</option>
-                    <option value="Ayala Fire Sub-Station, ZCFD">Ayala Fire Sub-Station</option>
-                    <option value="Boalan Fire Sub-Station, ZCFD">Boalan Fire Sub-Station</option>
-                    <option value="Buenavista Fire Sub-Station, ZCFD">Buenavista Fire Sub-Station</option>
-                    <option value="Cabaluay Fire Sub-Station, ZCFD">Cabaluay Fire Sub-Station</option>
-                    <option value="Calarian Fire Sub-Station, ZCFD">Calarian Fire Sub-Station</option>
-                    <option value="Culianan Fire Sub-Station, ZCFD">Culianan Fire Sub-Station</option>
-                    <option value="Guiwan Fire Sub-Station, ZCFD">Guiwan Fire Sub-Station</option>
-                    <option value="Labuan Fire Sub-Station, ZCFD">Labuan Fire Sub-Station</option>
-                    <option value="Lunzuran Fire Sub-Station, ZCFD">Lunzuran Fire Sub-Station</option>
-                    <option value="Mampang Fire Sub-Station, ZCFD">Mampang Fire Sub-Station</option>
-                    <option value="Manicahan Fire Sub-Station, ZCFD">Manicahan Fire Sub-Station</option>
-                    <option value="Mercedes Fire Sub-Station, ZCFD">Mercedes Fire Sub-Station</option>
-                    <option value="Putik Fire Sub-Station, ZCFD">Putik Fire Sub-Station</option>
-                    <option value="Quiniput Fire Sub-Station, ZCFD">Quiniput Fire Sub-Station</option>
-                    <option value="Recodo Fire Sub-Station, ZCFD">Recodo Fire Sub-Station</option>
-                    <option value="Sangali Fire Sub-Station, ZCFD">Sangali Fire Sub-Station</option>
-                    <option value="Sta Catalina Fire Sub-Station, ZCFD">Sta Catalina Fire Sub-Station</option>
-                    <option value="San Jose Gusu Fire Sub-Station, ZCFD">San Jose Gusu Fire Sub-Station</option>
-                    <option value="San Roque Fire Sub-Station, ZCFD">San Roque Fire Sub-Station</option>
-                    <option value="Sta Maria Fire Sub-Station, ZCFD">Sta Maria Fire Sub-Station</option>
-                    <option value="Talisayan Fire Sub-Station, ZCFD">Talisayan Fire Sub-Station</option>
-                    <option value="Talon-Talon Fire Sub-Station, ZCFD">Talon-Talon Fire Sub-Station</option>
-                    <option value="Tetuan Fire Sub-Station, ZCFD">Tetuan Fire Sub-Station</option>
-                    <option value="Tigbalabag Fire Sub-Station, ZCFD">Tigbalabag Fire Sub-Station</option>
-                    <option value="Tumaga Fire Sub-Station, ZCFD">Tumaga Fire Sub-Station</option>
-                    <option value="Vitali Fire Sub-Station, ZCFD">Vitali Fire Sub-Station</option>
-        </select>
-
-        <!-- Occupancy (Auto-filled but editable) -->
-        <label for="occupancy">Occupancy:</label>
-        <select id="occupancy"  onchange="updateInvolvedOptions()">
-            <option value=""></option>
-            <option value="structural">Structural</option>
-            <option value="non structural">Non Structural</option>
-        </select>
-
-        <!-- Involved -->
-        <label for="involved">Involved:</label>
-        <select id="involved">
-            <option value="">Choose Occupancy</option>
-        </select>
-
-        <!-- Location -->
-        <label for="location">Location:</label>
-        <input type="text" id="location"  />
-
-        <label for="barangay">Barangay:</label>
-        <input type="text" id="barangay" oninput="filterBarangays()" onkeydown="handleKeydown(event)" autocomplete="off"  />
-        <ul id="suggestions" class="hidden"></ul>
-
-        <label for="city">City:</label>
-        <input type="text" id="city" value="Zamboanga City"  />
-
-        <label for="region">Region:</label>
-        <input type="text" id="region" value="Region IX"  />
-        
-        <!-- RESPONDING TEAM -->
-        <label for="respondingTeam">Responding Team:</label>
-        <textarea id="respondingTeam" wrap="soft" rows="1" readonly onclick="showModal()"></textarea>
-
-        <!-- Modal -->
-        <div id="apparatusModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <div id="apparatusList"></div>
-                <button id="confirmApparatus">Confirm</button>
-            </div>
+    <div class="container">
+        <h1>Incident Response</h1>
+        <div class="button-group">
+            <button class="medical"onclick="location.href='medicalresponse.html'">Medical/Trauma Incident</button>
+            <button class="rescue">Rescue Incident</button>
+            <button class="fire" onclick="location.href='rtms_v3.html'">Fire <br>Incident</button>
         </div>
-
-        <!-- Date and Time -->
-        <label for="dateTimeReported">Time/Date Reported:</label>
-        <input type="datetime-local" id="dateTimeReported" onclick="this.showPicker()" />
-
-        <label for="timeArrival">Time of Arrival:</label>
-        <input type="datetime-local" id="timeArrival" onclick="this.showPicker()" />
-
-        <label for="timeFireOut">Fire Out:</label>
-        <input type="datetime-local" id="timeFireOut" onclick="this.showPicker()" />
-
-
-        <!-- Alarm Status Dropdown -->
-        <label for="alarm">Alarm Status:</label>
-        <select id="alarm" >
-            <option value=""></option>
-            <option value="1st Alarm">1st Alarm</option>
-            <option value="2nd Alarm">2nd Alarm</option>
-            <option value="3rd Alarm">3rd Alarm</option>
-            <option value="4th Alarm">4th Alarm</option>
-            <option value="5th Alarm">5th Alarm</option>
-            <option value="Task Force Alpha">Task Force Alpha</option>
-            <option value="Task Force Bravo">Task Force Bravo</option>
-            <option value="Task Force Charlie">Task Force Charlie</option>
-            <option value="Task Force Delta">Task Force Delta</option>
-            <option value="Task Force Echo">Task Force Echo</option>
-            <option value="General Alarm">General Alarm</option>
-            <option value="Fire Out Upon Arrival">Fire Out Upon Arrival</option>
-            <option value="Unresponded">Unresponded</option>
-        </select>
-
-        <!-- Ground Commander -->
-        <label for="commander">Ground Commander:</label>
-        <input type="text" id="commander"  />
-
-        <label for="commanderContact">Ground Commander Contact:</label>
-        <input type="tel" id="commanderContact" maxlength="16" oninput="formatPhoneInput(this)"  />
-
-        <!-- Sender -->
-        <label for="sender">Sender:</label>
-        <input type="text" id="sender"  />
-
-        <label for="senderContact">Sender Contact:</label>
-        <input type="tel" id="senderContact" maxlength="16" oninput="formatPhoneInput(this)" value="(0975) 993 2701"  />
-
-        <!-- Submit INITIAL Button -->
-        <button type="button" onclick="submitInitial()">Submit Initial</button>
-
-        <label for="owner">Name of Owner:</label>
-        <input type="text" id="owner" value=""  />
-
-        <label for="damage">Estimated Damage:</label>
-        <input type="text" id="damage" value=""  oninput="formatDamageInput(this)" />
-
-        <label for="fatality">Fatality:</label>
-        <input type="text" id="fatality" value="None"  />
-        
-        <label for="injured">Injured:</label>
-        <input type="text" id="injured" value="None"  />
-
-        <label for="noofestablishment">Number of Establishment:</label>
-        <input type="text" id="noofestablishment" value="0"  />
-
-        <label for="nooffamilies">Number of Famillies:</label>
-        <input type="text" id="nooffamilies" value="0"  />
-
-        <label for="responders">Number of Responders:</label>
-        <textarea id="responders" rows="1" readonly></textarea>
-
-        <!-- Submit PROGRESS Button -->
-        <button type="button" onclick="submitProgress()">Submit Progress</button>
-
-        <label for="nameofestablishment">Name of Establishment:</label>
-        <input type="text" id="nameofestablishment" value="N/A"  />
-
-        <label for="sqm">Lot Area Affected:</label>
-        <input type="number" id="sqm" value="0"  />  
-        
-        <!-- Submit COMPLETE Button -->
-        <button type="button" onclick="submitComplete()">Submit Complete</button>
-
-        </form>
+        <table>
+            <thead>
+                <tr>
+                    <th>Incident Type</th>
+                    <th>Description</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="incidentTableBody">
+                <!-- Data will be dynamically inserted here -->
+            </tbody>
+        </table>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // Example data for demonstration
+        const incidents = [
+
+        ];
+
+        function renderTable() {
+            const tableBody = document.getElementById('incidentTableBody');
+            tableBody.innerHTML = ''; // Clear existing rows
+
+            incidents.forEach((incident, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${incident.type}</td>
+                    <td>${incident.description}</td>
+                    <td>${incident.date}</td>
+                    <td class="action-buttons">
+                        <button class="edit" onclick="editIncident(${index})">Edit</button>
+                        <button class="delete" onclick="deleteIncident(${index})">Delete</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        function editIncident(index) {
+            const newDescription = prompt('Edit description:', incidents[index].description);
+            if (newDescription !== null) {
+                incidents[index].description = newDescription;
+                renderTable();
+            }
+        }
+
+        function deleteIncident(index) {
+            if (confirm('Are you sure you want to delete this incident?')) {
+                incidents.splice(index, 1);
+                renderTable();
+            }
+        }
+
+        // Initial render
+        renderTable();
+    </script>
 </body>
 </html>
