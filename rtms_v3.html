@@ -10,6 +10,7 @@
     <div class="logos">
         <img src="BFP Logo.png" alt="BFP Logo" />
         <img src="ZCFD Logo.png" alt="ZCFD Logo" />
+        <img src="IIS Logo.png" alt="IIS Logo">
     </div>
     <h1>
         BUREAU OF FIRE PROTECTION<br>
@@ -23,7 +24,7 @@
 
                 <div class="form-header station-section">
                     <label for="aor">Area of Responsibility:</label>
-                    <select id="aor" name="aor" >
+                    <select id="aor" name="aor" required>
                         <option value="" disabled selected hidden>Choose Station</option>
                         <option value="Intelligence and Investigation Section, ZCFD">Intelligence and Investigation Section</option>
                         <option value="Zamboanga City Fire District">Zamboanga City Fire District</option>
@@ -61,7 +62,7 @@
                     <div class="station-info-row">
                         <div>
                             <label for="station">Shift:</label>
-                            <select id="station" name="station" >
+                            <select id="station" name="station" required>
                                 <option value="" disabled selected hidden>Select Shift</option>
                                 <option value="Shift A">A Shift</option>
                                 <option value="Shift B">B Shift</option>
@@ -69,7 +70,7 @@
                         </div>
                         <div>
                             <label for="apparatus">Apparatus:</label>
-                            <select id="apparatus" name="apparatus" >
+                            <select id="apparatus" name="apparatus" required>
                                 <option value="" disabled selected hidden>Choose Fire Station</option>
                             </select>
                         </div>
@@ -78,55 +79,56 @@
 
                 <div class="form-header station-location-section">
                     <label for="stationAddress">Station Address:</label>
-                    <input type="text" id="stationAddress" name="stationAddress" />
+                    <input type="text" id="stationAddress" name="stationAddress" required />
                     <div class="location-row">
                         <div>
                             <label for="barangay">Barangay:</label>
-                            <input type="text" id="stationBarangay" oninput="filterStationBarangays()" onkeydown="handleStationKeydown(event)" autocomplete="off" placeholder="" title="Enter Barangay" />
+                            <input type="text" id="stationBarangay" oninput="filterStationBarangays()" onkeydown="handleStationKeydown(event)" autocomplete="off" placeholder="" title="Enter Barangay" required />
                             <ul id="station-suggestions" class="hidden"></ul>
                         </div>
                         <div>
                             <label for="city">City:</label>
-                            <input type="text" id="stationCity" name="city" value="Zamboanga City" placeholder=                        </div>
+                            <input type="text" id="stationCity" name="city" value="Zamboanga City" required />
+                        </div>
                     </div>
                 </div>
 
                 <div class="form-header location-section">
                     <label for="exactaddress">Exact Address:</label>
-                    <input type="text" id="exactaddress" name="exactaddress"  />
+                    <input type="text" id="exactaddress" name="exactaddress" required />
 
                     <div class="location-row">
                         <div>
                             <label for="barangay">Barangay:</label>
-                            <input type="text" id="barangay" oninput="filterBarangays()" onkeydown="handleKeydown(event)" autocomplete="off" />
+                            <input type="text" id="barangay" oninput="filterBarangays()" onkeydown="handleKeydown(event)" autocomplete="off" required />
                             <ul id="suggestions" class="hidden"></ul>
                         </div>
                         <div>
                             <label for="city">City:</label>
-                            <input type="text" id="city" name="city" value="Zamboanga City"  />
+                            <input type="text" id="city" name="city" value="Zamboanga City" required />
                         </div>
                         <div>
                             <label for="region">Region:</label>
-                            <input type="text" id="region" name="region" value="Region IX"  />
+                            <input type="text" id="region" name="region" value="Region IX" required />
                         </div>
                     </div>
                 </div>
 
                 <div class="form-header timeanddate-section">
                     <label for="datetime-report">Date and Time of Reported:</label>
-                    <input type="datetime-local" id="datetime-report" name="datetime-report"  />
+                    <input type="datetime-local" id="datetime-report" name="datetime-report" required />
                     <div style="margin-top: 10px;">
                         <button type="button" onclick="setCurrentDateTime('datetime-report')">Reported</button>
                     </div>
 
                     <label for="datetime-dispatched">Date and Time Apparatus Dispatched:</label>
-                    <input type="datetime-local" id="datetime-dispatched" name="datetime-dispatched"  />
+                    <input type="datetime-local" id="datetime-dispatched" name="datetime-dispatched" required />
                     <div style="margin-top: 10px;">
                         <button type="button" onclick="setCurrentDateTime('datetime-dispatched')">Dispatched</button>
                     </div>
 
                     <label for="datetime-arrivedonscene">Date and Time Arrived on Scene:</label>
-                    <input type="datetime-local" id="datetime-arrivedonscene" name="datetime-arrivedonscene"   />
+                    <input type="datetime-local" id="datetime-arrivedonscene" name="datetime-arrivedonscene" required />
                     <div style="margin-top: 10px;">
                         <button type="button" onclick="setCurrentDateTime('datetime-arrivedonscene')">Arrived On Scene</button>
                     </div>
@@ -134,11 +136,11 @@
                     <div class="responsetimeanddistance-row">
                         <div>
                             <label for="responsetime">Response Time:</label>
-                            <input type="text" id="responsetime" name="responsetime" placeholder=""   />
+                            <input type="text" id="responsetime" name="responsetime" required />
                         </div>
                         <div>
                             <label for="distancetravelled">Distance Travelled:</label>
-                            <input type="text" id="distancetravelled" name="distancetravelled" placeholder=""   />
+                            <input type="number" id="distancetravelled" name="distancetravelled" required />
                         </div>
                     </div>
                 </div>
@@ -147,41 +149,41 @@
                     <div class="occupancy-involved-row">
                         <div>
                             <label for="occupancy">Occupancy:</label>
-                            <select id="occupancy" onchange="updateInvolvedOptions()">
-                                <option value="" disabled selected hidden></option>
+                            <select id="occupancy" onchange="updateInvolvedOptions()" required>
+                                <option value="" disabled selected hidden>Choose Occupancy</option>
                                 <option value="structural">Structural</option>
                                 <option value="non structural">Non Structural</option>
                             </select>
                         </div>
                         <div>
                             <label for="involved">Involved:</label>
-                            <select id="involved" disabled>
+                            <select id="involved" disabled required>
                                 <option value="" disabled selected hidden>Choose Occupancy</option>
                             </select>
                         </div>
                     </div>
 
                     <label for="owner">Owner:</label>
-                    <input type="text" id="owner" name="owner" placeholder=""   />
+                    <input type="text" id="owner" name="owner" required />
 
                     <div class="familliesaffected-row">
                         <div>
                             <label for="familiesaffected">Number of Families Affected:</label>
-                            <input type="number" id="familiesaffected" name="familiesaffected" value="0"   />
+                            <input type="number" id="familiesaffected" name="familiesaffected" value="0" required />
                         </div>
                         <div>
                             <label for="individualsaffected">Number of Individual Affected:</label>
-                            <input type="number" id="individualsaffected" name="individualsaffected" value="0"   />
+                            <input type="number" id="individualsaffected" name="individualsaffected" value="0" required />
                         </div>
                     </div>
                     <div class="housesaffected-row">
                         <div>
                             <label for="housesaffected">Number of Houses Affected:</label>
-                            <input type="number" id="housesaffected" name="housesaffected" value="0"   />
+                            <input type="number" id="housesaffected" name="housesaffected" value="0" required />
                         </div>
                         <div>
                             <label for="floorarea">Floor Area Affected:</label>
-                            <input type="number" id="floorarea" name="floorarea" value="0"   />
+                            <input type="number" id="floorarea" name="floorarea" value="0" required />
                         </div>
                     </div>
                 </div>
@@ -192,30 +194,30 @@
                         <div class="bfp-responders-row">
                             <div>
                                 <label for="bfp-fireengine">Fire Engine:</label>
-                                <input type="number" id="bfp-fireengine" name="bfp-fireengine" value="0"   />
+                                <input type="number" id="bfp-fireengine" name="bfp-fireengine" value="0" required />
                             </div>
                             <div>
                                 <label for="bfp-rescue">Rescue Truck:</label>
-                                <input type="number" id="bfp-rescue" name="bfp-rescue" value="0"   />
+                                <input type="number" id="bfp-rescue" name="bfp-rescue" value="0" required />
                             </div>
                             <div>
                                 <label for="bfp-ambulance">Ambulance:</label>
-                                <input type="number" id="bfp-ambulance" name="bfp-ambulance" value="0"   />
+                                <input type="number" id="bfp-ambulance" name="bfp-ambulance" value="0" required />
                             </div>
                         </div>
                         <h4>AUXILIARY</h4>
                         <div class="otherresponders-row">
                             <div>
                                 <label for="otherfiretrucks">Fire Engine/Tanker:</label>
-                                <input type="number" id="otherfiretrucks" name="otherfiretrucks" value="0"   />
+                                <input type="number" id="otherfiretrucks" name="otherfiretrucks" value="0" required />
                             </div>
                             <div>
                                 <label for="otherrescue">Rescue Vehicles:</label>
-                                <input type="number" id="otherrescue" name="otherrescue" value="0"   />
+                                <input type="number" id="otherrescue" name="otherrescue" value="0" required />
                             </div>
                             <div>
                                 <label for="otherambulance">Ambulance:</label>
-                                <input type="number" id="otherambulance" name="otherambulance" value="0"   />
+                                <input type="number" id="otherambulance" name="otherambulance" value="0" required />
                             </div>
                         </div>
                     </div>
@@ -223,7 +225,6 @@
 
                 <div class="operational-status">
                     <label for="alarm">Alarm Status:</label>
-                    
                     <input type="hidden" id="alarm" name="alarm" value="" />
                     <div class="alarm-status-row">
                         <span id="alarm-status-label">Verification</span>
@@ -240,15 +241,15 @@
                     <div class="casualties-row">
                         <div>
                             <label for="casualties-injured">Injured:</label>
-                            <input type="number" id="casualties-injured" name="casualties-injured" value="0" min="0" />
+                            <input type="number" id="casualties-injured" name="casualties-injured" value="0" min="0" required />
                         </div>
                         <div>
                             <label for="casualties-fatality">Fatality:</label>
-                            <input type="number" id="casualties-fatality" name="casualties-fatality" value="0" min="0" />
+                            <input type="number" id="casualties-fatality" name="casualties-fatality" value="0" min="0" required />
                         </div>
                         <div>
                             <label for="casualties-missing">Missing:</label>
-                            <input type="number" id="casualties-missing" name="casualties-missing" value="0" min="0" />
+                            <input type="number" id="casualties-missing" name="casualties-missing" value="0" min="0" required />
                         </div>
                     </div>
                     <!-- Move detail containers outside of .casualties-row -->
@@ -259,16 +260,16 @@
                 
                 </br></br>
                 <label for="icplocation">Incident Command Post Location:</label>
-                    <input type="text" id="icplocation" name="icplocation"/>
+                <input type="text" id="icplocation" name="icplocation" required />
                 
                 <div class="reeviewsinfo-section">
 
                     <div class="firegroundcommander-section">
                         <label for="firegroundcommander">Fire Ground Commander:</label>
-                        <input type="text" id="firegroundcommander" name="firegroundcommander" placeholder=""   />
+                        <input type="text" id="firegroundcommander" name="firegroundcommander" required />
 
                         <label for="firegroundcommander-contactnumber">Fire Ground Commander Contact Number:</label>
-                        <input type="text" id="firegroundcommander-contactnumber" name="firegroundcommander-contactnumber" placeholder=""   />
+                        <input type="text" id="firegroundcommander-contactnumber" name="firegroundcommander-contactnumber" required />
                     </div>
 
                     <div class="fai-fcos-note">
@@ -277,18 +278,18 @@
 
                     <div class="fai-detailscontainer">
                         <label for="fai">Fire Investigator:</label>
-                        <input type="text" id="fai" name="fai" placeholder=""   />
+                        <input type="text" id="fai" name="fai"  />
 
                         <label for="fai-contact">Contact Number:</label>
-                        <input type="text" id="fai-contact" name="fai-contact" value="(0975) 993 2701"   />
+                        <input type="text" id="fai-contact" name="fai-contact" value="(0975) 993 2701"  />
                     </div>
 
                     <div class="fcos-section">
                         <label for="fcos-name">Fire Control Operation Section:</label>
-                        <input type="text" id="fcos-name" name="fcos-name" placeholder=""   />
+                        <input type="text" id="fcos-name" name="fcos-name"  />
 
                         <label for="fcos-contact">Contact Number:</label>
-                        <input type="text" id="fcos-contact" name="fcos-contact" value="(0955) 781 6063"   />
+                        <input type="text" id="fcos-contact" name="fcos-contact" value="(0955) 781 6063"  />
                     </div>
                 </div>
                 <!--

@@ -1,0 +1,222 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    color: #ffffff;
+}
+.logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem;
+    margin-bottom: 1.2rem;
+    padding-top: 20px;
+}
+.logos img {
+    height: 180px;
+    width: auto;
+    filter: grayscale(0.2) brightness(0.95);
+    border-radius: 8px;
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+}
+.logos img[alt="IIS Logo"] {
+    height: 180px;
+    width: 180px;
+    object-fit: contain;
+}
+.main-header {
+    text-align: center;
+    color: #f28500;
+    font-family: 'Courier New', Courier, monospace;
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+.main-header .alerting-title {
+    display: block;
+    font-size: 2.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 6px;
+    margin-bottom: 2px;
+    color: #ffb300;
+}
+#alertSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+}
+#alertBox {
+    background-color: #ff9800;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-align: left;
+    font-weight: bold;
+    min-width: 220px;
+    width: 100%;
+    max-width: 900px; /* Match .container max-width */
+    height: 38px;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: auto;
+    margin-right: auto;
+}
+#alertBox .marquee {
+    display: inline-block;
+    white-space: nowrap;
+    will-change: transform;
+    animation: marquee 12s linear infinite;
+    font-size: 1.1em;
+    padding-left: 100%;
+    box-sizing: border-box;
+}
+@keyframes marquee {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+#status {
+    font-size: 0.95em;
+    color: #bbb;
+    text-align: center;
+}
+#startBtn {
+    padding: 7px 18px;
+    font-size: 15px;
+    border: none;
+    border-radius: 5px;
+    background: #333;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+#startBtn:hover {
+    background: #444;
+}
+.version, .credit {
+    text-align: center;
+    font-size: 12px;
+    color: #bbb;
+    margin-top: 0;
+    margin-bottom: 0;
+    position: fixed;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background: transparent;
+    pointer-events: none;
+}
+.credit {
+    bottom: 28px;
+}
+.version {
+    bottom: 10px;
+}
+.container {
+    max-width: 900px;
+    margin: 40px auto 0 auto;
+    background: #1e1e1e;
+    padding: 32px 28px 24px 28px;
+    border-radius: 14px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.45);
+    margin-top: 18px;
+}
+.incident-header {
+    text-align: center;
+    font-size: 1.5em;
+    font-family: 'Courier New', Courier, monospace;
+    color: #f28500;
+    font-weight: bold;
+    margin-bottom: 18px;
+    letter-spacing: 1px;
+}
+h1 {
+    text-align: center;
+    color: #f28500;
+}
+.button-group {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+.button-group button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #333;
+    color: #fff;
+    transition: background-color 0.3s ease;
+    width: 150px;
+}
+.button-group button:hover {
+    background-color: #444;
+}
+.button-group .fire {
+    background-color: #ff4d4d;
+}
+.button-group .medical {
+    background-color: #4caf50;
+}
+.button-group .rescue {
+    background-color: #2196f3;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #1e1e1e;
+    color: #fff;
+}
+table th, table td {
+    border: 1px solid #444;
+    padding: 8px;
+    text-align: center;
+}
+table th {
+    background-color: #333;
+}
+.action-buttons button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.action-buttons .edit {
+    background-color: #ffc107;
+    color: #000;
+}
+.action-buttons .delete {
+    background-color: #f44336;
+    color: #fff;
+}
+
+/* Gentle blinking background for alerting */
+body.alerting-bg {
+    animation: mild-blink-bg 1.2s linear infinite;
+}
+
+@keyframes mild-blink-bg {
+    0%   { background-color: #121212; }
+    40%  { background-color: #1e1e1e; }
+    60%  { background-color: #2a1a00; }
+    100% { background-color: #121212; }
+}
