@@ -84,26 +84,36 @@ async function fetchAlert() {
       return;
     }
 
+    // Only accept channel_post from the channel (not private messages)
     const updates = data.result.filter(update =>
       update.channel_post &&
       update.channel_post.chat.id === chatId &&
       update.channel_post.text
     );
 
+    // Sort by update_id ascending
+    updates.sort((a, b) => a.update_id - b.update_id);
+
     let newUpdates = [];
     if (lastMessageId === null) {
       if (updates.length > 0) {
-        const latest = updates[updates.length - 1];
-        newUpdates = [latest];
+        newUpdates = [updates[updates.length - 1]];
       }
     } else {
-      newUpdates = updates.filter(u => u.update_id > lastMessageId)
-                          .sort((a, b) => a.update_id - b.update_id);
+      newUpdates = updates.filter(u => u.update_id > lastMessageId);
     }
 
     if (newUpdates.length > 0) {
-      queue = newUpdates;
-      playNextInQueue();
+      const lastAlertText = document.getElementById("alertBox").textContent.trim();
+      const filteredUpdates = newUpdates.filter(u => {
+        const text = u.channel_post.text || '';
+        const plainText = text.replace(/[*_`~]/g, '').trim();
+        return plainText && plainText !== lastAlertText;
+      });
+      if (filteredUpdates.length > 0) {
+        queue = filteredUpdates;
+        playNextInQueue();
+      }
     }
   } catch (err) {
     console.error(err);
@@ -127,56 +137,81 @@ function playNextInQueue() {
   lastMessageId = update.update_id;
   saveLastMessageId(lastMessageId);
 
-  const text = update.channel_post.text;
-  document.getElementById("alertBox").innerHTML = `<span class="marquee">${text}</span>`;
+  let text =
+    (update.channel_post && update.channel_post.text) ||
+    (update.message && update.message.text) ||
+    '';
 
-  const alertDate = new Date((update.channel_post.date || Date.now()) * 1000);
+  const plainText = text.replace(/[*_`~]/g, '').replace(/\n+/g, ' ').trim();
+
+  document.getElementById("alertBox").innerHTML = `<span class="marquee">${plainText}</span>`;
+
+  const alertDate = new Date(
+    ((update.channel_post && update.channel_post.date) ||
+     (update.message && update.message.date) ||
+     Date.now()) * 1000
+  );
   const dateStr = alertDate.toLocaleString();
   document.getElementById("status").textContent = `Alert time: ${dateStr}`;
 
   const tone1 = document.getElementById("tone1");
   const tone2 = document.getElementById("tone2");
 
-  function playSpeechAndTone2() {
+  function speakTwiceThenTone2() {
     window.speechSynthesis.cancel();
-    const speech = new SpeechSynthesisUtterance(text);
-    speech.lang = 'en-US';
-    speech.volume = 1.0; // Set to max volume (range: 0.0 to 1.0)
-    // Optionally, you can try adjusting pitch/rate for clarity:
-    // speech.pitch = 1.0;
-    // speech.rate = 1.0;
-    speech.onend = () => {
-      tone2.currentTime = 0;
-      tone2.play().then(() => {
-        tone2.onended = () => {
-          tone2.onended = null;
-          playNextInQueue();
-        };
-      }).catch(() => {
-        playNextInQueue();
-      });
-    };
-    speech.onerror = () => {
-      tone2.currentTime = 0;
-      tone2.play().then(() => {
-        tone2.onended = () => {
-          tone2.onended = null;
-          playNextInQueue();
-        };
-      }).catch(() => {
-        playNextInQueue();
-      });
-    };
-    window.speechSynthesis.speak(speech);
+    let count = 0;
+    function speakOnce() {
+      const speech = new SpeechSynthesisUtterance(plainText);
+      speech.lang = 'en-US';
+      speech.volume = 1.0;
+      speech.onend = () => {
+        count++;
+        if (count < 2) {
+          setTimeout(speakOnce, 1200); // 1.2s pause between readings
+        } else {
+          setTimeout(() => {
+            tone2.currentTime = 0;
+            tone2.play().then(() => {
+              tone2.onended = () => {
+                tone2.onended = null;
+                playNextInQueue();
+              };
+            }).catch(() => {
+              playNextInQueue();
+            });
+          }, 1200); // 1.2s pause before tone2
+        }
+      };
+      speech.onerror = () => {
+        count++;
+        if (count < 2) {
+          setTimeout(speakOnce, 1200);
+        } else {
+          setTimeout(() => {
+            tone2.currentTime = 0;
+            tone2.play().then(() => {
+              tone2.onended = () => {
+                tone2.onended = null;
+                playNextInQueue();
+              };
+            }).catch(() => {
+              playNextInQueue();
+            });
+          }, 1200);
+        }
+      };
+      window.speechSynthesis.speak(speech);
+    }
+    speakOnce();
   }
 
   tone1.currentTime = 0;
   tone1.onended = () => {
     tone1.onended = null;
-    playSpeechAndTone2();
+    speakTwiceThenTone2();
   };
   tone1.play().catch(() => {
-    playSpeechAndTone2();
+    speakTwiceThenTone2();
   });
 }
 

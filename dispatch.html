@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dispatcher CAD Entry</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dispatch.css">
+</head>
+<body>
+    <div class="dispatch-cad-container">
+        <form id="dispatchForm" autocomplete="off">
+            <div class="cad-section">
+                <h3>Location</h3>
+                <label for="exactaddress">Exact Address:</label>
+                <input type="text" id="exactaddress" name="exactaddress" required>
+                <div class="location-row">
+                    <div>
+                        <label for="barangay">Barangay:</label>
+                        <input type="text" id="barangay" name="barangay" autocomplete="off" required oninput="filterBarangays()" onkeydown="handleBarangayKeydown(event)">
+                        <ul id="barangay-suggestions" class="hidden"></ul>
+                    </div>
+                    <div>
+                        <label for="city">City:</label>
+                        <input type="text" id="city" name="city" value="Zamboanga City" required>
+                    </div>
+                </div>
+            </div>
+            <div class="cad-section">
+                <h3>Alarm Status</h3>
+                <input type="hidden" id="alarm" name="alarm" value="">
+                <div class="alarm-status-row">
+                    <span id="alarm-status-label">Verification</span>
+                    <div class="alarm-buttons-row">
+                        <button type="button" class="minus-alarm" id="alarm-minus">-</button>
+                        <button type="button" class="fire-under-control" id="alarm-under-control">Fire Under Control</button>
+                        <button type="button" class="plus-alarm" id="alarm-plus">+</button>
+                    </div>
+                </div>
+                <div id="alarm-log-container"></div>
+            </div>
+            <div class="cad-section">
+                <h3>Incident Details</h3>
+                <label for="type">Type of Alarm:</label>
+                <select id="type" name="type" required>
+                    <option value="ALARM">ALARM</option>
+                    <option value="FIRE">FIRE</option>
+                    <option value="MEDICAL">MEDICAL</option>
+                </select>
+                <label for="occupancy">Occupancy:</label>
+                <select id="occupancy" name="occupancy" required>
+                    <option value="" disabled selected hidden>Choose Occupancy</option>
+                    <option value="structural">Structural</option>
+                    <option value="non structural">Non Structural</option>
+                </select>
+                <label for="involved">Involved:</label>
+                <input type="text" id="involved" name="involved" required>
+            </div>
+            <div class="cad-section">
+                <h3>Responding Team</h3>
+                <label for="responders">Responding Team:</label>
+                <input type="text" id="responders" name="responders" placeholder="e.g. Pumper 1, Rescue 1" required>
+            </div>
+            <div class="cad-row">
+                <button type="submit" class="send-btn">Send Alert</button>
+                <div class="msg" id="dispatchMsg"></div>
+            </div>
+        </form>
+    </div>
+    <script src="dispatch.js"></script>
+</body>
+</html>
+        </form>
+    </div>
+    <script src="dispatch.js"></script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+body {
+    background: #181818;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.dispatch-container {
+    max-width: 400px;
+    margin: 60px auto;
+    background: #232323;
+    border-radius: 10px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+    padding: 32px 28px 22px 28px;
+}
+.dispatch-cad-container {
+    max-width: 1100px;
+    margin: 30px auto;
+    background: #232323;
+    border-radius: 10px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+    padding: 24px 20px 18px 20px;
+}
+form {
+    width: 100%;
+}
+h2 {
+    text-align: center;
+    color: #f28500;
+    margin-bottom: 18px;
+    font-family: 'Courier New', Courier, monospace;
+}
+label {
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 4px;
+    font-size: 1em;
+}
+input, select, textarea {
+    width: 100%;
+    padding: 6px 8px;
+    border-radius: 4px;
+    border: 1px solid #444;
+    background: #232323;
+    color: #fff;
+    font-size: 1em;
+    margin-bottom: 8px;
+    box-sizing: border-box;
+}
+textarea {
+    resize: vertical;
+}
+button {
+    width: 100%;
+    padding: 10px 0;
+    background: #f28500;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.2s;
+}
+button:hover {
+    background: #ff9800;
+}
+.cad-row {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+.cad-section {
+    background: #181818;
+    border-radius: 8px;
+    padding: 14px 16px 10px 16px;
+    flex: 1;
+    min-width: 260px;
+    box-sizing: border-box;
+    margin-bottom: 0;
+}
+.cad-section h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.08em;
+    color: #f28500;
+    font-family: 'Courier New', Courier, monospace;
+    letter-spacing: 1px;
+}
+.units-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #232323;
+    color: #fff;
+    font-size: 0.97em;
+}
+.units-table th, .units-table td {
+    border: 1px solid #444;
+    padding: 4px 7px;
+    text-align: center;
+}
+.units-table th {
+    background: #333;
+    color: #ffb300;
+}
+.send-btn {
+    background: #f28500;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1.1em;
+    cursor: pointer;
+    padding: 12px 0;
+    width: 200px;
+    margin: 0 auto;
+    display: block;
+    transition: background 0.2s;
+}
+.send-btn:hover {
+    background: #ff9800;
+}
+.msg {
+    flex: 1;
+    text-align: left;
+    margin-left: 24px;
+    font-size: 1em;
+    min-height: 24px;
+    align-self: center;
+    color: #4caf50;
+}
+@media (max-width: 900px) {
+    .cad-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .cad-section {
+        min-width: 0;
+    }
+}

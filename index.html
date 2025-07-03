@@ -8,6 +8,24 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="top-right">
+        <button id="dispatcherBtn" title="Dispatcher Login">Admin</button>
+    </div>
+    <!-- Dispatcher Login Modal -->
+    <div id="dispatcherModal" class="modal-bg" style="display:none;">
+        <div class="modal-card">
+            <span class="modal-close" id="closeDispatcherModal" title="Close">&times;</span>
+            <h3>Dispatcher Login</h3>
+            <form id="dispatcherLoginForm" autocomplete="off">
+                <label for="dispatcherUser">Username:</label>
+                <input type="text" id="dispatcherUser" required autofocus>
+                <label for="dispatcherPass">Password:</label>
+                <input type="password" id="dispatcherPass" required>
+                <div id="dispatcherError" style="color:#f44336;font-size:0.95em;min-height:18px;"></div>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
     <div class="logos">
         <img src="BFP Logo.png" alt="BFP Logo">
         <img src="ZCFD Logo.png" alt="ZCFD Logo">
@@ -51,5 +69,43 @@
     <p class="credit">Kansa pa ba?</p>
     <p class="version">v5.0.0</p>
     <script src="main.js"></script>
+    <script>
+    // Dispatcher modal logic
+    const dispatcherBtn = document.getElementById('dispatcherBtn');
+    const dispatcherModal = document.getElementById('dispatcherModal');
+    const closeDispatcherModal = document.getElementById('closeDispatcherModal');
+    const dispatcherLoginForm = document.getElementById('dispatcherLoginForm');
+    const dispatcherError = document.getElementById('dispatcherError');
+    const dispatcherUser = document.getElementById('dispatcherUser');
+    const dispatcherPass = document.getElementById('dispatcherPass');
+
+    dispatcherBtn.addEventListener('click', () => {
+        dispatcherModal.style.display = 'flex';
+        dispatcherError.textContent = '';
+        dispatcherLoginForm.reset();
+        setTimeout(() => dispatcherUser.focus(), 100);
+    });
+
+    closeDispatcherModal.addEventListener('click', () => {
+        dispatcherModal.style.display = 'none';
+    });
+
+    dispatcherModal.addEventListener('click', (e) => {
+        if (e.target === dispatcherModal) dispatcherModal.style.display = 'none';
+    });
+
+    dispatcherLoginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        // Change these credentials as needed
+        if (dispatcherUser.value === 'admin' && dispatcherPass.value === '123') {
+            dispatcherModal.style.display = 'none';
+            window.open('dispatch.html', '_blank');
+        } else {
+            dispatcherError.textContent = 'Invalid credentials.';
+            dispatcherPass.value = '';
+            dispatcherPass.focus();
+        }
+    });
+    </script>
 </body>
 </html>
