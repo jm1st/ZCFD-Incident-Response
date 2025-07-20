@@ -1,3 +1,21 @@
+// FIREBASE
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDLo3aqydvIAGNmkr5zVu0tR2rCwnd7ACg",
+  authDomain: "firehouse-alerting-system.firebaseapp.com",
+  projectId: "firehouse-alerting-system",
+  storageBucket: "firehouse-alerting-system.firebasestorage.app",
+  messagingSenderId: "153702333406",
+  appId: "1:153702333406:web:552f8ed1e3ef4a604b3b4f",
+  measurementId: "G-JR1T53Y9NG"
+};
+
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+// FIREBASE
+
 // Incident table logic
 const incidents = [
     // ...existing code...
@@ -79,6 +97,9 @@ async function fetchAlert() {
     const response = await fetch(`https://api.telegram.org/bot${token}/getUpdates`);
     const data = await response.json();
 
+    // Debug: log the raw data from Telegram
+    console.log("Telegram API response:", data);
+
     if (!data.ok || !Array.isArray(data.result)) {
       document.getElementById("status").textContent = "Error: Couldn't fetch updates";
       return;
@@ -90,6 +111,9 @@ async function fetchAlert() {
       update.channel_post.chat.id === chatId &&
       update.channel_post.text
     );
+
+    // Debug: log filtered updates
+    console.log("Filtered updates:", updates);
 
     // Sort by update_id ascending
     updates.sort((a, b) => a.update_id - b.update_id);
@@ -103,6 +127,9 @@ async function fetchAlert() {
       newUpdates = updates.filter(u => u.update_id > lastMessageId);
     }
 
+    // Debug: log new updates
+    console.log("New updates:", newUpdates);
+
     if (newUpdates.length > 0) {
       const lastAlertText = document.getElementById("alertBox").textContent.trim();
       const filteredUpdates = newUpdates.filter(u => {
@@ -110,13 +137,15 @@ async function fetchAlert() {
         const plainText = text.replace(/[*_`~]/g, '').trim();
         return plainText && plainText !== lastAlertText;
       });
+      // Debug: log filtered updates for display
+      console.log("Filtered updates for display:", filteredUpdates);
       if (filteredUpdates.length > 0) {
         queue = filteredUpdates;
         playNextInQueue();
       }
     }
   } catch (err) {
-    console.error(err);
+    console.error("Fetch alert error:", err);
     document.getElementById("status").textContent = "Network or API error";
   }
 }
@@ -256,4 +285,23 @@ window.addEventListener('DOMContentLoaded', () => {
             startAlerting();
         }
     });
+
+    // Unlock audio playback on first user interaction (required by browsers)
+    function unlockAudio() {
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            if (ctx.state === 'suspended') {
+                ctx.resume();
+            }
+            // Play a silent sound to unlock
+            const source = ctx.createBufferSource();
+            source.buffer = ctx.createBuffer(1, 1, 22050);
+            source.connect(ctx.destination);
+            source.start(0);
+        } catch (e) {}
+        window.removeEventListener('click', unlockAudio);
+        window.removeEventListener('keydown', unlockAudio);
+    }
+    window.addEventListener('click', unlockAudio);
+    window.addEventListener('keydown', unlockAudio);
 });

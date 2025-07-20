@@ -430,8 +430,7 @@ const apparatusByStation = {
         "Toyota Rush",
         "Toyota Hilux"
     ]
-    // Add more if needed
-};
+}; // <-- Add this closing brace to end the object
 
 // Update apparatus dropdown based on selected AOR
 document.addEventListener('DOMContentLoaded', function() {
@@ -1432,7 +1431,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             // Compose output
-            output =
+            const output =
 `FS: ${apparatusLabel}${apparatusLabel ? ',' : ''} ${shiftLabel}${shiftLabel ? ',' : ''} ${aorLabel}${aorLabel ? ',' : ' '} ${stationAddress}${stationAddress ? ", " : ""}Barangay ${stationBarangay}${stationCity ? ', ' + stationCity : ''}
 
 IPO: Fire Incident at ${exactLocation}${exactLocation ? ', ' : ''}Barangay ${barangay}, ${city}
@@ -1450,15 +1449,15 @@ Structure Burned: ${houses}
 FA: ${floorarea}${floorarea ? ' sqm' : ''}
 
 Responders:
-${respondersList.length > 0 ? respondersList.map(r => '\t' + r).join('\n') : ''}
+${respondersList.length > 0 ? respondersList.map(r => '          ' + r).join('\n') : ''}
 
 Operational Status:
-${operationalStatus.trim().split('\n').map(line => '\t' + line).join('\n')}
+${operationalStatus.trim().split('\n').map(line => '          ' + line).join('\n')}
 
 Casualties: ${injured + fatality}
-A. Injured: ${injured}${injuredDetails ? '\n\t' + injuredDetails.replace(/\n/g, '\n\t') : ''}
-B. Fatality: ${fatality}${fatalityDetails ? '\n\t' + fatalityDetails.replace(/\n/g, '\n\t') : ''}
-C. Missing: ${missing}${missingDetails ? '\n\t' + missingDetails.replace(/\n/g, '\n\t') : ''}
+A. Injured: ${injured}${injuredDetails ? '\n          ' + injuredDetails.replace(/\n/g, '\n          ') : ''}
+B. Fatality: ${fatality}${fatalityDetails ? '\n          ' + fatalityDetails.replace(/\n/g, '\n          ') : ''}
+C. Missing: ${missing}${missingDetails ? '\n          ' + missingDetails.replace(/\n/g, '\n          ') : ''}
 
 ICP: ${icp}
 
@@ -1468,11 +1467,52 @@ FCOS:
 `;
 
             // Copy to clipboard
+            let clipboardOk = false;
             try {
                 await navigator.clipboard.writeText(output);
-                alert('Form data copied to clipboard!');
+                clipboardOk = true;
             } catch (err) {
                 alert('Failed to copy to clipboard. Please copy manually.\n\n' + output);
+            }
+
+            // --- Telegram Bot Send ---
+            // Replace with your bot token and the actual chat ID of the GC
+            const token = '7742982738:AAEKDUd43h9v6-TsZ8fRcfNopn2aDQjr1qY'; // <-- Replace with your bot token
+            const chatId = '-1002652410269'; // <-- Replace with actual chat ID (number, not link)
+
+            if (token === 'YOUR_BOT_TOKEN' || chatId === 'YOUR_CHAT_ID') {
+                alert('Please set your Telegram bot token and chat ID in the code.');
+                return;
+            }
+
+            let telegramOk = false;
+            try {
+                const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: output
+                    })
+                });
+                const data = await res.json();
+                if (data.ok) {
+                    telegramOk = true;
+                } else {
+                    alert('Failed to send to Telegram GC.');
+                }
+            } catch (err) {
+                alert('Network error. Try again.');
+            }
+
+            if (clipboardOk && telegramOk) {
+                alert('Form data copied to clipboard and sent to Telegram GC!');
+            } else if (clipboardOk) {
+                alert('Form data copied to clipboard.');
+            } else if (telegramOk) {
+                alert('Details sent to Telegram GC!');
             }
         });
     }

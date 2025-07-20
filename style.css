@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'Winner-CondBlack';
+    src: url('./font/Winner-CondBlack.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -7,14 +14,23 @@ body {
 }
 .logos {
     display: flex;
-    justify-content: center;
     align-items: center;
+    width: 100%;
     gap: 1.2rem;
     margin-bottom: 1.2rem;
     padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 40px; /* Add right padding for spacing from edge */
+    box-sizing: border-box;
+}
+.logo-title-group {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    flex: 1;
 }
 .logos img {
-    height: 180px;
+    height: 90px;
     width: auto;
     filter: grayscale(0.2) brightness(0.95);
     border-radius: 8px;
@@ -22,10 +38,53 @@ body {
     padding: 0;
     box-shadow: none;
 }
+.text-title {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    text-align: left;
+    margin: 0;
+    color: #ffffff;
+    font-size: 1.5rem;
+    margin-left: 0;
+}
 .logos img[alt="IIS Logo"] {
     height: 180px;
     width: 180px;
     object-fit: contain;
+}
+.main-nav {
+    background: transparent;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    margin-left: auto;
+}
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2.2rem;
+    margin: 0;
+    padding: 0;
+}
+.main-nav ul li {
+    display: inline;
+}
+.main-nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    transition: color 0.2s;
+    padding: 4px 0;
+    border-bottom: 2px solid transparent;
+}
+.main-nav ul li a:hover,
+.main-nav ul li a:focus {
+    color: #ffb300;
+    border-bottom: 2px solid #ffb300;
 }
 .main-header {
     text-align: center;
@@ -314,3 +373,6 @@ body.alerting-bg {
 .modal-close:hover {
     color: #fff;
 }
+
+/* If you use background-image in CSS, use: */
+/* background-image: url('Image/your-image.png'); */

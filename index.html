@@ -4,13 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Incident Response</title>
-    <link rel="icon" type="image/png" href="ZCFD Logo.png">
+    <link rel="icon" type="image/png" href="Image/ZCFD Logo.png">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="top-right">
-        <button id="dispatcherBtn" title="Dispatcher Login">Admin</button>
+    <div class="logos">
+        <div class="logo-title-group">
+            <div class="logo-container">
+                <!--<img src="Image/BFP Logo.png" alt="BFP Logo">-->
+                <img src="Image/ZCFD Logo.png" alt="ZCFD Logo">
+                <!--<img src="Image/IIS Logo.png" alt="IIS Logo">-->
+            </div>
+            <div class="text-title">
+                ZAMBOANGA CITY </br>
+                FIRE DISTRICT
+            </div>
+        </div>
+        <!-- Navigation Bar -->
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="#">CONTACT US</a></li>
+                <li><a href="#" id="dispatcherNav">DISPATCH</a></li>
+                <li><a href="#">LOG IN</a></li>
+            </ul>
+        </nav>
     </div>
+
     <!-- Dispatcher Login Modal -->
     <div id="dispatcherModal" class="modal-bg" style="display:none;">
         <div class="modal-card">
@@ -26,22 +46,16 @@
             </form>
         </div>
     </div>
-    <div class="logos">
-        <img src="BFP Logo.png" alt="BFP Logo">
-        <img src="ZCFD Logo.png" alt="ZCFD Logo">
-        <!--<img src="IIS Logo.png" alt="IIS Logo">-->
-    </div>
+
     <div class="main-header">
-        Bureau of Fire Protection<br>
-        Zamboanga City Fire District<br>
         <span class="alerting-title">Firehouse Alerting System</span>
     </div>
     <div id="alertSection">
         <div id="alertBox">No alerts yet</div>
         <p id="status"></p>
         <button id="startBtn">Stop Alerting</button>
-        <audio id="tone1" src="1st tone.mp3" preload="auto"></audio>
-        <audio id="tone2" src="2 tone.mp3" preload="auto"></audio>
+        <audio id="tone1" src="Tone/1st tone.mp3" preload="auto"></audio>
+        <audio id="tone2" src="Tone/2 tone.mp3" preload="auto"></audio>
     </div>
     <div class="container">
         <div class="incident-header">
@@ -71,7 +85,7 @@
     <script src="main.js"></script>
     <script>
     // Dispatcher modal logic
-    const dispatcherBtn = document.getElementById('dispatcherBtn');
+    const dispatcherNav = document.getElementById('dispatcherNav');
     const dispatcherModal = document.getElementById('dispatcherModal');
     const closeDispatcherModal = document.getElementById('closeDispatcherModal');
     const dispatcherLoginForm = document.getElementById('dispatcherLoginForm');
@@ -79,7 +93,8 @@
     const dispatcherUser = document.getElementById('dispatcherUser');
     const dispatcherPass = document.getElementById('dispatcherPass');
 
-    dispatcherBtn.addEventListener('click', () => {
+    dispatcherNav.addEventListener('click', (e) => {
+        e.preventDefault();
         dispatcherModal.style.display = 'flex';
         dispatcherError.textContent = '';
         dispatcherLoginForm.reset();
