@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incident Response</title>
+    <link rel="icon" type="image/png" href="Image/ZCFD Logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="logos">
+ 
+        <!-- Navigation Bar -->
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">RESPONSE</a></li>
+                <li><a href="mdfir.html">REPORTS</a></li>
+                <li><a href="#" id="dispatcherNav">DISPATCH</a></li>
+                <li><a href="#">LOG IN</a></li>
+            </ul>
+        </nav>
+
+    </div>
+    <div class="main-header">
+        <span class="alerting-title">Minimal Damage Fire Incident Report</span>
+    </div>  
+
+    <div class="report-container">
+        <form id="mdfirForm" autocomplete="off">
+            <label for="datetime-actualoccurrence">Date and Time of Actual Occurence:</label>
+            <input type="datetime-local" id="datetime-actualoccurrence" name="datetime-actualoccurrence" required />
+            
+            <label for="datetime-reported">Date and Time Reported:</label>
+            <input type="datetime-local" id="datetime-reported" name="datetime-reported" required />
+            
+            <label for="location">Incident Location:</label>
+            <input type="text" id="location" required>
+
+            
+        
+            <label for="description">Description of Incident:</label>
+            <textarea id="description" rows="4" required></textarea>
+
+            <button type="submit">Submit Report</button>
+        </form>
+        <div id="reportStatus"></div>
+    <script src="mdfir.js"></script>
+    <script>
+
+    </script>
+</body>
+</html>

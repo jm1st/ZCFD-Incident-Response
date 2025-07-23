@@ -20,14 +20,15 @@ body {
     margin-bottom: 1.2rem;
     padding-top: 20px;
     padding-left: 20px;
-    padding-right: 40px; /* Add right padding for spacing from edge */
+    padding-right: 40px;
     box-sizing: border-box;
+    justify-content: space-between; /* Distribute left, center, right */
 }
 .logo-title-group {
     display: flex;
     align-items: center;
     gap: 1.2rem;
-    flex: 1;
+    flex-shrink: 0;
 }
 .logos img {
     height: 90px;
@@ -47,6 +48,25 @@ body {
     font-size: 1.5rem;
     margin-left: 0;
 }
+.contact-emergency {
+    text-align: center;
+    color: #ffffff;
+    font-family: 'Courier New', Courier, monospace;
+    margin-top: 10px;
+    font-size: 1.2rem;
+}
+.contact-emergency a,
+.contact-emergency a:visited {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+.contact-emergency a:hover,
+.contact-emergency a:focus {
+    color: #ffb300;
+    text-decoration: underline;
+}
 .logos img[alt="IIS Logo"] {
     height: 180px;
     width: 180px;
@@ -56,9 +76,12 @@ body {
     background: transparent;
     display: flex;
     align-items: center;
-    padding: 0;
+    justify-content: center;
+    flex: 1 1 auto;
+    min-width: 0;
+    /* Remove margin and padding that may offset center */
     margin: 0;
-    margin-left: auto;
+    padding: 0;
 }
 .main-nav ul {
     list-style: none;
@@ -66,6 +89,8 @@ body {
     gap: 2.2rem;
     margin: 0;
     padding: 0;
+    justify-content: center;
+    align-items: center;
 }
 .main-nav ul li {
     display: inline;
