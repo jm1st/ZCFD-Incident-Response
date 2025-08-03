@@ -574,9 +574,9 @@ function updateInvolvedOptions() {
     involved.innerHTML = '<option value="" disabled selected hidden>Choose Occupancy</option>';
 
     let options = [];
-    if (occupancy === 'structural') {
+    if (occupancy === 'Structural') {
         options = structuralOptions;
-    } else if (occupancy === 'non structural') {
+    } else if (occupancy === 'Non Structural') {
         options = nonStructuralOptions;
     }
 
@@ -1274,6 +1274,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 involved = involvedSel.options[involvedSel.selectedIndex].text;
             }
 
+            //GENERAL OCCUPANCY
+            const occupancy = val('occupancy');
+
             // Owner
             const owner = val('owner');
             const families = val('familiesaffected');
@@ -1441,7 +1444,8 @@ TED: ${formatDT(dtDispatched)}
 TAS: ${formatDT(dtArrived)}
 RT: ${responsetime}
 DIST: ${distancetravelled}${distancetravelled ? ' km' : ''}
-Involved: ${involved}
+
+Involved: ${occupancy} (${involved})
 Owners: ${owner}
 Family: ${families}
 Individuals: ${individuals}
@@ -1462,7 +1466,9 @@ C. Missing: ${missing}${missingDetails ? '\n          ' + missingDetails.replace
 ICP: ${icp}
 
 Fire Ground Commander: ${fgCommander}${fgCommanderContact ? '/' + fgCommanderContact : ''}
+
 FAI: ${fai || ''}${faiContact ? '/' + faiContact : ''}
+
 FCOS:
 `;
 
