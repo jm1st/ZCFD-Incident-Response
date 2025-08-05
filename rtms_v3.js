@@ -574,9 +574,9 @@ function updateInvolvedOptions() {
     involved.innerHTML = '<option value="" disabled selected hidden>Choose Occupancy</option>';
 
     let options = [];
-    if (occupancy === 'structural') {
+    if (occupancy === 'Structural') {
         options = structuralOptions;
-    } else if (occupancy === 'non structural') {
+    } else if (occupancy === 'Non Structural') {
         options = nonStructuralOptions;
     }
 
@@ -611,6 +611,142 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     // ...existing code...
+});
+
+// AUTO POPULATE ADDRESS
+document.addEventListener('DOMContentLoaded', function() {
+    const station = document.getElementById('aor');
+    const stationAddress = document.getElementById('stationAddress');
+    const stationBarangay = document.getElementById('stationBarangay');
+
+    if (station && stationAddress && stationBarangay) {
+        station.addEventListener('change', function() {
+            if (station.value === 'Zamboanga City Central Fire Station, ZCFD') {
+                stationAddress.value = 'Mayor Cesar Climaco Avenue';
+                stationBarangay.value = 'Zone II';
+            }
+            if (station.value === 'Ayala Fire Sub-Station, ZCFD') {
+                stationAddress.value = 'Zone 5, Calle San Jose';
+                stationBarangay.value = 'Ayala';
+            }
+            if (station.value === 'Boalan Fire Sub-Station, ZCFD') {
+                stationAddress.value = 'Zone 3';
+                stationBarangay.value = 'Boalan';
+            }
+            if (station.value === 'Buenavista Fire Sub-Station, ZCFD') {
+                stationAddress.value = 'Maharlika Highway';
+                stationBarangay.value = 'Buenavista';
+            }
+            if (station.value === 'Cabaluay Fire Sub-Station, ZCFD') {
+                stationAddress.value = 'Maharlika Highway';
+                stationBarangay.value = 'Cabaluay';
+            }
+            if (station.value === 'Calarian Fire Sub-Station, ZCFD') {
+                stationAddress.value = 'Labuan-Limpapa National Road';
+                stationBarangay.value = 'Calarian';
+            }
+            if (station.value === 'Culianan Fire Sub-Station, ZCFD') {
+                stationAddress.value = 'Rural Service Center, Maharlika Highway';
+                stationBarangay.value = 'Culianan';
+            }
+            if (station.value === 'Guiwan Fire Sub-Station, ZCFD') {
+                stationAddress.value = 'Bougainvilla Road';
+                stationBarangay.value = 'Guiwan';
+            }
+            if (station.value === 'Labuan Fire Sub-Station, ZCFD') {
+                stationAddress.value = 'Cable Drive, Purok 4';
+                stationBarangay.value = 'Labuan';
+            }
+            if (station.value === 'Lunzuran Fire Sub-Station, ZCFD') {
+                stationAddress.value = 'Purok 1';
+                stationBarangay.value = 'Lunzuran';
+            }
+            if (station.value === 'Mampang Fire Sub-Station, ZCFD') {
+                stationAddress.value = 'Fernando Luciano Drive';
+                stationBarangay.value = 'Mampang';
+            }
+            if (station.value === 'Manicahan Fire Sub-Station, ZCFD') {
+                stationAddress.value = 'Maharlika Highway';
+                stationBarangay.value = 'Manicahan';
+            }
+            if (station.value === 'Mercedes Fire Sub-Station, ZCFD') {
+                stationAddress.value = 'Calle Real';
+                stationBarangay.value = 'Mercedes';
+            }
+            if (station.value === 'Pasonanca Fire Sub-Station, ZCFD') {
+                stationAddress.value = 'Pasonanca Road';
+                stationBarangay.value = 'Pasonanca';
+            }
+            if (station.value === 'Putik Fire Sub-Station, ZCFD') {
+                stationAddress.value = 'Morning Glory';
+                stationBarangay.value = 'Putik';
+            }
+            if (station.value === 'Quiniput Fire Sub-Station, ZCFD') {
+                stationAddress.value = 'Ontong';
+                stationBarangay.value = 'Quiniput';
+            }
+            if (station.value === 'Recodo Fire Sub-Station, ZCFD') {
+                stationAddress.value = 'Labuan-Limpapa National Road';
+                stationBarangay.value = 'Recodo';
+            }
+            if (station.value === 'Sangali Fire Sub-Station, ZCFD') {
+                stationAddress.value = 'Celia P Manuel Street, Malasugat';
+                stationBarangay.value = 'Sangali';
+            }
+            if (station.value === 'San Jose Gusu Fire Sub-Station, ZCFD') {
+                stationAddress.value = 'San Jose Road';
+                stationBarangay.value = 'San Jose Gusu';
+            }
+            if (station.value === 'San Roque Fire Sub-Station, ZCFD') {
+                stationAddress.value = 'Zone 3';
+                stationBarangay.value = 'San Roque';
+            }
+            if (station.value === 'Sta Catalina Fire Sub-Station, ZCFD') {
+                stationAddress.value = 'Evangelista Street';
+                stationBarangay.value = 'Sta Catalina';
+            }
+            if (station.value === 'Sta Maria Fire Sub-Station, ZCFD') {
+                stationAddress.value = 'Governor Ramos Avenue';
+                stationBarangay.value = 'Sta Maria';
+            }   
+            if (station.value === 'Talisayan Fire Sub-Station, ZCFD') {
+                stationAddress.value = 'Zamboanga Ecozone, Sitio San Ramon';
+                stationBarangay.value = 'Talisayan';
+            }
+            if (station.value === 'Talon-Talon Fire Sub-Station, ZCFD') {
+                stationAddress.value = 'Talon-Talon Road';
+                stationBarangay.value = 'Talon-Talon';
+            }
+            if (station.value === 'Tetuan Fire Sub-Station, ZCFD') {
+                stationAddress.value = 'Natividad Street';
+                stationBarangay.value = 'Tetuan';
+            }
+            if (station.value === 'Tumaga Fire Sub-Station, ZCFD') {
+                stationAddress.value = 'Sun Street';
+                stationBarangay.value = 'Tumaga';
+            }
+            if (station.value === 'Tugbungan Fire Sub-Station, ZCFD') {
+                stationAddress.value = 'Agripino Lorenzo Street, Morning Breeze';
+                stationBarangay.value = 'Tugbungan';
+            }
+            if (station.value === 'Tigbalabag Fire Sub-Station, ZCFD') {
+                stationAddress.value = 'Maharlika Highway';
+                stationBarangay.value = 'Tigbalabag';
+            }
+            if (station.value === 'Vitali Fire Sub-Station, ZCFD') {
+                stationAddress.value = 'Centro Vitali';
+                stationBarangay.value = 'Vitali';
+            }
+            if (station.value === 'Zamboanga City Fire District') {
+                stationAddress.value = 'Mayor Cesar Climaco Avenue';
+                stationBarangay.value = 'Zone II';
+            }
+            if (station.value === 'Intelligence and Investigation Section, ZCFD') {
+                stationAddress.value = 'Mayor Cesar Climaco Avenue';
+                stationBarangay.value = 'Zone II';
+            }
+        });
+    }
 });
 
 const alarmLevels = [
@@ -1266,7 +1402,9 @@ document.addEventListener('DOMContentLoaded', function() {
             // Response time and distance
             const responsetime = val('responsetime');
             const distancetravelled = val('distancetravelled');
-
+            
+            //Occupancy
+            const occupancy = val('occupancy');
             // Involved/Occupancy
             let involved = '';
             const involvedSel = document.getElementById('involved');
@@ -1441,7 +1579,8 @@ TED: ${formatDT(dtDispatched)}
 TAS: ${formatDT(dtArrived)}
 RT: ${responsetime}
 DIST: ${distancetravelled}${distancetravelled ? ' km' : ''}
-Involved: ${involved}
+
+Involved: ${occupancy} (${involved})
 Owners: ${owner}
 Family: ${families}
 Individuals: ${individuals}
@@ -1462,7 +1601,9 @@ C. Missing: ${missing}${missingDetails ? '\n          ' + missingDetails.replace
 ICP: ${icp}
 
 Fire Ground Commander: ${fgCommander}${fgCommanderContact ? '/' + fgCommanderContact : ''}
+
 FAI: ${fai || ''}${faiContact ? '/' + faiContact : ''}
+
 FCOS:
 `;
 
