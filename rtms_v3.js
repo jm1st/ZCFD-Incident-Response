@@ -430,79 +430,226 @@ const apparatusByStation = {
         "Toyota Rush",
         "Toyota Hilux"
     ]
-}; // <-- Add this closing brace to end the object
+};
 
-// Update apparatus dropdown based on selected AOR
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const aorSelect = document.getElementById('aor');
     const apparatusSelect = document.getElementById('apparatus');
     const shiftSelect = document.getElementById('station');
+    const stationAddress = document.getElementById('stationAddress');
+    const stationBarangay = document.getElementById('stationBarangay');
 
-    function resetSelect(select, placeholder, keepOptions) {
+    const stationData = {
+        'Zamboanga City Central Fire Station, ZCFD': {
+            address: 'Mayor Cesar Climaco Avenue',
+            barangay: 'Zone II'
+        },
+        'Ayala Fire Sub-Station, ZCFD': {
+            address: 'Zone 5, Calle San Jose',
+            barangay: 'Ayala'
+        },
+        'Boalan Fire Sub-Station, ZCFD': {
+            address: 'Zone 3',
+            barangay: 'Boalan'
+        },
+        'Buenavista Fire Sub-Station, ZCFD': {
+            address: 'Maharlika Highway',
+            barangay: 'Buenavista'
+        },
+        'Cabaluay Fire Sub-Station, ZCFD': {
+            address: 'Maharlika Highway',
+            barangay: 'Cabaluay'
+        },
+        'Calarian Fire Sub-Station, ZCFD': {
+            address: 'Labuan-Limpapa National Road',
+            barangay: 'Calarian'
+        },
+        'Culianan Fire Sub-Station, ZCFD': {
+            address: 'Rural Service Center, Maharlika Highway',
+            barangay: 'Culianan'
+        },
+        'Guiwan Fire Sub-Station, ZCFD': {
+            address: 'Bougainvilla Road',
+            barangay: 'Guiwan'
+        },
+        'Labuan Fire Sub-Station, ZCFD': {
+            address: 'Cable Drive, Purok 4',
+            barangay: 'Labuan'
+        },
+        'Lunzuran Fire Sub-Station, ZCFD': {
+            address: 'Purok 1',
+            barangay: 'Lunzuran'
+        },
+        'Mampang Fire Sub-Station, ZCFD': {
+            address: 'Fernando Luciano Drive',
+            barangay: 'Mampang'
+        },
+        'Manicahan Fire Sub-Station, ZCFD': {
+            address: 'Maharlika Highway',
+            barangay: 'Manicahan'
+        },
+        'Mercedes Fire Sub-Station, ZCFD': {
+            address: 'Calle Real',
+            barangay: 'Mercedes'
+        },
+        'Pasonanca Fire Sub-Station, ZCFD': {
+            address: 'Pasonanca Road',
+            barangay: 'Pasonanca'
+        },
+        'Putik Fire Sub-Station, ZCFD': {
+            address: 'Morning Glory',
+            barangay: 'Putik'
+        },
+        'Quiniput Fire Sub-Station, ZCFD': {
+            address: 'Ontong',
+            barangay: 'Quiniput'
+        },
+        'Recodo Fire Sub-Station, ZCFD': {
+            address: 'Labuan-Limpapa National Road',
+            barangay: 'Recodo'
+        },
+        'Sangali Fire Sub-Station, ZCFD': {
+            address: 'Celia P Manuel Street, Malasugat',
+            barangay: 'Sangali'
+        },
+        'San Jose Gusu Fire Sub-Station, ZCFD': {
+            address: 'San Jose Road',
+            barangay: 'San Jose Gusu'
+        },
+        'San Roque Fire Sub-Station, ZCFD': {
+            address: 'Zone 3',
+            barangay: 'San Roque'
+        },
+        'Sta Catalina Fire Sub-Station, ZCFD': {
+            address: 'Evangelista Street',
+            barangay: 'Sta Catalina'
+        },
+        'Sta Maria Fire Sub-Station, ZCFD': {
+            address: 'Governor Ramos Avenue',
+            barangay: 'Sta Maria'
+        },
+        'Talisayan Fire Sub-Station, ZCFD': {
+            address: 'Zamboanga Ecozone, Sitio San Ramon',
+            barangay: 'Talisayan'
+        },
+        'Talon-Talon Fire Sub-Station, ZCFD': {
+            address: 'Talon-Talon Road',
+            barangay: 'Talon-Talon'
+        },
+        'Tetuan Fire Sub-Station, ZCFD': {
+            address: 'Natividad Street',
+            barangay: 'Tetuan'
+        },
+        'Tumaga Fire Sub-Station, ZCFD': {
+            address: 'Sun Street',
+            barangay: 'Tumaga'
+        },
+        'Tugbungan Fire Sub-Station, ZCFD': {
+            address: 'Agripino Lorenzo Street, Morning Breeze',
+            barangay: 'Tugbungan'
+        },
+        'Tigbalabag Fire Sub-Station, ZCFD': {
+            address: 'Maharlika Highway',
+            barangay: 'Tigbalabag'
+        },
+        'Vitali Fire Sub-Station, ZCFD': {
+            address: 'Centro Vitali',
+            barangay: 'Vitali'
+        },
+        'Zamboanga City Fire District': {
+            address: 'Mayor Cesar Climaco Avenue',
+            barangay: 'Zone II'
+        },
+        'Intelligence and Investigation Section, ZCFD': {
+            address: 'Mayor Cesar Climaco Avenue',
+            barangay: 'Zone II'
+        }
+    };
+
+    const resetSelect = (select, placeholder, keepOptions = false) => {
         if (keepOptions) {
             select.selectedIndex = 0;
         } else {
             select.innerHTML = `<option value="" disabled selected hidden>${placeholder}</option>`;
         }
-    }
+    };
 
     if (aorSelect && apparatusSelect && shiftSelect) {
-        // Set initial placeholders
+        // Initial reset
         resetSelect(shiftSelect, 'Choose Fire Station');
-        resetSelect(apparatusSelect, 'Choose Fire Station');
+        resetSelect(apparatusSelect, 'Choose Apparatus');
+        shiftSelect.disabled = true;
+        apparatusSelect.disabled = true;
 
-        aorSelect.addEventListener('change', function() {
+        aorSelect.addEventListener('change', function () {
             const selectedAor = aorSelect.value;
-            // Always reset both selects
-            resetSelect(shiftSelect, 'Choose Fire Station');
-            resetSelect(apparatusSelect, 'Choose Fire Station');
 
-            if (selectedAor === "Intelligence and Investigation Section, ZCFD") {
-                // Only shift enabled, apparatus disabled
-                shiftSelect.disabled = false;
-                apparatusSelect.disabled = true;
-                shiftSelect.innerHTML = `
-                    <option value="" disabled selected hidden>Select Shift</option>
-                    <option value="Shift A">A Shift</option>
-                    <option value="Shift B">B Shift</option>
-                `;
-            } else if (selectedAor === "Zamboanga City Fire District") {
-                // Both shift and apparatus disabled, keep their placeholders
-                shiftSelect.disabled = true;
-                apparatusSelect.disabled = true;
-                resetSelect(shiftSelect, 'Choose Fire Station');
-                resetSelect(apparatusSelect, 'Choose Fire Station');
-            } else if (selectedAor) {
-                // Both shift and apparatus enabled for other stations
-                shiftSelect.disabled = false;
-                apparatusSelect.disabled = false;
-                shiftSelect.innerHTML = `
-                    <option value="" disabled selected hidden>Select Shift</option>
-                    <option value="Shift A">A Shift</option>
-                    <option value="Shift B">B Shift</option>
-                `;
-                resetSelect(apparatusSelect, 'Choose Apparatus');
-                if (apparatusByStation[selectedAor]) {
-                    apparatusByStation[selectedAor].forEach(app => {
-                        const option = document.createElement('option');
-                        option.value = app;
-                        option.textContent = app;
-                        apparatusSelect.appendChild(option);
-                    });
-                }
+            // Reset selects
+            resetSelect(shiftSelect, 'Choose Shift');
+            resetSelect(apparatusSelect, 'Choose Apparatus');
+            shiftSelect.disabled = true;
+            apparatusSelect.disabled = true;
+
+            // Update address & barangay
+            if (stationData[selectedAor]) {
+                stationAddress.value = stationData[selectedAor].address;
+                stationBarangay.value = stationData[selectedAor].barangay;
             } else {
+                stationAddress.value = '';
+                stationBarangay.value = '';
+            }
+
+            // Show shifts based on AOR
+            if (selectedAor === 'Intelligence and Investigation Section, ZCFD') {
+                shiftSelect.disabled = false;
+                apparatusSelect.disabled = true;
+                shiftSelect.innerHTML = `
+                    <option value="" disabled selected hidden>Select Shift</option>
+                    <option value="Shift A">A Shift</option>
+                    <option value="Shift B">B Shift</option>
+                `;
+            } else if (selectedAor === 'Zamboanga City Fire District') {
                 shiftSelect.disabled = true;
                 apparatusSelect.disabled = true;
-                resetSelect(shiftSelect, 'Choose Fire Station');
-                resetSelect(apparatusSelect, 'Choose Fire Station');
+            } else if (selectedAor) {
+                shiftSelect.disabled = false;
+                shiftSelect.innerHTML = `
+                    <option value="" disabled selected hidden>Select Shift</option>
+                    <option value="Shift A">A Shift</option>
+                    <option value="Shift B">B Shift</option>
+                `;
             }
         });
 
-        // On page load, disable shift and apparatus until station is chosen
-        shiftSelect.disabled = true;
-        apparatusSelect.disabled = true;
-    }
+        // Enable and populate apparatus on shift selection
+        shiftSelect.addEventListener('change', function () {
+            const selectedAor = aorSelect.value;
+            const previouslySelected = apparatusSelect.value;
 
+            resetSelect(apparatusSelect, 'Choose Apparatus');
+            apparatusSelect.disabled = false;
+
+            let found = false;
+
+            if (typeof apparatusByStation !== 'undefined' && apparatusByStation[selectedAor]) {
+                apparatusByStation[selectedAor].forEach(app => {
+                    const option = document.createElement('option');
+                    option.value = app;
+                    option.textContent = app;
+                    if (app === previouslySelected) {
+                        option.selected = true;
+                        found = true;
+                    }
+                    apparatusSelect.appendChild(option);
+                });
+            }
+
+            // If previous selection not found, default to placeholder
+            if (!found) {
+                apparatusSelect.selectedIndex = 0;
+            }
+        });
+    }
 });
 
 // Utility to set current datetime-local value to an input by id
@@ -611,142 +758,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-});
-
-// AUTO POPULATE ADDRESS
-document.addEventListener('DOMContentLoaded', function() {
-    const station = document.getElementById('aor');
-    const stationAddress = document.getElementById('stationAddress');
-    const stationBarangay = document.getElementById('stationBarangay');
-
-    if (station && stationAddress && stationBarangay) {
-        station.addEventListener('change', function() {
-            if (station.value === 'Zamboanga City Central Fire Station, ZCFD') {
-                stationAddress.value = 'Mayor Cesar Climaco Avenue';
-                stationBarangay.value = 'Zone II';
-            }
-            if (station.value === 'Ayala Fire Sub-Station, ZCFD') {
-                stationAddress.value = 'Zone 5, Calle San Jose';
-                stationBarangay.value = 'Ayala';
-            }
-            if (station.value === 'Boalan Fire Sub-Station, ZCFD') {
-                stationAddress.value = 'Zone 3';
-                stationBarangay.value = 'Boalan';
-            }
-            if (station.value === 'Buenavista Fire Sub-Station, ZCFD') {
-                stationAddress.value = 'Maharlika Highway';
-                stationBarangay.value = 'Buenavista';
-            }
-            if (station.value === 'Cabaluay Fire Sub-Station, ZCFD') {
-                stationAddress.value = 'Maharlika Highway';
-                stationBarangay.value = 'Cabaluay';
-            }
-            if (station.value === 'Calarian Fire Sub-Station, ZCFD') {
-                stationAddress.value = 'Labuan-Limpapa National Road';
-                stationBarangay.value = 'Calarian';
-            }
-            if (station.value === 'Culianan Fire Sub-Station, ZCFD') {
-                stationAddress.value = 'Rural Service Center, Maharlika Highway';
-                stationBarangay.value = 'Culianan';
-            }
-            if (station.value === 'Guiwan Fire Sub-Station, ZCFD') {
-                stationAddress.value = 'Bougainvilla Road';
-                stationBarangay.value = 'Guiwan';
-            }
-            if (station.value === 'Labuan Fire Sub-Station, ZCFD') {
-                stationAddress.value = 'Cable Drive, Purok 4';
-                stationBarangay.value = 'Labuan';
-            }
-            if (station.value === 'Lunzuran Fire Sub-Station, ZCFD') {
-                stationAddress.value = 'Purok 1';
-                stationBarangay.value = 'Lunzuran';
-            }
-            if (station.value === 'Mampang Fire Sub-Station, ZCFD') {
-                stationAddress.value = 'Fernando Luciano Drive';
-                stationBarangay.value = 'Mampang';
-            }
-            if (station.value === 'Manicahan Fire Sub-Station, ZCFD') {
-                stationAddress.value = 'Maharlika Highway';
-                stationBarangay.value = 'Manicahan';
-            }
-            if (station.value === 'Mercedes Fire Sub-Station, ZCFD') {
-                stationAddress.value = 'Calle Real';
-                stationBarangay.value = 'Mercedes';
-            }
-            if (station.value === 'Pasonanca Fire Sub-Station, ZCFD') {
-                stationAddress.value = 'Pasonanca Road';
-                stationBarangay.value = 'Pasonanca';
-            }
-            if (station.value === 'Putik Fire Sub-Station, ZCFD') {
-                stationAddress.value = 'Morning Glory';
-                stationBarangay.value = 'Putik';
-            }
-            if (station.value === 'Quiniput Fire Sub-Station, ZCFD') {
-                stationAddress.value = 'Ontong';
-                stationBarangay.value = 'Quiniput';
-            }
-            if (station.value === 'Recodo Fire Sub-Station, ZCFD') {
-                stationAddress.value = 'Labuan-Limpapa National Road';
-                stationBarangay.value = 'Recodo';
-            }
-            if (station.value === 'Sangali Fire Sub-Station, ZCFD') {
-                stationAddress.value = 'Celia P Manuel Street, Malasugat';
-                stationBarangay.value = 'Sangali';
-            }
-            if (station.value === 'San Jose Gusu Fire Sub-Station, ZCFD') {
-                stationAddress.value = 'San Jose Road';
-                stationBarangay.value = 'San Jose Gusu';
-            }
-            if (station.value === 'San Roque Fire Sub-Station, ZCFD') {
-                stationAddress.value = 'Zone 3';
-                stationBarangay.value = 'San Roque';
-            }
-            if (station.value === 'Sta Catalina Fire Sub-Station, ZCFD') {
-                stationAddress.value = 'Evangelista Street';
-                stationBarangay.value = 'Sta Catalina';
-            }
-            if (station.value === 'Sta Maria Fire Sub-Station, ZCFD') {
-                stationAddress.value = 'Governor Ramos Avenue';
-                stationBarangay.value = 'Sta Maria';
-            }   
-            if (station.value === 'Talisayan Fire Sub-Station, ZCFD') {
-                stationAddress.value = 'Zamboanga Ecozone, Sitio San Ramon';
-                stationBarangay.value = 'Talisayan';
-            }
-            if (station.value === 'Talon-Talon Fire Sub-Station, ZCFD') {
-                stationAddress.value = 'Talon-Talon Road';
-                stationBarangay.value = 'Talon-Talon';
-            }
-            if (station.value === 'Tetuan Fire Sub-Station, ZCFD') {
-                stationAddress.value = 'Natividad Street';
-                stationBarangay.value = 'Tetuan';
-            }
-            if (station.value === 'Tumaga Fire Sub-Station, ZCFD') {
-                stationAddress.value = 'Sun Street';
-                stationBarangay.value = 'Tumaga';
-            }
-            if (station.value === 'Tugbungan Fire Sub-Station, ZCFD') {
-                stationAddress.value = 'Agripino Lorenzo Street, Morning Breeze';
-                stationBarangay.value = 'Tugbungan';
-            }
-            if (station.value === 'Tigbalabag Fire Sub-Station, ZCFD') {
-                stationAddress.value = 'Maharlika Highway';
-                stationBarangay.value = 'Tigbalabag';
-            }
-            if (station.value === 'Vitali Fire Sub-Station, ZCFD') {
-                stationAddress.value = 'Centro Vitali';
-                stationBarangay.value = 'Vitali';
-            }
-            if (station.value === 'Zamboanga City Fire District') {
-                stationAddress.value = 'Mayor Cesar Climaco Avenue';
-                stationBarangay.value = 'Zone II';
-            }
-            if (station.value === 'Intelligence and Investigation Section, ZCFD') {
-                stationAddress.value = 'Mayor Cesar Climaco Avenue';
-                stationBarangay.value = 'Zone II';
-            }
-        });
-    }
 });
 
 const alarmLevels = [
