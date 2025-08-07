@@ -600,7 +600,7 @@ function updateInvolvedOptions() {
 
 // Auto-populate owner if involved is "Electrical Pole"
 document.addEventListener('DOMContentLoaded', function() {
-    // ...existing code...
+
     const involved = document.getElementById('involved');
     const ownerInput = document.getElementById('owner');
     if (involved && ownerInput) {
@@ -610,7 +610,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    // ...existing code...
+
 });
 
 // AUTO POPULATE ADDRESS
@@ -1244,7 +1244,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // ...existing code...
 });
 
 // Auto-format contact numbers to (####) ### ####
@@ -1411,9 +1410,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (involvedSel && !involvedSel.disabled && involvedSel.selectedIndex > 0) {
                 involved = involvedSel.options[involvedSel.selectedIndex].text;
             }
-
-            //GENERAL OCCUPANCY
-            const occupancy = val('occupancy');
 
             // Owner
             const owner = val('owner');
