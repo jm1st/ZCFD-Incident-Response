@@ -32,8 +32,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
 });
 
-//CHOOSE OOPTION MODAL END
-
 //BARANGAY AUTOCOMPLETE
 const barangays = [
 "Arena Blanco", "Ayala", "Baliwasan", "Baluno", "Zone I", "Zone II",
@@ -46,7 +44,7 @@ const barangays = [
 "Maasin", "Malagutay", "Mampang", "Manalipa", "Mangusu", "Manicahan", "Mariki", "Mercedes",
 "Muti", "Pamucutan", "Pangapuyan", "Panubigan", "Pasilmanta", "Pasobolong", "Pasonanca",
 "Patalon", "Putik", "Quiniput", "Recodo", "Rio Hondo", "Salaan", "San Jose Cawa-cawa",
-"San Jose Gusu", "San Roque", "Sangali", "St. Barbara", "St. Catalina", "St. Maria",
+"San Jose Gusu", "San Roque", "Sangali", "Sta Barbara", "Sta Catalina", "Sta Maria",
 "Santo Niño", "Sibulao", "Sinubung", "Sinunuc", "Tagasilay", "Taguiti", "Talabaan",
 "Talisayan", "Talon-talon", "Taluksangay", "Tetuan", "Tictapul", "Tigbalabag", "Tigtabon",
 "Tolosa", "Tugbungan", "Tulungatung", "Tumaga", "Tumalutab", "Tumitus", "Victoria",
@@ -679,7 +677,9 @@ function updateResponseTime() {
         if (!isNaN(dispatchedDate) && !isNaN(arrivedDate) && arrivedDate > dispatchedDate) {
             const diffMs = arrivedDate - dispatchedDate;
             const diffMin = Math.round(diffMs / 60000);
-            responseInput.value = diffMin + " minutes";
+
+            const label = diffMin === 1 ? "minute" : "minutes";
+            responseInput.value = `${diffMin} ${label}`;
         } else {
             responseInput.value = "";
         }
@@ -701,14 +701,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //INVOLVED
 const structuralOptions = [
-    'Residential','Apartment Building', 'Condominiums', 'Dormitory', 'Hotel', 'Lodging and Rooming Houses', 
-    'Assembly', 'Business', 'Detention and Correctional', 
+    'Residential','Apartment', 'Condominiums', 'Dormitory', 'Hotel', 'Lodging and Rooming Houses', 
+    'Assembly', 'Business','Day Care', 'Detention and Correctional', 
     'Educational', 'Health Care', 'Industrial', 'Mercantile', 'Miscellaneous', 
-    'Mixed Occupancies', 'Storage'
+    'Mixed Occupancies','Residential Board and Care','Special Structure', 'Storage'
 ];
 
 const nonStructuralOptions = [
-    'Agricultural Land', 'Ambulant Vendor', 'Electrical Pole', 'Forest', 'Grass', 'Rubbish', 
+    'Agricultural Land', 'Ambulant Vendor', 'Electrical Pole', 'Forest', 'Grass', 'Rubbish'
+];
+
+const transportOptions = [
     'Aircraft', 'Automobile', 'Bus', 'Heavy Equipment', 'Jeepney', 'Locomotive', 
     'Motorcycle', 'Ship/Watervessel', 'Tricycle', 'Truck'
 ];
@@ -725,6 +728,9 @@ function updateInvolvedOptions() {
         options = structuralOptions;
     } else if (occupancy === 'Non Structural') {
         options = nonStructuralOptions;
+    }
+    else if (occupancy === 'Transport') {
+        options = transportOptions;
     }
 
     if (options.length > 0) {
@@ -758,6 +764,25 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const exactaddressInput = document.getElementById('exactaddress');
+    const barangayInput = document.getElementById('barangay');
+    const cityInput = document.getElementById('city');
+    const icpInput = document.getElementById('icplocation');
+
+    if (exactaddressInput && barangayInput && cityInput && icpInput) {
+        setInterval(() => {
+            const exact = exactaddressInput.value.trim();
+            const barangay = barangayInput.value.trim();
+            const city = cityInput.value.trim();
+
+            if (exact && barangay && city) {
+                icpInput.value = `${exact}, Barangay ${barangay}, ${city}`;
+            }
+        }, 300);
+    }
 });
 
 const alarmLevels = [
@@ -940,7 +965,6 @@ function removeLastAlarmLogEntry() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    // ...existing code...
 
     updateAlarmStatusDisplay();
 
@@ -1290,7 +1314,6 @@ function setupContactNumberAutoFormat(inputId) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    // ...existing code...
 
     // Setup auto-format for all contact number fields
     setupContactNumberAutoFormat('contactnumber');
@@ -1588,7 +1611,11 @@ DTR: ${formatDT(dtReport)}
 TED: ${formatDT(dtDispatched)}
 TAS: ${formatDT(dtArrived)}
 RT: ${responsetime}
-DIST: ${distancetravelled}${distancetravelled ? ' km' : ''}
+DIST: ${distancetravelled 
+    ? (distancetravelled < 1 
+        ? (distancetravelled * 1000) + 'm' 
+        : distancetravelled + ' km') 
+    : ''}
 
 Involved: ${occupancy} (${involved})
 Owners: ${owner}
@@ -1674,17 +1701,61 @@ FCOS:
         'otherfiretrucks', 'otherrescue', 'otherambulance',
         'familiesaffected', 'individualsaffected', 'housesaffected', 'floorarea'
     ];
+
     zeroMinIds.forEach(id => {
         const el = document.getElementById(id);
         if (el) {
             el.setAttribute('min', '0');
-            el.addEventListener('input', function() {
-                let val = parseInt(el.value, 10);
-                if (isNaN(val) || val < 0) el.value = 0;
+            
+            el.addEventListener('input', function () {
+                let val = el.value;
+
+                // Remove leading zero if typing more numbers
+                if (val.length > 1 && val.startsWith("0") && !val.startsWith("0.")) {
+                    val = val.replace(/^0+/, ""); 
+                }
+
+                // Convert to number and validate
+                const num = parseInt(val, 10);
+                if (isNaN(num)) {
+                    el.value = "";
+                } else if (num < 0) {
+                    el.value = 0;
+                } else {
+                    el.value = val;
+                }
             });
         }
     });
 
-    // ...existing code...
-});
+    const distanceEl = document.getElementById('distancetravelled');
+    if (distanceEl) {
+        distanceEl.setAttribute('min', '0');
+        distanceEl.setAttribute('step', '0.01'); // allow decimals
 
+        distanceEl.addEventListener('input', function () {
+            let val = parseFloat(distanceEl.value);
+
+            if (isNaN(val) || val < 0) {
+                distanceEl.value = '';
+                return;
+            }
+
+            // Format distance into m or km
+            let displayValue;
+            if (val < 1) {
+                displayValue = (val * 1000) + ' m';
+            } else {
+                displayValue = val + ' km';
+            }
+
+            console.log("Distance formatted:", displayValue); // for debugging
+
+            // If you just want to store the raw number, don't overwrite .value
+            // Instead, you could show the formatted value elsewhere
+        });
+    }
+
+
+
+});
