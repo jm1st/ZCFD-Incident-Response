@@ -204,11 +204,17 @@ function playNextInQueue() {
           setTimeout(() => {
             // Play tone2 after both readings
             tone2.currentTime = 0;
-            tone2.play();
+            // Use play() and always set onended before calling play()
             tone2.onended = () => {
               tone2.onended = null;
               playNextInQueue();
             };
+            const p2 = tone2.play();
+            if (p2 && typeof p2.then === "function") {
+              p2.catch(() => {
+                playNextInQueue();
+              });
+            }
           }, 1200);
         }
       };
@@ -219,11 +225,16 @@ function playNextInQueue() {
         } else {
           setTimeout(() => {
             tone2.currentTime = 0;
-            tone2.play();
             tone2.onended = () => {
               tone2.onended = null;
               playNextInQueue();
             };
+            const p2 = tone2.play();
+            if (p2 && typeof p2.then === "function") {
+              p2.catch(() => {
+                playNextInQueue();
+              });
+            }
           }, 1200);
         }
       };
@@ -238,10 +249,10 @@ function playNextInQueue() {
     tone1.onended = null;
     speakTwiceThenTone2();
   };
-  // Always call speakTwiceThenTone2 after tone1, even if play() fails (e.g. due to browser policy)
-  const playPromise = tone1.play();
-  if (playPromise !== undefined) {
-    playPromise.catch(() => {
+  // Always set onended before calling play, and handle play() promise
+  const p1 = tone1.play();
+  if (p1 && typeof p1.then === "function") {
+    p1.catch(() => {
       speakTwiceThenTone2();
     });
   }
