@@ -199,37 +199,32 @@ function playNextInQueue() {
       speech.onend = () => {
         count++;
         if (count < 2) {
-          setTimeout(speakOnce, 1000);
+          setTimeout(speakOnce, 1200);
         } else {
           setTimeout(() => {
+            // Play tone2 after both readings
             tone2.currentTime = 0;
-            tone2.play().then(() => {
-              tone2.onended = () => {
-                tone2.onended = null;
-                playNextInQueue();
-              };
-            }).catch(() => {
+            tone2.play();
+            tone2.onended = () => {
+              tone2.onended = null;
               playNextInQueue();
-            });
-          }, 1000);
+            };
+          }, 1200);
         }
       };
       speech.onerror = () => {
         count++;
         if (count < 2) {
-          setTimeout(speakOnce, 1000);
+          setTimeout(speakOnce, 1200);
         } else {
           setTimeout(() => {
             tone2.currentTime = 0;
-            tone2.play().then(() => {
-              tone2.onended = () => {
-                tone2.onended = null;
-                playNextInQueue();
-              };
-            }).catch(() => {
+            tone2.play();
+            tone2.onended = () => {
+              tone2.onended = null;
               playNextInQueue();
-            });
-          }, 1000);
+            };
+          }, 1200);
         }
       };
       window.speechSynthesis.speak(speech);
@@ -237,15 +232,19 @@ function playNextInQueue() {
     speakOnce();
   }
 
-  // Ensure tone1 is played before speech
+  // Ensure tone1 is played before speech, and always call speakTwiceThenTone2 after tone1
   tone1.currentTime = 0;
   tone1.onended = () => {
     tone1.onended = null;
     speakTwiceThenTone2();
   };
-  tone1.play().catch(() => {
-    speakTwiceThenTone2();
-  });
+  // Always call speakTwiceThenTone2 after tone1, even if play() fails (e.g. due to browser policy)
+  const playPromise = tone1.play();
+  if (playPromise !== undefined) {
+    playPromise.catch(() => {
+      speakTwiceThenTone2();
+    });
+  }
 }
 
 function stopAlerting() {
