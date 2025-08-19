@@ -217,7 +217,7 @@ function playNextInQueue() {
       speech.onerror = () => {
         count++;
         if (count < 2) {
-          setTimeout(speakOnce, 1200);
+          setTimeout(speakOnce, 1000);
         } else {
           setTimeout(() => {
             tone2.currentTime = 0;
@@ -229,7 +229,7 @@ function playNextInQueue() {
             }).catch(() => {
               playNextInQueue();
             });
-          }, 1200);
+          }, 1000);
         }
       };
       window.speechSynthesis.speak(speech);
