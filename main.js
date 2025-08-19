@@ -1,19 +1,21 @@
+// Remove or comment out the ES module imports to fix the error in a browser environment
+
 // FIREBASE
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+// import { initializeApp } from "firebase/app";
+// import { getAnalytics } from "firebase/analytics";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDLo3aqydvIAGNmkr5zVu0tR2rCwnd7ACg",
-  authDomain: "firehouse-alerting-system.firebaseapp.com",
-  projectId: "firehouse-alerting-system",
-  storageBucket: "firehouse-alerting-system.firebasestorage.app",
-  messagingSenderId: "153702333406",
-  appId: "1:153702333406:web:552f8ed1e3ef4a604b3b4f",
-  measurementId: "G-JR1T53Y9NG"
-};
+// const firebaseConfig = {
+//   apiKey: "AIzaSyDLo3aqydvIAGNmkr5zVu0tR2rCwnd7ACg",
+//   authDomain: "firehouse-alerting-system.firebaseapp.com",
+//   projectId: "firehouse-alerting-system",
+//   storageBucket: "firehouse-alerting-system.firebasestorage.app",
+//   messagingSenderId: "153702333406",
+//   appId: "1:153702333406:web:552f8ed1e3ef4a604b3b4f",
+//   measurementId: "G-JR1T53Y9NG"
+// };
 
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+// const app = initializeApp(firebaseConfig);
+// const analytics = getAnalytics(app);
 // FIREBASE
 
 // Incident table logic
@@ -186,6 +188,7 @@ function playNextInQueue() {
   const tone1 = document.getElementById("tone1");
   const tone2 = document.getElementById("tone2");
 
+  // Play tone1, then speak twice, then play tone2
   function speakTwiceThenTone2() {
     window.speechSynthesis.cancel();
     let count = 0;
@@ -196,7 +199,7 @@ function playNextInQueue() {
       speech.onend = () => {
         count++;
         if (count < 2) {
-          setTimeout(speakOnce, 1200); // 1.2s pause between readings
+          setTimeout(speakOnce, 1000);
         } else {
           setTimeout(() => {
             tone2.currentTime = 0;
@@ -208,7 +211,7 @@ function playNextInQueue() {
             }).catch(() => {
               playNextInQueue();
             });
-          }, 1200); // 1.2s pause before tone2
+          }, 1000);
         }
       };
       speech.onerror = () => {
@@ -234,6 +237,7 @@ function playNextInQueue() {
     speakOnce();
   }
 
+  // Ensure tone1 is played before speech
   tone1.currentTime = 0;
   tone1.onended = () => {
     tone1.onended = null;
