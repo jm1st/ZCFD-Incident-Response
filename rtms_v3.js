@@ -40,7 +40,7 @@ const barangays = [
 "Campo Islam", "Canelar", "Capisan", "Cawit", "Culianan", "Curuan", "Dita", "Divisoria",
 "Dulian (Upper Bunguiao)", "Dulian (Upper Pasonanca)", "Guisao", "Guiwan", "Kasanyangan",
 "La Paz", "Labuan", "Lamisahan", "Landang Gua", "Landang Laum", "Lanzones", "Lapakan",
-"Latuan", "Licomo", "Limaong", "Limpapa", "Lubigan", "Lumayang", "Lumbangan", "Lunzuran",
+"Latuan", "Licomo", "Limaong", "Limpapa", "Lubigan", "Lumayang", "Lumbangan", "Lunzuran","Luyahan",
 "Maasin", "Malagutay", "Mampang", "Manalipa", "Mangusu", "Manicahan", "Mariki", "Mercedes",
 "Muti", "Pamucutan", "Pangapuyan", "Panubigan", "Pasilmanta", "Pasobolong", "Pasonanca",
 "Patalon", "Putik", "Quiniput", "Recodo", "Rio Hondo", "Salaan", "San Jose Cawa-cawa",
@@ -831,16 +831,16 @@ function updateAlarmStatusDisplay() {
     if (plusBtn) plusBtn.disabled = isUnderControl || isFireOut || isFireOutUponArrival;
     if (underControlBtn) {
         if (isFireOutUponArrival) {
-            underControlBtn.textContent = "FIRE OUT";
+            underControlBtn.textContent = "FIRE OUT UPON ARRIVAL 1";
             underControlBtn.disabled = true;
         } else if (isUnderControl) {
-            underControlBtn.textContent = "FIRE OUT";
+            underControlBtn.textContent = "FIRE OUT UNDER 2";
             underControlBtn.disabled = false;
         } else if (isFireOut) {
-            underControlBtn.textContent = "FIRE OUT";
+            underControlBtn.textContent = "FIRE OUT 3";
             underControlBtn.disabled = true;
         } else {
-            underControlBtn.textContent = "FIRE UNDER CONTROL";
+            underControlBtn.textContent = "FIRE UNDER CONTROL ";
             underControlBtn.disabled = false;
         }
     }

@@ -116,6 +116,13 @@ Responding Team: ${responders}`;
             msgDiv.textContent = "Alert sent successfully!";
             msgDiv.style.color = "#4caf50";
             document.getElementById('dispatchForm').reset();
+            // Notify all index.html tabs/windows to poll for new Telegram messages
+            localStorage.setItem('ZCFD_FAS_DISPATCH_NOTIFY', Date.now().toString());
+            // Store the sent message for index.html to read directly
+            localStorage.setItem('ZCFD_FAS_LAST_DISPATCH', JSON.stringify({
+                text: message,
+                time: Date.now()
+            }));
         } else {
             msgDiv.textContent = "Failed to send alert.";
             msgDiv.style.color = "#f44336";

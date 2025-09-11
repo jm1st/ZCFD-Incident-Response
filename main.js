@@ -85,6 +85,26 @@ window.addEventListener('storage', (e) => {
   if (e.key === 'ZCFD_FAS_LAST_ID') {
     lastMessageId = e.newValue ? Number(e.newValue) : null;
   }
+  // Listen for dispatch notification and poll immediately
+  if (e.key === 'ZCFD_FAS_DISPATCH_NOTIFY') {
+    fetchAlert();
+  }
+  // Listen for direct dispatch message and read it immediately
+  if (e.key === 'ZCFD_FAS_LAST_DISPATCH' && e.newValue) {
+    try {
+      const dispatchMsg = JSON.parse(e.newValue);
+      if (dispatchMsg && dispatchMsg.text) {
+        // Push to queue and process immediately
+        queue = [{
+          update_id: Date.now(), // Use timestamp as unique id
+          channel_post: { text: dispatchMsg.text, date: Math.floor(dispatchMsg.time / 1000) }
+        }];
+        playNextInQueue();
+      }
+    } catch (err) {
+      // Ignore parse errors
+    }
+  }
 });
 
 async function fetchAlert() {
