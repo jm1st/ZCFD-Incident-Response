@@ -396,6 +396,9 @@ const apparatusByStation = {
         "Engine 02",
         "Engine 04"
     ],
+    "Sinunuc Fire Sub-Station, ZCFD": [
+        "Engine 37",
+    ],
     "Talisayan Fire Sub-Station, ZCFD": [
         "Engine 15",
         "Engine 22"
@@ -525,6 +528,10 @@ document.addEventListener('DOMContentLoaded', function () {
         'Sta Maria Fire Sub-Station, ZCFD': {
             address: 'Governor Ramos Avenue',
             barangay: 'Sta Maria'
+        },
+            'Sinunuc Fire Sub-Station, ZCFD': {
+            address: 'Purok 5',
+            barangay: 'Sinunuc'
         },
         'Talisayan Fire Sub-Station, ZCFD': {
             address: 'Zamboanga Ecozone, Sitio San Ramon',
@@ -830,18 +837,21 @@ function updateAlarmStatusDisplay() {
     // Button logic
     if (plusBtn) plusBtn.disabled = isUnderControl || isFireOut || isFireOutUponArrival;
     if (underControlBtn) {
-        if (isFireOutUponArrival) {
-            underControlBtn.textContent = "FIRE OUT UPON ARRIVAL 1";
-            underControlBtn.disabled = true;
-        } else if (isUnderControl) {
-            underControlBtn.textContent = "FIRE OUT UNDER 2";
-            underControlBtn.disabled = false;
-        } else if (isFireOut) {
-            underControlBtn.textContent = "FIRE OUT 3";
-            underControlBtn.disabled = true;
+        // Hide button when incident is closed (FOUA or FO declared)
+        if (isFireOut || isFireOutUponArrival) {
+            underControlBtn.style.display = 'none';
         } else {
-            underControlBtn.textContent = "FIRE UNDER CONTROL ";
-            underControlBtn.disabled = false;
+            underControlBtn.style.display = '';
+            if (isUnderControl) {
+                underControlBtn.textContent = "FIRE OUT";
+                underControlBtn.disabled = false;
+            } else if (alarmIndex === 0) {
+                underControlBtn.textContent = "FIRE OUT UPON ARRIVAL";
+                underControlBtn.disabled = false;
+            } else {
+                underControlBtn.textContent = "FIRE UNDER CONTROL";
+                underControlBtn.disabled = false;
+            }
         }
     }
     if (minusBtn) {
@@ -1023,12 +1033,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     if (underControlBtn) {
         underControlBtn.addEventListener('click', function() {
+            // No alarm raised yet - decide between FOUA or First Alarm
             if (alarmIndex === 0 && !isUnderControl && !isFireOut && !isFireOutUponArrival) {
-                // No alarm raised, treat as Fire Out Upon Arrival
                 isFireOutUponArrival = true;
                 addAlarmLogEntry("FIRE OUT UPON ARRIVAL");
                 updateAlarmStatusDisplay();
-            } else if (!isUnderControl && !isFireOut && !isFireOutUponArrival) {
+            }
+            // Alarm raised - transition through FUC to FO
+            else if (alarmIndex > 0 && !isUnderControl && !isFireOut && !isFireOutUponArrival) {
                 // Add Fire Under Control card
                 isUnderControl = true;
                 addAlarmLogEntry("FIRE UNDER CONTROL");
